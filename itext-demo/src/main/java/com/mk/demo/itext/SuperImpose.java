@@ -5,6 +5,8 @@ import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 import com.itextpdf.kernel.pdf.xobject.PdfFormXObject;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
 
 import java.io.File;
 
@@ -39,12 +41,19 @@ public class SuperImpose {
         PdfFormXObject page;
         PdfCanvas canvas = new PdfCanvas(pdfDoc.getFirstPage().newContentStreamBefore(),
                 pdfDoc.getFirstPage().getResources(), pdfDoc);
-        for (String path : EXTRA) {
+        /*for (String path : EXTRA) {
             srcDoc = new PdfDocument(new PdfReader(path));
             page = srcDoc.getFirstPage().copyAsFormXObject(pdfDoc);
             canvas.addXObject(page, 0, 0);
             srcDoc.close();
-        }
+        }*/
+
+        srcDoc = null;
+        page = srcDoc.getFirstPage().copyAsFormXObject(pdfDoc);
+        canvas.addXObject(page, 10, 10);
+        srcDoc.close();
+
+
         pdfDoc.close();
     }
 
