@@ -1,7 +1,9 @@
 package com.mk.demo.itext;
 
 import com.itextpdf.io.font.FontConstants;
+import com.itextpdf.io.font.constants.StandardFonts;
 import com.itextpdf.kernel.colors.ColorConstants;
+import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.geom.Rectangle;
@@ -13,6 +15,7 @@ import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 import com.itextpdf.layout.Canvas;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Text;
 import com.itextpdf.signatures.*;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
@@ -96,7 +99,11 @@ public class Test {
         String src = "d:/tmp/tmp2.pdf";
         PdfDocument pdfDoc = new PdfDocument(new PdfReader(src),new PdfWriter(dest));
         PageSize ps = pdfDoc.getDefaultPageSize();
-        Paragraph p = new Paragraph("This is the text added in the rectangle.");
+        PdfFont font = PdfFontFactory.createFont("STSong-Light", "UniGB-UCS2-H",true);
+        Text text = new Text("王晨This is the text added in the rectangle.");
+//        text.setFont(font);
+        Paragraph p = new Paragraph(text);
+        p.setFont(font);
         p.add("another paragraph");
 //        p.setBorder(new SolidBorder(1));
         PdfCanvas canvas = new PdfCanvas(pdfDoc.getFirstPage());
@@ -129,5 +136,15 @@ public class Test {
         System.out.println(providers);
     }
 
+    @org.junit.Test
+    public void test7(){
+        Paragraph paragraph = new Paragraph("完成wangc");
+        paragraph.setFont("s");
+        try {
+            PdfFont pdfFont = PdfFontFactory.createFont();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

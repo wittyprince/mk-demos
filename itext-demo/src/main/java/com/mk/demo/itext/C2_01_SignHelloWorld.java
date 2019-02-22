@@ -64,6 +64,7 @@ public class C2_01_SignHelloWorld {
         PdfReader reader = new PdfReader(src);
         PdfSigner signer = new PdfSigner(reader, new FileOutputStream(dest), false);
         // Creating the appearance
+        signer.setFieldName("001");
         PdfSignatureAppearance appearance = signer.getSignatureAppearance();
         String fieldName = signer.getFieldName();
         System.out.println("fieldName:" + fieldName);
@@ -71,12 +72,13 @@ public class C2_01_SignHelloWorld {
         System.out.println(invisible);
         appearance.setReason(reason)
                 .setLocation(location)
+//                .setLocationCaption(null)
                 .setReuseAppearance(false);
         Rectangle rect = new Rectangle(36, 648, 200, 100);
         appearance
                 .setPageRect(rect)
                 .setPageNumber(1);
-        signer.setFieldName("Signature1");
+//        signer.setFieldName("Signature1");
         System.out.println(signer.getFieldName());
         // Creating the signature
         IExternalSignature pks = new PrivateKeySignature(pk, digestAlgorithm, provider);
