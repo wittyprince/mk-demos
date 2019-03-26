@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.activiti.org/test" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" expressionLanguage="http://www.w3.org/1999/XPath" id="m1551766421942" name="" targetNamespace="http://www.activiti.org/test" typeLanguage="http://www.w3.org/2001/XMLSchema">
-  <process id="myProcess_1" isClosed="false" isExecutable="true" name="LeaveRequest" processType="None">
+  <process id="myProcess_1" isClosed="false" isExecutable="true" name="qjlc" processType="None">
     <startEvent id="_2" name="start"/>
-    <userTask activiti:assignee="zhangsan" activiti:exclusive="true" id="_3" name="提交请假申请"/>
+    <userTask activiti:assignee="zhangsan" activiti:exclusive="true" id="_3" name="请假申请"/>
     <sequenceFlow id="_4" sourceRef="_2" targetRef="_3"/>
-    <userTask activiti:assignee="lisi" activiti:exclusive="true" id="_5" name="项目经理审批"/>
-    <userTask activiti:assignee="wangwu" activiti:exclusive="true" id="_6" name="部门经理审批"/>
+    <userTask activiti:assignee="lisi" activiti:exclusive="true" id="_5" name="经理审批"/>
+    <userTask activiti:assignee="wangwu" activiti:exclusive="true" id="_6" name="总监审批"/>
     <sequenceFlow id="_7" sourceRef="_3" targetRef="_5"/>
     <sequenceFlow id="_8" sourceRef="_5" targetRef="_6"/>
     <endEvent id="_9" name="end"/>
