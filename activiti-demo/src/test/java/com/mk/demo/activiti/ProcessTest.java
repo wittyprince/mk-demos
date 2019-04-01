@@ -4,8 +4,17 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.zip.ZipInputStream;
 
+import org.activiti.bpmn.BpmnAutoLayout;
+import org.activiti.bpmn.model.BpmnModel;
+import org.activiti.bpmn.model.EndEvent;
+import org.activiti.bpmn.model.ParallelGateway;
+import org.activiti.bpmn.model.Process;
+import org.activiti.bpmn.model.SequenceFlow;
+import org.activiti.bpmn.model.StartEvent;
+import org.activiti.bpmn.model.UserTask;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngines;
+import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.repository.Deployment;
@@ -68,6 +77,76 @@ public class ProcessTest {
 //        Deployment deployment = deploymentBuilder.deploy();
     }
 
+    @Test
+    public void dynamicDeploy(){
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        RepositoryService repositoryService = processEngine.getRepositoryService();
+        //1. Build up the model from scratch
+        BpmnModel bpmnModel = new BpmnModel();
+        //2. Generate graphical information
+        bpmnModel.addProcess(this.wrapProcess());
+        new BpmnAutoLayout(bpmnModel).execute();
+        //3. Deploy the process to the engine
+        String tenantId = "0001";
+        repositoryService.createDeployment().addBpmnModel("dynamic-model.bpmn", bpmnModel)
+                .name("Dynamic process deployment")
+                .tenantId(tenantId)
+                .deploy();
+    }
+    private Process wrapProcess(){
+        org.activiti.bpmn.model.Process process = new org.activiti.bpmn.model.Process();
+        process.setId("processId01");
+        process.setName("processName01");
+
+        StartEvent startEvent = new StartEvent();
+        startEvent.setId("eventStart");
+        process.addFlowElement(startEvent);
+
+        ParallelGateway startParallelGateway = new ParallelGateway();
+        startParallelGateway.setId("parallelGatewayStartId");
+        startParallelGateway.setName("parallelGatewayStartName");
+        ParallelGateway endParallelGateway = new ParallelGateway();
+        endParallelGateway.setId("parallelGatewayEndId");
+        endParallelGateway.setName("parallelGatewayEndName");
+        process.addFlowElement(startParallelGateway);
+        process.addFlowElement(endParallelGateway);
+
+        SequenceFlow flow01 = new SequenceFlow();
+        flow01.setSourceRef("eventStart");
+        flow01.setTargetRef("parallelGatewayStartId");
+        process.addFlowElement(flow01);
+
+        UserTask userTask = new UserTask();
+        userTask.setName("userTaskName");
+        userTask.setId("userTaskId");
+        userTask.setAssignee("userTaskAssignee");
+        userTask.setOwner("userTaskOwner");
+        userTask.setCategory("userTaskCategory");
+        process.addFlowElement(userTask);
+
+        SequenceFlow flow02 = new SequenceFlow();
+        flow02.setSourceRef("parallelGatewayStartId");
+        flow02.setTargetRef(userTask.getId());
+        process.addFlowElement(flow02);
+
+        SequenceFlow flow03 = new SequenceFlow();
+        flow03.setSourceRef(userTask.getId());
+        flow03.setTargetRef("parallelGatewayEndId");
+        process.addFlowElement(flow03);
+
+        EndEvent endEvent = new EndEvent();
+        endEvent.setId("eventEnd");
+        process.addFlowElement(endEvent);
+
+        SequenceFlow flow04 = new SequenceFlow();
+        flow04.setSourceRef("parallelGatewayEndId");
+        flow04.setTargetRef("eventEnd");
+        process.addFlowElement(flow04);
+        return process;
+    }
+
+
+
     /**
      * 查询部署列表
      *      ACT_RE_DEPLOYMENT
@@ -78,7 +157,7 @@ public class ProcessTest {
         // 部署查询对象，查询表act_re_deployment
         DeploymentQuery query = processEngine.getRepositoryService()
                 .createDeploymentQuery();
-        query.deploymentKeyLike("my");
+//        query.deploymentKeyLike("my");
         List<Deployment> list = query.list();
         for (Deployment deployment : list) {
             String id = deployment.getId();
@@ -96,7 +175,7 @@ public class ProcessTest {
         // 流程查询对象, 用于查询表act_re_procdef
         ProcessDefinitionQuery query = processEngine.getRepositoryService().createProcessDefinitionQuery();
         // 添加过滤条件
-        query.deploymentId("7501");
+        query.deploymentId("1");
         // 添加排序
         query.orderByProcessDefinitionVersion().desc();
         // 添加分页
