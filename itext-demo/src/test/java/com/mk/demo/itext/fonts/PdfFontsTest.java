@@ -23,6 +23,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Logger;
 
 /**
@@ -303,9 +306,24 @@ public class PdfFontsTest {
         String[] split = s.split("\\s+");
 //        Arrays.stream(split).forEach(System.out::println);
 //        String text = "WHAT IS THE WIDTH OF THIS STRING?";
-        float maxFontSize = this.getMaxFontSize(s, pdfFont, 7, new Rectangle(100, 100, 120, 28));
+        float maxFontSize = this.getSingleLineMaxFontSize(s, pdfFont, 7, new Rectangle(100, 100, 120, 28));
         System.out.println("maxFontSize:" + maxFontSize);
 
+    }
+
+    /**
+     * 多行(\n): 每一行经自然换行后的高度不确定，没法计算
+     * 这里暂时先考虑均分高度的情况, 不等分高度的情况后续再考虑
+     */
+    private float getMaxFontSize(String multiParagraph, PdfFont font, float minFontSize, Rectangle rect){
+        String[] paragraphs = multiParagraph.split("\\n");
+        Set<Float> fontSizeSet = new HashSet<>(paragraphs.length);
+        for (String paragraph : paragraphs){
+            Rectangle r = new Rectangle(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight()/paragraphs.length);
+            float fontSize = this.getSingleLineMaxFontSize(paragraph, font, minFontSize, r);
+            fontSizeSet.add(fontSize);
+        }
+        return fontSizeSet.stream().min(Comparator.comparing(Float::valueOf)).orElse(-1f);
     }
 
     /**
@@ -313,7 +331,7 @@ public class PdfFontsTest {
      * 需注意如果最后一个字符长度很长的情况, 如果前面的行没有写满, 可能会导致最后一个字符写不进rectangle
      * 考虑每行占满, 使用连字符的方法解决
      */
-    private float getMaxFontSize(String text, PdfFont font, float minFontSize, Rectangle rect){
+    private float getSingleLineMaxFontSize(String text, PdfFont font, float minFontSize, Rectangle rect){
         String[] words = text.split("\\s+");
         for (String word : words){
 
@@ -323,7 +341,7 @@ public class PdfFontsTest {
             float width = font.getWidth(text, fontSize + i);
             double rowNum = Math.ceil(width / rect.getWidth());
             // 高度的最大占比为80%(未找到官方说明文档, 自己测试值), 这里取值70%
-            if (rowNum * (fontSize + i)  >= rect.getHeight() * 0.69){
+            if (rowNum * (fontSize + i)  >= rect.getHeight() * 0.66){
                 if (i == 0){
                     fontSize = -1f;
                 }else {
@@ -349,8 +367,8 @@ public class PdfFontsTest {
         text = "2019-04-22T20:00:08.171\n" +
                 "+08:00[Asia/Shanghai]";
         PdfFont pdfFont = PdfFontFactory.createFont("STSong-Light", "UniGB-UCS2-H", true);
-        Rectangle rect = new Rectangle(200, 300, 120, 23);
-        float maxFontSize = this.getMaxFontSize(text, pdfFont, 7, rect);
+        Rectangle rect = new Rectangle(200, 300, 120, 17);
+        float maxFontSize = this.getMaxFontSize(text, pdfFont, 6, rect);
         System.out.println("maxFontSize:" + maxFontSize);
 
         String dest = "src/main/resources/file/pdf/10.pdf";
