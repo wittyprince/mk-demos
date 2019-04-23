@@ -309,7 +309,7 @@ public class PdfFontsTest {
     }
 
     /**
-     * 此方法并不能处理包含换行符(\n)的字符串
+     * 此方法并不考虑包含换行符(\n)的字符串
      * 需注意如果最后一个字符长度很长的情况, 如果前面的行没有写满, 可能会导致最后一个字符写不进rectangle
      * 考虑每行占满, 使用连字符的方法解决
      */
@@ -323,7 +323,7 @@ public class PdfFontsTest {
             float width = font.getWidth(text, fontSize + i);
             double rowNum = Math.ceil(width / rect.getWidth());
             // 高度的最大占比为80%(未找到官方说明文档, 自己测试值), 这里取值70%
-            if (rowNum * (fontSize + i)  >= rect.getHeight() * 0.70){
+            if (rowNum * (fontSize + i)  >= rect.getHeight() * 0.69){
                 if (i == 0){
                     fontSize = -1f;
                 }else {
