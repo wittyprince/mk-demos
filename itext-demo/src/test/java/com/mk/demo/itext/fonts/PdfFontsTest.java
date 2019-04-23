@@ -341,7 +341,7 @@ public class PdfFontsTest {
             float width = font.getWidth(text, fontSize + i);
             double rowNum = Math.ceil(width / rect.getWidth());
             // 高度的最大占比为80%(未找到官方说明文档, 自己测试值), 这里取值70%
-            if (rowNum * (fontSize + i)  >= rect.getHeight() * 0.66){
+            if (rowNum * (fontSize + i)  > rect.getHeight() * 0.7f){
                 if (i == 0){
                     fontSize = -1f;
                 }else {
@@ -366,9 +366,11 @@ public class PdfFontsTest {
         String text = "点击保存按钮可把当前接口保存到测试集，方便下次调试。";
         text = "2019-04-22T20:00:08.171\n" +
                 "+08:00[Asia/Shanghai]";
+        text = "2019-04-23T18:05:39.120+08:00[Asia/Shanghai]";
         PdfFont pdfFont = PdfFontFactory.createFont("STSong-Light", "UniGB-UCS2-H", true);
-        Rectangle rect = new Rectangle(200, 300, 120, 17);
-        float maxFontSize = this.getMaxFontSize(text, pdfFont, 6, rect);
+//        Rectangle rect = new Rectangle(200, 300, 100, 27);
+        Rectangle rect = new Rectangle(200, 300, 100, 16);
+        float maxFontSize = this.getMaxFontSize(text, pdfFont, 5, rect);
         System.out.println("maxFontSize:" + maxFontSize);
 
         String dest = "src/main/resources/file/pdf/10.pdf";
@@ -376,7 +378,8 @@ public class PdfFontsTest {
         Document document = new Document(pdf);
 
         Paragraph p = new Paragraph(text).setFontSize(maxFontSize).setFont(pdfFont);
-        p.setMarginLeft(0).setMarginTop(0);
+//        p.setMarginLeft(0).setMarginTop(0);
+        p.setMargin(0f);
         p.setMultipliedLeading(1);
         document.add(p);
 
