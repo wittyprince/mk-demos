@@ -1,7 +1,10 @@
 package com.mk.demo.activiti;
 
 import java.io.InputStream;
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipInputStream;
 
 import org.activiti.bpmn.BpmnAutoLayout;
@@ -275,8 +278,15 @@ public class ProcessTest {
     public void test3(){
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
         RuntimeService runtimeService = processEngine.getRuntimeService();
-        String processDefinitionId = "myProcess_1:6:30004";
-        ProcessInstance processInstance = runtimeService.startProcessInstanceById(processDefinitionId);
+        String processDefinitionId = "myProcess_1:1:5004";
+        Map<String, Object> variables = new HashMap<>(2);
+        variables.put("userEmail", "wittyprince@163.com");
+        variables.put("user", new User(1,"小王"));
+        ProcessInstance processInstance = runtimeService.startProcessInstanceById(processDefinitionId, variables);
+        TaskService taskService = processEngine.getTaskService();
+        TaskQuery taskQuery = taskService.createTaskQuery().processInstanceId(processInstance.getId());
+        Task task = taskQuery.singleResult();
+        taskService.setAssignee(task.getId(), "wittyprince@163.com");
         System.out.println(processInstance);
 
         // 方式二
@@ -401,5 +411,30 @@ public class ProcessTest {
         String executionId = "2701";//流程实例id
 //        processEngine.getRuntimeService().signal(executionId);
     }
+}
+class User implements Serializable {
+    private int id;
+    private String name;
 
+    public User() {}
+    public User(int id, String username) {
+        this.id = id;
+        this.name = username;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

@@ -20,9 +20,9 @@ public class DbTest {
         ProcessEngineConfiguration configuration = ProcessEngineConfiguration.createStandaloneProcessEngineConfiguration();
         // 设置数据源信息
         configuration.setJdbcDriver("com.mysql.jdbc.Driver");
-        configuration.setJdbcUrl("jdbc:mysql://192.168.52.134/activiti01?useUnicode=true&useSSL=true");
+        configuration.setJdbcUrl("jdbc:mysql://47.103.57.20/test_wc?useUnicode=true&useSSL=true");
         configuration.setJdbcUsername("wangchen");
-        configuration.setJdbcPassword("wangchen@123");
+        configuration.setJdbcPassword("!QAZxcde32");
         // 设置自动创建表
         configuration.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
         // 创建一个流程引擎对象，在创建的过程中，会自动建表
