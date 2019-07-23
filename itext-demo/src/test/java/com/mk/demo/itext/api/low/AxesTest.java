@@ -18,7 +18,7 @@ import java.io.IOException;
  * Created on 2019/7/16 22:05
  * @since 1.0
  */
-public class CanvasTest {
+public class AxesTest {
 
     public static final String DEST = "src/main/resources/file/pdf/api/low/CanvasTest.pdf";
 
@@ -63,6 +63,7 @@ public class CanvasTest {
                 .lineTo(0, ps.getHeight() / 2 - 15)
                 .stroke();
 
+        // a better practice should use whenever we change the graphics state: saveState and restoreState
         //Draw Y axis arrow
         canvas.saveState()
                 .setLineJoinStyle(PdfCanvasConstants.LineJoinStyle.ROUND)
