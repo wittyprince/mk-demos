@@ -2,6 +2,7 @@ package com.mk.demo.itext.api.low;
 
 import com.itextpdf.io.font.FontConstants;
 import com.itextpdf.kernel.colors.Color;
+import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.colors.DeviceCmyk;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.PageSize;
@@ -55,7 +56,9 @@ public class StarWarsCrawlTest {
 
         int maxStringWidth = 0;
         for (String fragment : text) {
-            if (fragment.length() > maxStringWidth) maxStringWidth = fragment.length();
+            if (fragment.length() > maxStringWidth) {
+                maxStringWidth = fragment.length();
+            }
         }
 
         //Initialize PDF document
@@ -70,7 +73,7 @@ public class StarWarsCrawlTest {
         Color grayColor = new DeviceCmyk(0.f, 0.f, 0.f, 0.875f);
         //Set black background
         canvas.rectangle(0, 0, ps.getWidth(), ps.getHeight())
-                .setColor(grayColor, true)
+                .setColor(ColorConstants.BLACK, true)
                 .fill();
 
         //Replace the origin of the coordinate system to the top left corner
@@ -90,6 +93,9 @@ public class StarWarsCrawlTest {
             for (int i = 0; i < stringWidth; i++) {
                 float angle = (maxStringWidth / 2 - i) / 2f;
                 float charXOffset = (4 + (float) j / 2) * i;
+                // Parameter a and d define the scaling factors, We'll use them to change the font size
+                //  With parameter c , we introduce a skew factor.
+                // Finally, we calculate the coordinate of the character to determine the parameter e and f
                 canvas.setTextMatrix(fontSizeCoeff, 0,
                         angle, fontSizeCoeff / 1.5f,
                         xOffset + charXOffset, yOffset - lineSpacing)
