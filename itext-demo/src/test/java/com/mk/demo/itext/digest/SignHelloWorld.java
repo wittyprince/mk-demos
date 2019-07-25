@@ -1,4 +1,4 @@
-package com.mk.demo.itext;
+package com.mk.demo.itext.digest;
 
 import com.itextpdf.kernel.geom.Rectangle;
 import com.itextpdf.kernel.pdf.PdfReader;
@@ -9,6 +9,7 @@ import com.itextpdf.signatures.IExternalSignature;
 import com.itextpdf.signatures.PdfSignatureAppearance;
 import com.itextpdf.signatures.PdfSigner;
 import com.itextpdf.signatures.PrivateKeySignature;
+import com.mk.demo.itext.C2_01_SignHelloWorld;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import java.io.FileInputStream;
@@ -24,13 +25,13 @@ import java.security.cert.Certificate;
  * SignHelloWorld
  *
  * @author WangChen
- * Created on 2019/2/21 11:02
+ * Created on 2019/7/25 11:56
  * @since 1.0
  */
-public class C2_01_SignHelloWorld {
+public class SignHelloWorld {
 
-/*    public static final String KEYSTORE = "D:\\wangchen\\tools/ks";//"D:\\wangchen\\tools/abchinablue.jks";//
-    public static final char[] PASSWORD = "password".toCharArray();//"!QAZxsw2".toCharArray();//
+    public static final String KEYSTORE = "D:\\wangchen\\tools/msb.p12";//"D:\\wangchen\\tools/abchinablue.jks";//"D:\\wangchen\\tools/ks";//
+    public static final char[] PASSWORD = "Abcd!234".toCharArray();//"!QAZxsw2".toCharArray();//"password".toCharArray();//
     public static final String SRC = "D:\\tmp/hello.pdf";
     public static final String DEST = "D:\\tmp/signatures/hello_signed%s.pdf";
 
@@ -42,7 +43,7 @@ public class C2_01_SignHelloWorld {
         String alias = ks.aliases().nextElement();
         PrivateKey pk = (PrivateKey) ks.getKey(alias, PASSWORD);
         Certificate[] chain = ks.getCertificateChain(alias);
-        C2_01_SignHelloWorld app = new C2_01_SignHelloWorld();
+        SignHelloWorld app = new SignHelloWorld();
         app.sign(SRC, String.format(DEST, 1), chain, pk, DigestAlgorithms.SHA256, provider.getName(),
                 PdfSigner.CryptoStandard.CMS, "Test 1", "Ghent");
         app.sign(SRC, String.format(DEST, 2), chain, pk, DigestAlgorithms.SHA512, provider.getName(),
@@ -84,5 +85,5 @@ public class C2_01_SignHelloWorld {
         IExternalSignature pks = new PrivateKeySignature(pk, digestAlgorithm, provider);
         IExternalDigest digest = new BouncyCastleDigest();
         signer.signDetached(digest, pks, chain, null, null, null, 0, subfilter);
-    }*/
+    }
 }
