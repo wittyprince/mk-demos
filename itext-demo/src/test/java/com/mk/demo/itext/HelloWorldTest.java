@@ -6,6 +6,7 @@ import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -22,6 +23,8 @@ public class HelloWorldTest {
     @Test
     public void test() throws FileNotFoundException {
         String dest = "src/main/resources/file/pdf/hello.pdf";
+        File file = new File(dest);
+        file.getParentFile().mkdirs();
         OutputStream fos = new FileOutputStream(dest);// create a PDF file on disk
         // OutputStream fos = new ByteArrayOutputStream(dest);// create a PDF document in memory
         // OutputStream fos = new ServletOutputStream(dest);//  write a web application

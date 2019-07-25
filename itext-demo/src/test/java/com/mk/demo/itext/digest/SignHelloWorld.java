@@ -11,7 +11,9 @@ import com.itextpdf.signatures.PdfSigner;
 import com.itextpdf.signatures.PrivateKeySignature;
 import com.mk.demo.itext.C2_01_SignHelloWorld;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.junit.Test;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -30,12 +32,18 @@ import java.security.cert.Certificate;
  */
 public class SignHelloWorld {
 
-    public static final String KEYSTORE = "D:\\wangchen\\tools/msb.p12";//"D:\\wangchen\\tools/abchinablue.jks";//"D:\\wangchen\\tools/ks";//
-    public static final char[] PASSWORD = "Abcd!234".toCharArray();//"!QAZxsw2".toCharArray();//"password".toCharArray();//
-    public static final String SRC = "D:\\tmp/hello.pdf";
-    public static final String DEST = "D:\\tmp/signatures/hello_signed%s.pdf";
+//    public static final String KEYSTORE = "D:\\wangchen\\tools/msb.p12";//"D:\\wangchen\\tools/abchinablue.jks";//"D:\\wangchen\\tools/ks";//
+//    public static final char[] PASSWORD = "Abcd!234".toCharArray();//"!QAZxsw2".toCharArray();//"password".toCharArray();//
+//    public static final String SRC = "D:\\tmp/hello.pdf";
+//    public static final String DEST = "D:\\tmp/signatures/hello_signed%s.pdf";
 
-    public static void main(String[] args) throws Exception{
+    public static final String KEYSTORE = "src/main/resources/encryption/abchinablue.jks";
+    public static final char[] PASSWORD = "!QAZxsw2".toCharArray();
+    public static final String SRC = "src/main/resources/file/pdf/hello.pdf";
+    public static final String DEST = "src/main/resources/file/pdf/digest/hello_signed%s.pdf";
+
+    @Test
+    public void test() throws Exception{
         BouncyCastleProvider provider = new BouncyCastleProvider();
         Security.addProvider(provider);
         KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
@@ -44,8 +52,14 @@ public class SignHelloWorld {
         PrivateKey pk = (PrivateKey) ks.getKey(alias, PASSWORD);
         Certificate[] chain = ks.getCertificateChain(alias);
         SignHelloWorld app = new SignHelloWorld();
-        app.sign(SRC, String.format(DEST, 1), chain, pk, DigestAlgorithms.SHA256, provider.getName(),
-                PdfSigner.CryptoStandard.CMS, "Test 1", "Ghent");
+        for (int i=1; i<5; i++){
+
+        }
+        String dest1 = String.format(DEST, 1);
+        File file = new File(dest1);
+        file.getParentFile().mkdirs();
+        app.sign(SRC, dest1, chain, pk, DigestAlgorithms.SHA256, provider.getName(),
+                PdfSigner.CryptoStandard.CMS, "Test 1", "Asia/Shanghai");
         app.sign(SRC, String.format(DEST, 2), chain, pk, DigestAlgorithms.SHA512, provider.getName(),
                 PdfSigner.CryptoStandard.CMS, "Test 2", "Ghent");
         app.sign(SRC, String.format(DEST, 3), chain, pk, DigestAlgorithms.SHA256, provider.getName(),
