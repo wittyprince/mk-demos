@@ -1,12 +1,16 @@
 package com.mk.demos.spring.boot.handler;
 
 import java.lang.reflect.Method;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.condition.RequestCondition;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import com.mk.demos.spring.boot.annotation.ApiVersion;
+
+import lombok.AllArgsConstructor;
 
 /**
  * ApiRequestMappingHandlerMapping
@@ -15,10 +19,16 @@ import com.mk.demos.spring.boot.annotation.ApiVersion;
  * Created on 2019/10/24 17:22
  * @since 1.0
  */
+@AllArgsConstructor
 public class ApiRequestMappingHandlerMapping extends RequestMappingHandlerMapping {
+    //最小版本
+    private int minimumVersion;
+    //自动解析包名，获取版本号
+    private boolean parsePackageVersion;
     private static final String VERSION_FLAG = "{version}";
+    private final static Pattern PACKAGE_VERSION_PREFIX_PATTERN = Pattern.compile(".*v(\\d+).*");
 
-    private static RequestCondition<ApiVersionCondition> createCondition(Class<?> clazz) {
+    private RequestCondition<ApiVersionCondition> createCondition(Class<?> clazz) {
         RequestMapping classRequestMapping = clazz.getAnnotation(RequestMapping.class);
         if (classRequestMapping == null) {
             return null;
@@ -32,7 +42,29 @@ public class ApiRequestMappingHandlerMapping extends RequestMappingHandlerMappin
             return null;
         }
         ApiVersion apiVersion = clazz.getAnnotation(ApiVersion.class);
-        return apiVersion == null ? new ApiVersionCondition(1) : new ApiVersionCondition(apiVersion.value());
+        return new ApiVersionCondition(new ApiVersionState.ApiVersionStateBuilder()
+                .apiVersion(apiVersion)
+                .packageVersion(parseVersionByPackage(clazz))
+                .minimumVersion(minimumVersion)
+                .build());
+    }
+
+    /**
+     * 通过包名解析出版本号
+     *
+     * @param clazz 类
+     * @return 版本号/null
+     */
+    private Integer parseVersionByPackage(Class<?> clazz) {
+        //如果关闭了自动解析包名，直接返回null
+        if (!this.parsePackageVersion) {
+            return null;
+        }
+        Matcher m = PACKAGE_VERSION_PREFIX_PATTERN.matcher(clazz.getPackage().getName());
+        if (m.find()) {
+            return Integer.parseInt(m.group(1));
+        }
+        return null;
     }
 
     @Override

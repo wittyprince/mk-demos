@@ -17,6 +17,6 @@ import com.mk.demos.spring.boot.handler.ApiRequestMappingHandlerMapping;
 public class WebMvcRegistrationsConfig implements WebMvcRegistrations {
     @Override
     public RequestMappingHandlerMapping getRequestMappingHandlerMapping() {
-        return new ApiRequestMappingHandlerMapping();
+        return new ApiRequestMappingHandlerMapping(1, true);
     }
 }
