@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.condition.RequestCondition;
  * @since 1.0
  */
 public class ApiVersionCondition implements RequestCondition<ApiVersionCondition> {
-    private final static Pattern VERSION_PREFIX_PATTERN = Pattern.compile("\\.v(\\d+).*");
+    private final static Pattern VERSION_PREFIX_PATTERN = Pattern.compile(".*v(\\d+).*");
 
     private int apiVersion;
 
