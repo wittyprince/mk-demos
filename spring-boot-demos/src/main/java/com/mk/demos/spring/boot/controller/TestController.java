@@ -32,6 +32,14 @@ public class TestController {
         return "test2";
     }
 
+    @RequestMapping("/test")
+    @ResponseBody
+    @ApiVersion(5)
+    public String test5(){
+        System.out.println("test5");
+        return "test5";
+    }
+
     @RequestMapping("/test3")
     @ResponseBody
     public String test3(){

@@ -33,6 +33,9 @@ public class ApiVersionCondition implements RequestCondition<ApiVersionCondition
         ApiVersionCondition.maxVersion = maxVersion;
     }
 
+    public static int getMaxVersion() {
+        return maxVersion;
+    }
 
     @Override
     public ApiVersionCondition combine(ApiVersionCondition apiVersionCondition) {
@@ -48,7 +51,7 @@ public class ApiVersionCondition implements RequestCondition<ApiVersionCondition
         Matcher m = VERSION_PREFIX_PATTERN.matcher(apiVersion);
         if (m.find()) {
             int version = Integer.parseInt(m.group(1));
-            if (version <= maxVersion && version >= this.apiVersion) {
+            if (/*version <= maxVersion && */version >= this.apiVersion) {
                 return this;
             }
         }
