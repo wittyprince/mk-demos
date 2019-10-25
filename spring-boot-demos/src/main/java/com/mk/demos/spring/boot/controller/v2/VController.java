@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
  * Created on 2019/10/24 21:00
  * @since 1.0
  */
-//@RestController("v2")
-@RestController
+@RestController("v2")
+//@RestController
 @RequestMapping("/{version}")
 public class VController {
 

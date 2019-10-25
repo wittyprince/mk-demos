@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Created on 2019/10/24 20:47
  * @since 1.0
  */
-//@Controller("v1")
-@Controller
+@Controller("v1")
+//@Controller
 @RequestMapping("/{version}")
 public class VController {
 
