@@ -17,14 +17,20 @@ import org.springframework.web.servlet.mvc.condition.RequestCondition;
 public class ApiVersionCondition implements RequestCondition<ApiVersionCondition> {
     private final static Pattern VERSION_PREFIX_PATTERN = Pattern.compile(".*v(\\d+).*");
 
-    private int apiVersion;
+    private int apiVersion = 1;
+    // 保存所有接口的最大版本号
+    private static int maxVersion = 1;
 
     ApiVersionCondition(int apiVersion) {
         this.apiVersion = apiVersion;
     }
 
-    private int getApiVersion() {
+    public int getApiVersion() {
         return apiVersion;
+    }
+
+    public static void setMaxVersion(int maxVersion) {
+        ApiVersionCondition.maxVersion = maxVersion;
     }
 
 
@@ -35,10 +41,14 @@ public class ApiVersionCondition implements RequestCondition<ApiVersionCondition
 
     @Override
     public ApiVersionCondition getMatchingCondition(HttpServletRequest httpServletRequest) {
-        Matcher m = VERSION_PREFIX_PATTERN.matcher(httpServletRequest.getRequestURI());
+        String apiVersion = httpServletRequest.getHeader("v");
+        if (apiVersion == null){
+            return this;
+        }
+        Matcher m = VERSION_PREFIX_PATTERN.matcher(apiVersion);
         if (m.find()) {
-            Integer version = Integer.valueOf(m.group(1));
-            if (version >= this.apiVersion) {
+            int version = Integer.parseInt(m.group(1));
+            if (version <= maxVersion && version >= this.apiVersion) {
                 return this;
             }
         }

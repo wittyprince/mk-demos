@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mk.demos.spring.boot.annotation.ApiVersion;
+
 /**
  * test
  *
@@ -16,13 +18,24 @@ public class TestController {
 
     @RequestMapping("/test")
     @ResponseBody
+    @ApiVersion(1)
     public String test1(){
         System.out.println("test1");
         return "test1";
     }
 
-//    @RequestMapping("/test")
-//    public void test2(){
-//        System.out.println("test2");
-//    }
+    @RequestMapping("/test")
+    @ResponseBody
+    @ApiVersion(2)
+    public String test2(){
+        System.out.println("test2");
+        return "test2";
+    }
+
+    @RequestMapping("/test3")
+    @ResponseBody
+    public String test3(){
+        System.out.println("test3");
+        return "test3";
+    }
 }
