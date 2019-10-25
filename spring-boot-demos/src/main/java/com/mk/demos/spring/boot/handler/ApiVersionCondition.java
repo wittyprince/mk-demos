@@ -15,25 +15,25 @@ import org.springframework.web.servlet.mvc.condition.RequestCondition;
  * @since 1.0
  */
 public class ApiVersionCondition implements RequestCondition<ApiVersionCondition> {
-    private final static Pattern VERSION_PREFIX_PATTERN = Pattern.compile(".*v(\\d+).*");
+    private final static Pattern VERSION_PREFIX_PATTERN = Pattern.compile(".*(\\d+).*");
 
-    private int apiVersion = 1;
+    private float apiVersion = 1;
     // 保存所有接口的最大版本号
-    private static int maxVersion = 1;
+    private static float maxVersion = 1;
 
-    ApiVersionCondition(int apiVersion) {
+    ApiVersionCondition(float apiVersion) {
         this.apiVersion = apiVersion;
     }
 
-    public int getApiVersion() {
+    public float getApiVersion() {
         return apiVersion;
     }
 
-    public static void setMaxVersion(int maxVersion) {
+    public static void setMaxVersion(float maxVersion) {
         ApiVersionCondition.maxVersion = maxVersion;
     }
 
-    public static int getMaxVersion() {
+    public static float getMaxVersion() {
         return maxVersion;
     }
 
@@ -50,8 +50,8 @@ public class ApiVersionCondition implements RequestCondition<ApiVersionCondition
         }
         Matcher m = VERSION_PREFIX_PATTERN.matcher(apiVersion);
         if (m.find()) {
-            int version = Integer.parseInt(m.group(1));
-            if (/*version <= maxVersion && */version >= this.apiVersion) {
+            float version = Float.parseFloat(m.group(0));
+            if (/*version <= maxVersion && */version == this.apiVersion) {
                 return this;
             }
         }
@@ -60,6 +60,6 @@ public class ApiVersionCondition implements RequestCondition<ApiVersionCondition
 
     @Override
     public int compareTo(ApiVersionCondition apiVersionCondition, HttpServletRequest httpServletRequest) {
-        return apiVersionCondition.getApiVersion() - this.apiVersion;
+        return (int) (apiVersionCondition.getApiVersion() - this.apiVersion);
     }
 }

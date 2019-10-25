@@ -26,6 +26,14 @@ public class TestController {
 
     @RequestMapping("/test")
     @ResponseBody
+    @ApiVersion(1.1f)
+    public String test1_1(){
+        System.out.println("test1_1");
+        return "test1_1";
+    }
+
+    @RequestMapping("/test")
+    @ResponseBody
     @ApiVersion(2)
     public String test2(){
         System.out.println("test2");
