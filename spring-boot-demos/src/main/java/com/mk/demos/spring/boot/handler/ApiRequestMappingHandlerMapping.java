@@ -34,7 +34,7 @@ public class ApiRequestMappingHandlerMapping extends RequestMappingHandlerMappin
 //            return null;
 //        }
         ApiVersion apiVersion = clazz.getAnnotation(ApiVersion.class);
-        return apiVersion == null ? new ApiVersionCondition(1) : new ApiVersionCondition(apiVersion.value());
+        return apiVersion == null ? new ApiVersionCondition("1.0") : new ApiVersionCondition(apiVersion.value());
     }
 
     @Override
@@ -42,7 +42,7 @@ public class ApiRequestMappingHandlerMapping extends RequestMappingHandlerMappin
         // 判断是否有@ApiVersion注解，构建基于@ApiVersion的RequestCondition
         ApiVersionCondition condition =  buildFrom(AnnotationUtils.findAnnotation(method, ApiVersion.class));
         // 保存最大版本号
-        if (condition != null && condition.getApiVersion() > ApiVersionCondition.getMaxVersion()) {
+        if (condition != null && ApiVersionCondition.versionCompare(condition.getApiVersion(), ApiVersionCondition.getMaxVersion()) >= 0) {
             ApiVersionCondition.setMaxVersion(condition.getApiVersion());
         }
         return condition;
@@ -53,13 +53,13 @@ public class ApiRequestMappingHandlerMapping extends RequestMappingHandlerMappin
         // 判断是否有@ApiVersion注解，构建基于@ApiVersion的RequestCondition
         ApiVersionCondition condition = buildFrom(AnnotationUtils.findAnnotation(handlerType, ApiVersion.class));
         // 保存最大版本号
-        if (condition != null && condition.getApiVersion() > ApiVersionCondition.getMaxVersion()) {
+        if (condition != null && ApiVersionCondition.versionCompare(condition.getApiVersion(), ApiVersionCondition.getMaxVersion()) >= 0) {
             ApiVersionCondition.setMaxVersion(condition.getApiVersion());
         }
         return condition;
     }
 
     private ApiVersionCondition buildFrom(ApiVersion apiVersion) {
-        return apiVersion == null ? null : new ApiVersionCondition(apiVersion.value());
+        return apiVersion == null ? new ApiVersionCondition("1.5") : new ApiVersionCondition(apiVersion.value());
     }
 }

@@ -15,7 +15,7 @@ import com.mk.demos.spring.boot.annotation.ApiVersion;
  */
 @RequestMapping("/{version}/version")
 @RestController
-@ApiVersion(2)
+@ApiVersion("2.0")
 public class V2Controller {
 
     @GetMapping

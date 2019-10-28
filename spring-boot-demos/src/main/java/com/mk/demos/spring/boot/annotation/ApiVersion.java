@@ -23,5 +23,5 @@ public @interface ApiVersion {
     /**
      * @return 版本号
      */
-    float value() default 1f;
+    String value() default "1.0";
 }

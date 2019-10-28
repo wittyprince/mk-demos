@@ -17,23 +17,23 @@ import org.springframework.web.servlet.mvc.condition.RequestCondition;
 public class ApiVersionCondition implements RequestCondition<ApiVersionCondition> {
     private final static Pattern VERSION_PREFIX_PATTERN = Pattern.compile(".*(\\d+).*");
 
-    private float apiVersion = 1;
+    private String apiVersion = "1.0";
     // 保存所有接口的最大版本号
-    private static float maxVersion = 1;
+    private static String maxVersion = "1.0";
 
-    ApiVersionCondition(float apiVersion) {
+    ApiVersionCondition(String apiVersion) {
         this.apiVersion = apiVersion;
     }
 
-    public float getApiVersion() {
+    public String getApiVersion() {
         return apiVersion;
     }
 
-    public static void setMaxVersion(float maxVersion) {
+    public static void setMaxVersion(String maxVersion) {
         ApiVersionCondition.maxVersion = maxVersion;
     }
 
-    public static float getMaxVersion() {
+    public static String getMaxVersion() {
         return maxVersion;
     }
 
@@ -50,8 +50,8 @@ public class ApiVersionCondition implements RequestCondition<ApiVersionCondition
         }
         Matcher m = VERSION_PREFIX_PATTERN.matcher(apiVersion);
         if (m.find()) {
-            float version = Float.parseFloat(m.group(0));
-            if (/*version <= maxVersion && */version == this.apiVersion) {
+            String version = m.group(0);
+            if (/*version <= maxVersion && */versionCompare(version, this.apiVersion) >= 0) {
                 return this;
             }
         }
@@ -60,6 +60,27 @@ public class ApiVersionCondition implements RequestCondition<ApiVersionCondition
 
     @Override
     public int compareTo(ApiVersionCondition apiVersionCondition, HttpServletRequest httpServletRequest) {
-        return (int) (apiVersionCondition.getApiVersion() - this.apiVersion);
+        return versionCompare(apiVersionCondition.getApiVersion(), this.apiVersion);
+    }
+
+    public static int versionCompare(String version1, String version2) {
+        String[] v1Arr = version1.split("\\.");
+        String[] v2Arr = version2.split("\\.");
+
+        int i = 0;
+        int diff = 0;
+        diff = v1Arr.length - v2Arr.length;
+
+        while (diff == 0 && i < v1Arr.length
+                && (diff = v1Arr[i].length() - v2Arr[i].length()) == 0
+                && (diff = v1Arr[i].compareToIgnoreCase(v2Arr[i])) == 0) {
+            ++i;
+        }
+        if (diff > 0) {
+            return 1;
+        } else if (diff < 0) {
+            return -1;
+        }
+        return 0;
     }
 }
