@@ -61,23 +61,3 @@ public class ReverseList {
     }
 }
 
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) { val = x; }
-
-    @Override
-    public String toString() {
-        return val + "";
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof ListNode){
-            if (((ListNode) obj).val == this.val){
-                return true;
-            }
-        }
-        return super.equals(obj);
-    }
-}
