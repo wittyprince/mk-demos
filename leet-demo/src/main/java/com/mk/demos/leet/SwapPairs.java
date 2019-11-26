@@ -21,13 +21,19 @@ public class SwapPairs {
         }
         ListNode pre = new ListNode(0);
         pre.next = head;
-        ListNode node = head;
-        while (node != null && node.next != null){
+        ListNode node = pre;
+//        ListNode pre = null;
+        while (node.next != null && node.next.next != null){
+            // 声明两个临时变量
             ListNode next = node.next;
             ListNode nextNext = next.next;
-            next.next = node;
+            // 交换相邻的两个节点
+            next.next = nextNext.next;
+            nextNext.next = next;
             node.next = nextNext;
-            node = nextNext;
+            // 移动游标
+            node = next;
+//            pre = next;
             System.out.println(node);
         }
         return pre.next;
@@ -39,10 +45,14 @@ public class SwapPairs {
         ListNode node3 = new ListNode(3);
         ListNode node4 = new ListNode(4);
         ListNode node5 = new ListNode(5);
+        ListNode node6 = new ListNode(6);
+        ListNode node7 = new ListNode(7);
         node1.next = node2;
         node2.next = node3;
         node3.next = node4;
         node4.next = node5;
+        node5.next = node6;
+        node6.next = node7;
         ListNode listNode = new SwapPairs().swapPairs(node1);
         System.out.println(listNode);
     }
