@@ -45,7 +45,7 @@ public class MyQueue {
     }
 
     /** Removes the element from in front of queue and returns that element. */
-    public int pop() {
+    public int pop() {// 非线程安全
         if (outputStack.isEmpty()){
             if (inputStack.isEmpty()){
                 throw new RuntimeException("empty queue!");
@@ -60,7 +60,7 @@ public class MyQueue {
     }
 
     /** Get the front element. */
-    public int peek() {
+    public int peek() {// 非线程安全
         if (outputStack.isEmpty()){
             if (inputStack.isEmpty()){
                 throw new RuntimeException("empty queue!");
