@@ -10,7 +10,7 @@ package com.mk.demos.leet;
 public class ForLoop {
 
     public static void main(String[] args){
-        new ForLoop().loop4();
+        new ForLoop().loop1();
     }
 
     private void loop1(){
@@ -19,6 +19,7 @@ public class ForLoop {
             System.out.println(i);
         }
         System.out.println(i);
+        // 3  4  5
     }
 
     private void loop2(){
@@ -27,6 +28,7 @@ public class ForLoop {
             System.out.println(i);
         }
         System.out.println(i);
+        // 3  4  5
     }
 
     private void loop3(){
@@ -36,6 +38,7 @@ public class ForLoop {
             System.out.println(i);
         }
         System.out.println(i);
+        // 3  4  5 6
     }
 
     private void loop4(){
@@ -45,5 +48,6 @@ public class ForLoop {
             System.out.println(i);
         }
         System.out.println(i);
+        // 3  4  5
     }
 }
