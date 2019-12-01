@@ -163,6 +163,38 @@ public class MaxSlidingWindow {
 
     }
 
+    public int[] maxSlidingWindow5(int[] nums, int k) {
+        if (nums == null) {
+            return null;
+        } else if (nums.length == 0) {
+            return nums;
+        } else if (nums.length <= k) {
+            return new int[]{Arrays.stream(nums).max().orElse(nums[0])};
+        } else {
+            List<Integer> resultArr = new ArrayList<>(nums.length - k + 1);
+            Deque<Integer> queue = new LinkedList<>();
+            int i = 0;
+            for (; i < k; i++){
+                while (!queue.isEmpty() && nums[i] > nums[queue.getLast()]){
+                    queue.removeLast();
+                }
+                queue.addLast(i);
+            }
+            resultArr.add(nums[queue.peekFirst()]);
+            for (i = k; i < nums.length; i++){
+                while (!queue.isEmpty() && queue.peekFirst() <= i - k){
+                    queue.removeFirst();
+                }
+                while (!queue.isEmpty() && nums[i] > nums[queue.getLast()]){
+                    queue.removeLast();
+                }
+                queue.addLast(i);
+                resultArr.add(nums[queue.peekFirst()]);
+            }
+            return resultArr.stream().mapToInt(a->a).toArray();
+        }
+    }
+
     public static Comparator<Integer> comparatorDesc = new Comparator<Integer>() {
         @Override
         public int compare(Integer e1, Integer e2) {
@@ -171,13 +203,13 @@ public class MaxSlidingWindow {
     };
 
     public static void main(String[] args){
-        test1();
+        test4();
     }
 
     private static void test1(){
         int[] nums = new int[]{1,3,-1,-3,5,3,6,7};
         int k = 3;
-        int[] ints = new MaxSlidingWindow().maxSlidingWindow4(nums, k);
+        int[] ints = new MaxSlidingWindow().maxSlidingWindow5(nums, k);
         System.out.println(Arrays.toString(ints));
     }
 
@@ -196,9 +228,9 @@ public class MaxSlidingWindow {
     }
 
     private static void test4(){
-        int[] nums = {};
-        int k = 5000;
-        int[] ints = new MaxSlidingWindow().maxSlidingWindow(nums, k);
+        int[] nums = {1, -1};
+        int k = 1;
+        int[] ints = new MaxSlidingWindow().maxSlidingWindow5(nums, k);
         System.out.println(Arrays.toString(ints));
     }
 }
