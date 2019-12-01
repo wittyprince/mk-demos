@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -114,24 +116,51 @@ public class MaxSlidingWindow {
             Queue<Integer> queue = new PriorityQueue<>((x, y) -> y - x);// PriorityQueue 默认是minHeap, 可以使用一个比较器转换为maxHeap
             int i = 0;
             for (; i < k; i++){
-                int j = i;
-                while (nums[i] > nums[j--] && j >= 0){// 对每次新加入的元素nums[i]进行比较，如果大于前面的，就把前面的元素移除
-                    queue.remove();
-                }
                 queue.add(nums[i]);
             }
             resultArr.add(queue.element());
             for (i = k; i < nums.length; i++){
                 queue.remove(nums[i - k]);
-                int j = i;
-                while (nums[i] > nums[j--] && j > i - k){
-                    queue.remove();
-                }
                 queue.add(nums[i]);
                 resultArr.add(queue.element());
             }
             return resultArr.stream().mapToInt(a->a).toArray();
         }
+    }
+
+    public int[] maxSlidingWindow4(int[] nums, int k) {
+        if (nums == null) {
+            return null;
+        } else if (nums.length == 0) {
+            return nums;
+        } else if (nums.length <= k) {
+            return new int[]{Arrays.stream(nums).max().orElse(nums[0])};
+        } else {
+            List<Integer> resultArr = new ArrayList<>(nums.length - k + 1);
+            Deque<Integer> queue = new LinkedList<>();
+            int i = 0;
+            for (; i < k; i++){
+                int j = i - 1;
+                while (j >= 0 && nums[i] > nums[j]){// 对每次新加入的元素nums[i]进行比较，如果大于前面的，就把前面的元素移除
+                    queue.remove(j);
+                    j--;
+                }
+                queue.add(i);
+            }
+            resultArr.add(nums[queue.element()]);
+            for (i = k; i < nums.length; i++){
+                queue.remove(i - k);
+                int j = i - 1;
+                while (j > i - k && nums[i] > nums[j]){
+                    queue.remove(j);
+                    j--;
+                }
+                queue.add(i);
+                resultArr.add(nums[queue.element()]);
+            }
+            return resultArr.stream().mapToInt(a->a).toArray();
+        }
+
     }
 
     public static Comparator<Integer> comparatorDesc = new Comparator<Integer>() {
@@ -142,13 +171,13 @@ public class MaxSlidingWindow {
     };
 
     public static void main(String[] args){
-        test4();
+        test1();
     }
 
     private static void test1(){
         int[] nums = new int[]{1,3,-1,-3,5,3,6,7};
         int k = 3;
-        int[] ints = new MaxSlidingWindow().maxSlidingWindow(nums, k);
+        int[] ints = new MaxSlidingWindow().maxSlidingWindow4(nums, k);
         System.out.println(Arrays.toString(ints));
     }
 
