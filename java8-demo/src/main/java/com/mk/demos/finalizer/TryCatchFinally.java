@@ -15,14 +15,11 @@ package com.mk.demos.finalizer;
  *      divide3()中为①->②->③->⑦, divide4()中也为①->②->③->⑦, divide5()中为①->②->③->⑥,
  *      divide2()中为①->②->③->④->⑧,
  *
- *
- *
- *
  * @author WangChen
  * Created on 2019/12/15 9:47
  * @since 1.0
  */
-public class Finalizer {
+public class TryCatchFinally {
 
     public double divide1(int a, int b){
         try {
@@ -100,7 +97,7 @@ public class Finalizer {
     }
 
     public static void main(String [] args){
-        Finalizer finalizer2 = new Finalizer();
+        TryCatchFinally finalizer2 = new TryCatchFinally();
 //        System.out.println("商是: " + finalizer2.divide1(9, 1));
 //        System.out.println("商是: " + finalizer2.divide2(9, 1));
 //        System.out.println("商是: " + finalizer2.divide3(9, 1));
