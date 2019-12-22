@@ -23,16 +23,16 @@ public class TryCatchFinally {
 
     public double divide1(int a, int b){
         try {
-            System.out.println("a/b :" + a / b);// ①
+            System.out.println("① a/b :" + a / b);// ①
             return a / b;// ⑤
         }catch (Exception e){
-            System.out.println("catch 语句块: ");// ②
+            System.out.println("② catch 语句块: ");// ②
 //            return a + 1;// ⑥
         }finally {
-            System.out.println("finally 语句块: ");// ③
+            System.out.println("③ finally 语句块: ");// ③
 //            return a + 2;// ⑦
         }
-        System.out.println("Out of try-catch-finally");// ④
+        System.out.println("④ Out of try-catch-finally");// ④
         return -1;// ⑧
     }
 
@@ -103,5 +103,22 @@ public class TryCatchFinally {
 //        System.out.println("商是: " + finalizer2.divide3(9, 1));
 //        System.out.println("商是: " + finalizer2.divide4(9, 1));
         System.out.println("商是: " + finalizer2.divide2(9, 0));
+
+        try {
+            // do something
+            System.out.println("try");
+            System.exit(1);
+        } finally{
+            System.out.println("Print from finally");// 注意此行语句不会执行
+        }
+
+        try {
+            // do something
+            System.out.println("try");
+//            System.exit(1);
+            return;
+        } finally{
+            System.out.println("Print from finally");// 注意此行语句会执行
+        }
     }
 }
