@@ -102,12 +102,20 @@ public class TryCatchFinally {
 //        System.out.println("商是: " + finalizer2.divide2(9, 1));
 //        System.out.println("商是: " + finalizer2.divide3(9, 1));
 //        System.out.println("商是: " + finalizer2.divide4(9, 1));
-        System.out.println("商是: " + finalizer2.divide2(9, 0));
+//        System.out.println("商是: " + finalizer2.divide2(9, 0));
 
         try {
             // do something
             System.out.println("try");
-            System.exit(1);
+            System.exit(0);// status=0 表示jvm非正常退出
+        } finally{
+            System.out.println("Print from finally");// 注意此行语句不会执行
+        }
+
+        try {
+            // do something
+            System.out.println("try");
+            System.exit(1);// status非零表示jvm非正常退出
         } finally{
             System.out.println("Print from finally");// 注意此行语句不会执行
         }
