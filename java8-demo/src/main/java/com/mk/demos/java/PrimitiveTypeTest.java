@@ -22,8 +22,11 @@ public class PrimitiveTypeTest {
 //        short g = Short.MAX_VALUE + 1; // 2^15 -1 = 32767, 编译出错, 超出范围
 //        byte h = c; // 编译报错, c已确定类型, 不能向下隐式转换
         byte i = (byte) c; // 编译通过, 虽然会128溢出, 但是有强制转换
+        System.out.println("i=" + i);
         long j = c; // 编译通过, 可以向上隐式转换
-//        long k = 11111111111;//报错 因为超过了int的范围又不加L、l(小写)
+//        long k = 12345678901;//报错 因为超过了int的范围又不加L、l(小写)
+        long k2 = Integer.MAX_VALUE + 1;//编译通过，默认为int运算，溢出丢弃
+        System.out.println("k2=" + k2);
         short m = 1;
 //        m = m + (short) 1; // 编译出错 require short, found int
         m +=1; // 编译通过, 相当于 s4 = (short)(s4 + 1);
@@ -34,12 +37,12 @@ public class PrimitiveTypeTest {
 //        q = q + 4.7; // 编译出错 require short, found double
         q += 4.7;
         System.out.println(q); // 7    E1 op= E2 is equivalent to E1 = (T)((E1) op (E2))
-        int x6 = 1;
-        long a6 = 2;
-//        int b6 = x6 + a6; // 编译出错 require int, found long
-        long c6 = x6 + a6; // 编译通过
-        x6+= a6;
-        System.out.println(x6);
+        int a3 = 1;
+        long b3 = 2;
+//        int c3 = a3 + b3; // 编译出错 require int, found long
+        long d3 = a3 + b3; // 编译通过
+        a3+= b3;
+        System.out.println(a3);
 
         float s = 1.5F;
         // 1.5虽然在float取值范围内，但是1.5默认是double双精度, 隐式转换为float单精度会丢失精度
@@ -58,6 +61,8 @@ public class PrimitiveTypeTest {
         double dd3 = dd1 - dd2;
         System.out.println("dd3=" + dd3);
 
+        int a4 = new Integer(1);
+        Integer a5 = new Integer(1);
 
     }
 }
