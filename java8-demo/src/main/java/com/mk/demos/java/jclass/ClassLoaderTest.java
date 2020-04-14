@@ -21,6 +21,7 @@ public class ClassLoaderTest {
         System.out.println(classLoader.getParent().getParent());// null
 
 
+        // 获取BootStrapClassLoader所在的URL下的jar
         URL[] urLs = Launcher.getBootstrapClassPath().getURLs();
         Arrays.stream(urLs).map(URL::toExternalForm).forEach(System.out::println);
     }
