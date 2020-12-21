@@ -8,6 +8,10 @@ Java EE平台提供了一个API和运行时环境，用于开发和运行大规�
 多层，可伸缩，可靠和安全的网络应用程序。
 ```
 
+**Java13绝技**
+也就是所谓的JavaEE规范：
+JDBC，JNDI，EJB，RMI，JSP，Servlets，XML，JMS，Java IDL，JTS，JTA，JavaMail，JAF。
+
 JavaEE的13个规范(不止)    
 - JDBC（java Database Connectivity）数据库连接
 - JNDI(Java Name and Directory Interface)命名雨目录接口
