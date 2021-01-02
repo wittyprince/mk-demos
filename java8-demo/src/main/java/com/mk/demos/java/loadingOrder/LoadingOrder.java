@@ -10,8 +10,9 @@ package com.mk.demos.java.loadingOrder;
  * 执行构造函数
  *
  * 对于静态变量、静态初始化块、变量、初始化块、构造器，它们的初始化顺序依次是:
- * （静态变量、静态初始化块）>（变量、初始化块）>构造器。
- *
+ * （静态变量、静态初始化块） > （变量、初始化块） > 构造器。
+ *     ↑                        ↑                 ↑
+ *  类调用                   对象调用            对象调用
  * @author WangChen
  * Created on 2020/4/10 20:08
  * @since 1.0
@@ -23,7 +24,7 @@ public class LoadingOrder {
     /**
      * 构造函数
      *
-     * 1. 对象一建立，就会调用与之相应的构造函数，也就是说，不建立对象，构造函数时不会运行的
+     * 1. 对象一建立，就会调用与之相应的构造函数，也就是说，不建立对象，构造函数是不会运行的
      * 2. 构造函数的作用是用于给对象进行初始化
      * 3. 一个对象建立，构造函数只运行一次，而一般方法可以被该对象调用多次。
      */
@@ -73,11 +74,14 @@ public class LoadingOrder {
     public static void main(String [] args){
         System.out.println("5 main");
         LoadingOrder loadingOrder1 = new LoadingOrder();
+        LoadingOrder loadingOrder11 = new LoadingOrder();
         LoadingOrder loadingOrder2 = new LoadingOrder("loading2");
         /**
          * 运行main方法后执行顺序为:
          * 4 static block
          * 5 main
+         * 3 block
+         * 1 constructor
          * 3 block
          * 1 constructor
          * 3 block
