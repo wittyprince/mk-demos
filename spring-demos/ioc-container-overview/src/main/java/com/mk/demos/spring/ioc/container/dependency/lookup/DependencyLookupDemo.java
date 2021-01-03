@@ -95,6 +95,9 @@ public class DependencyLookupDemo {
          * 答：
          * 这个是 BeanFactory 实现决定，当 name 关联的 Bean 为 FactoryBean，实际返回的对象是 FactoryBean#getObject()，
          * 请参考 org.springframework.beans.factory.support.AbstractBeanFactory#getObjectForBeanInstance 方法。
+         *
+         * ObjectFactoryCreatingFactoryBean 是 ObjectFactory 和 FactoryBean 组合形式，通过 FactoryBean 注册 ObjectFactory
+         *
          */
         //TODO 延迟查找的好处是什么？
         //TODO 得到

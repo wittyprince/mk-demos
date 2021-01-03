@@ -19,7 +19,8 @@
     </bean>
 
     <!-- 借助ObjectFactoryCreatingFactoryBean 实现延迟查找 -->
-    <bean id="objectFactory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+    <!-- ObjectFactoryCreatingFactoryBean 是 ObjectFactory 和 FactoryBean 组合形式，通过 FactoryBean 注册 ObjectFactory -->
+    <bean id="objectFactory1" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
         <property name="targetBeanName" value="account"/>
     </bean>
 

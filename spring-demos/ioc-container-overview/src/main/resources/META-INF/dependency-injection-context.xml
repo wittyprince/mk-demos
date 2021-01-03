@@ -1,0 +1,28 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!-- bean definitions here -->
+
+    <import resource="dependency-lookup-context.xml"/>
+
+    <!-- 方式一：通过手动配置注入 -->
+ <!--   <bean id="userRepository" class="com.mk.demos.spring.ioc.container.dependency.repository.UserRepository">
+        <property name="users">
+            <util:list>
+                &lt;!&ndash; 注意 ref 的顺序，先定义的先输出 &ndash;&gt;
+                <ref bean="superUser"/>
+                <ref bean="user"/>
+            </util:list>
+        </property>
+    </bean>-->
+
+    <!-- 方式二：通过autowire自动注入    autowire="default" 默认是通过byName注入 -->
+    <bean id="userRepository" class="com.mk.demos.spring.ioc.container.dependency.repository.UserRepository"
+          autowire="byType">
+    </bean>
+
+</beans>
