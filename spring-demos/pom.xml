@@ -7,10 +7,12 @@
     <groupId>com.mk.demos</groupId>
     <artifactId>spring-demos</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
     <modules>
         <module>ioc-java-beans</module>
+        <module>ioc-container-overview</module>
     </modules>
-    <packaging>pom</packaging>
 
     <properties>
         <spring.version>5.2.2.RELEASE</spring.version>

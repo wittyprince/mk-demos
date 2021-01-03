@@ -1,0 +1,26 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="user"  class="com.mk.demos.spring.ioc.container.dependency.domain.User" primary="true">
+        <property name="id" value="1"/>
+        <property name="name" value="mk"/>
+    </bean>
+
+    <bean id="superUser" class="com.mk.demos.spring.ioc.container.dependency.domain.SuperUser" parent="user">
+        <property name="address" value="shanghai"/>
+    </bean>
+
+    <bean id="account" name="account" class="com.mk.demos.spring.ioc.container.dependency.domain.Account">
+
+    </bean>
+
+    <!-- 借助ObjectFactoryCreatingFactoryBean 实现延迟查找 -->
+    <bean id="objectFactory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+        <property name="targetBeanName" value="account"/>
+    </bean>
+
+</beans>
