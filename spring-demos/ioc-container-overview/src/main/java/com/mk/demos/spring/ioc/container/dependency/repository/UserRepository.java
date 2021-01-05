@@ -19,9 +19,11 @@ public class UserRepository {
 
     private Collection<User> users;
 
-    private BeanFactory beanFactory;
+    private BeanFactory beanFactory;// org.springframework.beans.factory.support.DefaultListableBeanFactory@3fb6a447
 
-    private ObjectFactory<ApplicationContext> objectFactory;// 这里通过getObject得到的就是applicationContext,也就是ClassPathXmlApplicationContext
+    private ApplicationContext applicationContext;// org.springframework.context.support.ClassPathXmlApplicationContext@c4437c4, started on Tue Jan 05 21:35:44 CST 2021
+
+    private ObjectFactory<ApplicationContext> objectFactoryApplicationContext;// 这里通过getObject得到的就是applicationContext,也就是ClassPathXmlApplicationContext
 
     private ObjectFactory<BeanFactory> objectFactoryBeanFactory;// 这里通过getObject得到的就是line22行的BeanFactory beanFactory
 
@@ -44,12 +46,20 @@ public class UserRepository {
         this.beanFactory = beanFactory;
     }
 
-    public ObjectFactory<ApplicationContext> getObjectFactory() {
-        return objectFactory;
+    public ApplicationContext getApplicationContext() {
+        return applicationContext;
     }
 
-    public void setObjectFactory(ObjectFactory<ApplicationContext> objectFactory) {
-        this.objectFactory = objectFactory;
+    public void setApplicationContext(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
+
+    public ObjectFactory<ApplicationContext> getObjectFactoryApplicationContext() {
+        return objectFactoryApplicationContext;
+    }
+
+    public void setObjectFactoryApplicationContext(ObjectFactory<ApplicationContext> objectFactoryApplicationContext) {
+        this.objectFactoryApplicationContext = objectFactoryApplicationContext;
     }
 
     public ObjectFactory<BeanFactory> getObjectFactoryBeanFactory() {
