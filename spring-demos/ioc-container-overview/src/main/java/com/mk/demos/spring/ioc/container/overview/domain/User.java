@@ -1,4 +1,4 @@
-package com.mk.demos.spring.ioc.container.dependency.domain;
+package com.mk.demos.spring.ioc.container.overview.domain;
 
 /**
  * User POJO类

@@ -1,17 +1,15 @@
-package com.mk.demos.spring.ioc.container.dependency.lookup;
+package com.mk.demos.spring.ioc.container.overview.dependency.lookup;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.mk.demos.spring.ioc.container.dependency.annotation.Super;
-import com.mk.demos.spring.ioc.container.dependency.domain.Account;
-import com.mk.demos.spring.ioc.container.dependency.domain.User;
+import com.mk.demos.spring.ioc.container.overview.annotation.Super;
+import com.mk.demos.spring.ioc.container.overview.domain.Account;
+import com.mk.demos.spring.ioc.container.overview.domain.User;
 
 /**
  * 依赖查找demo

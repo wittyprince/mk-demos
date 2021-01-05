@@ -1,4 +1,4 @@
-package com.mk.demos.spring.ioc.container.dependency.annotation;
+package com.mk.demos.spring.ioc.container.overview.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

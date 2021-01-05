@@ -21,7 +21,7 @@
     </bean>-->
 
     <!-- 方式二：通过autowire自动注入    autowire="default" 默认是通过byName注入 -->
-    <bean id="userRepository" class="com.mk.demos.spring.ioc.container.dependency.repository.UserRepository"
+    <bean id="userRepository" class="com.mk.demos.spring.ioc.container.overview.repository.UserRepository"
           autowire="byType">
     </bean>
 

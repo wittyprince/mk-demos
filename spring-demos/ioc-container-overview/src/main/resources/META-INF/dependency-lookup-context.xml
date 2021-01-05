@@ -5,16 +5,16 @@
     https://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <bean id="user"  class="com.mk.demos.spring.ioc.container.dependency.domain.User" primary="true">
+    <bean id="user" class="com.mk.demos.spring.ioc.container.overview.domain.User" primary="true">
         <property name="id" value="1"/>
         <property name="name" value="mk"/>
     </bean>
 
-    <bean id="superUser" class="com.mk.demos.spring.ioc.container.dependency.domain.SuperUser" parent="user">
+    <bean id="superUser" class="com.mk.demos.spring.ioc.container.overview.domain.SuperUser" parent="user">
         <property name="address" value="shanghai"/>
     </bean>
 
-    <bean id="account" name="account" class="com.mk.demos.spring.ioc.container.dependency.domain.Account">
+    <bean id="account" name="account" class="com.mk.demos.spring.ioc.container.overview.domain.Account">
 
     </bean>
 

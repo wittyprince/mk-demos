@@ -1,4 +1,4 @@
-package com.mk.demos.spring.ioc.container.dependency.repository;
+package com.mk.demos.spring.ioc.container.overview.repository;
 
 import java.util.Collection;
 
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.context.ApplicationContext;
 
-import com.mk.demos.spring.ioc.container.dependency.domain.User;
+import com.mk.demos.spring.ioc.container.overview.domain.User;
 
 /**
  * user 仓库

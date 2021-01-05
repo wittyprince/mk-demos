@@ -1,6 +1,6 @@
-package com.mk.demos.spring.ioc.container.dependency.domain;
+package com.mk.demos.spring.ioc.container.overview.domain;
 
-import com.mk.demos.spring.ioc.container.dependency.annotation.Super;
+import com.mk.demos.spring.ioc.container.overview.annotation.Super;
 
 /**
  * 超级用户POJO类

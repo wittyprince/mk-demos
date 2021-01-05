@@ -1,12 +1,11 @@
-package com.mk.demos.spring.ioc.container.dependency.injection;
+package com.mk.demos.spring.ioc.container.overview.dependency.injection;
 
-import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.env.Environment;
 
-import com.mk.demos.spring.ioc.container.dependency.repository.UserRepository;
+import com.mk.demos.spring.ioc.container.overview.repository.UserRepository;
 
 /**
  * 依赖注入demo
