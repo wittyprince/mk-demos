@@ -4,6 +4,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.env.Environment;
 
 import com.mk.demos.spring.ioc.container.dependency.repository.UserRepository;
 
@@ -25,7 +26,7 @@ public class DependencyInjectionDemo {
         UserRepository userRepository = beanFactory.getBean("userRepository", UserRepository.class);
         System.out.println(userRepository);
 
-        // 依赖来源二：依赖注入（內建依赖）
+        // 依赖来源三：依赖注入（內建依赖）
         // 注意这里是通过autowire=byType方式时，才可以通过UserRepository#setBeanFactory方法注入
         System.out.println(userRepository.getBeanFactory());
 
@@ -42,5 +43,9 @@ public class DependencyInjectionDemo {
         // 这句话需要有bean id="objectFactory1" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean"显示定义
         // 因为autowire=byType, 所以id="objectFactory1"不影响
         System.out.println(beanFactory.getBean(ObjectFactory.class));
+
+        // 依赖来源二：容器內建 Bean
+        Environment environment = applicationContext.getBean(Environment.class);
+        System.out.println("获取 Environment 类型的 Bean：" + environment);
     }
 }
