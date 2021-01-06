@@ -24,7 +24,7 @@ public class ApplicationContextAsIoCContainerDemo {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
         // 将当前类 AnnotationApplicationContextAsIoCContainerDemo 作为配置类（Configuration Class）
         applicationContext.register(ApplicationContextAsIoCContainerDemo.class);
-        // 启动应用上下文
+        // 启动应用上下文，refresh方法是启动上下文的唯一途径
         applicationContext.refresh();
         // 依赖查找集合对象
         lookupCollectionByType(applicationContext);
