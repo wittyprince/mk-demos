@@ -17,11 +17,12 @@
           factory-method="createAddress">
     </bean>
 
-
+    <!-- bean实例化 第三种方式：通过实例(Bean)工厂方法 -->
     <bean id="address-by-bean-factory" factory-bean="addressFactory" factory-method="createAddress"/>
 
     <bean id="addressFactory" class="com.mk.demos.spring.beans.factory.DefaultAddressFactory"/>
 
-
+    <!-- bean实例化 第四种方式：通过FactoryBean方法 -->
+    <bean id="address-by-Factory-Bean" class="com.mk.demos.spring.beans.factory.AddressFactoryBean"/>
 
 </beans>
