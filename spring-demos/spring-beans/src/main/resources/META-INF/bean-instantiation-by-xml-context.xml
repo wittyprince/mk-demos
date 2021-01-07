@@ -12,10 +12,16 @@
     </bean>
 
     <!-- bean实例化 第二种方式：静态工厂方法static method factory之XML配置 -->
-    <!--<bean id="address-by-static-method"
+    <bean id="address-by-static-method"
           class="com.mk.demos.spring.beans.domain.Address"
           factory-method="createAddress">
-    </bean>-->
+    </bean>
+
+
+    <bean id="address-by-bean-factory" factory-bean="addressFactory" factory-method="createAddress"/>
+
+    <bean id="addressFactory" class="com.mk.demos.spring.beans.factory.DefaultAddressFactory"/>
+
 
 
 </beans>
