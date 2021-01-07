@@ -5,8 +5,10 @@
 
     <!-- bean实例化 第一种方式：构造器constructor之XML配置 -->
     <bean id="address-by-constructor" class="com.mk.demos.spring.beans.domain.Address">
-        <property name="id" value="1"/>
-        <property name="name" value="shanghai-constructor-xml"/>
+        <!--<property name="id" value="1"/>
+        <property name="name" value="shanghai-constructor-xml"/>-->
+        <constructor-arg name="name" value="shanghai-constructor-xml"/>
+        <constructor-arg name="id" value="1"/>
     </bean>
 
     <!-- bean实例化 第二种方式：静态工厂方法static method factory之XML配置 -->
