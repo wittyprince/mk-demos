@@ -3,4 +3,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
     https://www.springframework.org/schema/beans/spring-beans.xsd">
 
+
+    <bean id="addressFactoryServiceLoader"  class="org.springframework.beans.factory.serviceloader.ServiceLoaderFactoryBean">
+        <property name="serviceType" value="com.mk.demos.spring.beans.factory.AddressFactory"/>
+    </bean>
 </beans>

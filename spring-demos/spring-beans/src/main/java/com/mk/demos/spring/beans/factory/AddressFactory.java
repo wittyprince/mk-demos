@@ -14,4 +14,8 @@ public interface AddressFactory {
     default Address createAddress(){
         return Address.createAddress();
     }
+
+    default void initByCustom(){
+        System.out.println("initByCustom");
+    }
 }
