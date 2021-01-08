@@ -17,12 +17,13 @@ import com.mk.demos.spring.beans.factory.AddressFactory;
 public class SpecialBeanInstantiationDemo {
 
     public static void main(String[] args) {
-        String configLocation = "classpath:/META-INF/special-bean-instantiation-context.xml";
-        // 创建BeanFactory容器
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(configLocation);
+//        String configLocation = "classpath:/META-INF/special-bean-instantiation-context.xml";
+//        // 创建BeanFactory容器
+//        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(configLocation);
         // 注册Configuration Class 配置类
 
 
+        // Java中控制反转
         ServiceLoader<AddressFactory> serviceLoader = ServiceLoader.load(AddressFactory.class, Thread.currentThread().getContextClassLoader());
         for (AddressFactory addressFactory : serviceLoader) {
             System.out.println(addressFactory.createAddress());
