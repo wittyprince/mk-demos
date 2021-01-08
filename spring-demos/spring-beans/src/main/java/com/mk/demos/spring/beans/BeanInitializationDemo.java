@@ -27,8 +27,8 @@ public class BeanInitializationDemo {
 
 
 
-        Map<String, DefaultAddressFactory> beansOfType = applicationContext.getBeansOfType(DefaultAddressFactory.class);
-        System.out.println(beansOfType);
+//        Map<String, DefaultAddressFactory> beansOfType = applicationContext.getBeansOfType(DefaultAddressFactory.class);
+//        System.out.println(beansOfType);
 
         // 1. @PostConstruct标注方法, @PostConstruct是Java的标准注解(JDK1.6开始有)
         // 2. 实现Initialization接口的afterPropertiesSet()方法
@@ -36,10 +36,12 @@ public class BeanInitializationDemo {
 		//  3.1 XML配置：<bean init-method="initXXX" …/>
 		//  3.2 Java注解：@Bean(initMethod="initXXX")
         //  3.3 Java API：AbstractBeanDefinition#setInitMethodName(String)
+
+        applicationContext.close();
     }
 
-    @Bean(initMethod = "initByCustom")
-    public AddressFactory addressFactory(){
+    @Bean(initMethod = "initByCustom", destroyMethod = "destroyByCustom")
+    public DefaultAddressFactory addressFactory(){
         return new DefaultAddressFactory();
     }
 }
