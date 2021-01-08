@@ -19,6 +19,7 @@ public class DefaultAddressFactory implements AddressFactory, InitializingBean {
         System.out.println("@PostConstruct: init...");
     }
 
+    // 2. 实现Initialization接口的afterPropertiesSet()方法
     @Override
     public void afterPropertiesSet() {
         System.out.println("@afterPropertiesSet: init...");

@@ -15,6 +15,7 @@ public interface AddressFactory {
         return Address.createAddress();
     }
 
+    // 3. 自定义初始化方法
     default void initByCustom(){
         System.out.println("initByCustom");
     }
