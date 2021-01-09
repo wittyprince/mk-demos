@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="userDAO" class="com.mk.demos.spring.dao.impl.UserDAOImpl">
+        <!-- collaborators and configuration for this bean go here -->
+    </bean>
+
+    <bean id="userService" class="com.mk.demos.spring.service.UserService">
+        <!-- collaborators and configuration for this bean go here -->
+        <property name="userDAO" ref="userDAO"/><!-- 这里property属性需要调用name所对应的set方法 -->
+    </bean>
+
+    <!-- more bean definitions go here -->
+
+</beans>

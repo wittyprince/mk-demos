@@ -1,0 +1,11 @@
+<beans>
+    <bean id="userDAO-simulate" class="com.mk.demos.spring.simulation.dao.impl.UserDAOImpl">
+        <!-- collaborators and configuration for this bean go here -->
+    </bean>
+
+    <bean id="userService" class="com.mk.demos.spring.simulation.service.UserService">
+        <!-- collaborators and configuration for this bean go here -->
+        <!-- 这里property属性需要调用name所对应的set方法 -->
+        <property name="userDAO" ref="userDAO-simulate"/>
+    </bean>
+</beans>

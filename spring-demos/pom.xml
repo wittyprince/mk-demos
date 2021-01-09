@@ -13,6 +13,7 @@
         <module>ioc-java-beans</module>
         <module>ioc-container-overview</module>
         <module>spring-beans</module>
+        <module>spring-simulation</module>
     </modules>
 
     <properties>
