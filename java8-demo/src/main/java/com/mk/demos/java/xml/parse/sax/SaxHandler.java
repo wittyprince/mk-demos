@@ -1,4 +1,4 @@
-package com.mk.demos.java.sax;
+package com.mk.demos.java.xml.parse.sax;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;

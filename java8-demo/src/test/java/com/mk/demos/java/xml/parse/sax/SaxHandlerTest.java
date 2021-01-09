@@ -1,4 +1,4 @@
-package com.mk.demos.java;
+package com.mk.demos.java.xml.parse.sax;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import javax.xml.parsers.SAXParserFactory;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import com.mk.demos.java.sax.SaxHandler;
+import com.mk.demos.java.xml.parse.sax.SaxHandler;
 
 /**
  * sax handler 测试类
