@@ -64,9 +64,9 @@ public class SaxHandler extends DefaultHandler {
 //    }
 
     @Override
-    public void characters(char[] arg0, int arg1, int arg2) throws SAXException {
-        System.out.print(new String(arg0, arg1, arg2));
-        super.characters(arg0, arg1, arg2);
+    public void characters(char[] ch, int start, int length) throws SAXException {
+        System.out.print(new String(ch, start, length));
+        super.characters(ch, start, length);
     }
 
     @Override
@@ -76,12 +76,12 @@ public class SaxHandler extends DefaultHandler {
     }
 
     @Override
-    public void endElement(String arg0, String arg1, String arg2)
+    public void endElement(String uri, String localName, String qName)
             throws SAXException {
         System.out.print("</");
-        System.out.print(arg2);
+        System.out.print(localName);
         System.out.print(">");
-        super.endElement(arg0, arg1, arg2);
+        super.endElement(uri, localName, qName);
     }
 
     @Override
@@ -93,19 +93,19 @@ public class SaxHandler extends DefaultHandler {
     }
 
     @Override
-    public void startElement(String arg0, String arg1, String arg2,
-                             Attributes arg3) throws SAXException {
+    public void startElement(String uri, String localName,
+                             String qName, Attributes attributes) throws SAXException {
 
         System.out.print("<");
-        System.out.print(arg2);
+        System.out.print(qName);
 
-        if (arg3 != null) {
-            for (int i = 0; i < arg3.getLength(); i++) {
-                System.out.print(" " + arg3.getQName(i) + "=\"" + arg3.getValue(i) + "\"");
+        if (attributes != null) {
+            for (int i = 0; i < attributes.getLength(); i++) {
+                System.out.print(" " + attributes.getQName(i) + "=\"" + attributes.getValue(i) + "\"");
             }
         }
         System.out.print(">");
-        super.startElement(arg0, arg1, arg2, arg3);
+        super.startElement(uri, localName, qName, attributes);
     }
 
 
