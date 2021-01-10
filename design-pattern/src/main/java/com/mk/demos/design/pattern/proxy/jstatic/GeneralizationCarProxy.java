@@ -8,6 +8,7 @@ import com.mk.demos.design.pattern.proxy.Car;
  * 静态代理：方法一：继承方式
  *
  * 由于使用的是继承方式，所以，所有用到Car的时候，均可以使用GeneralizationCarProxy来代替
+ * 可以把 GeneralizationCarProxy 看成是Car的一个代理
  *
  * @author WangChen
  * Created on 2021/1/10 20:00
