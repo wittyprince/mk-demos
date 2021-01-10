@@ -6,6 +6,10 @@ import com.mk.demos.design.pattern.proxy.Movable;
 /**
  * 使用聚合方式(组合方式)对Car中的move方法进行代理
  *
+ * 静态代理：方法二：聚合方式
+ *
+ * 面向对象(OOP)设计原则: 多用组合，少用继承
+ *
  * 	- 组合 (关系更强)
  * 		○ 类是成员变量(contains-a)
  * 	- 聚合  (关系较组合弱)
