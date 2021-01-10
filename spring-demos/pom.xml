@@ -14,6 +14,7 @@
         <module>ioc-container-overview</module>
         <module>spring-beans</module>
         <module>spring-simulation</module>
+        <module>spring-annotation</module>
     </modules>
 
     <properties>

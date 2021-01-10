@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--
+    The implicitly registered post-processors include:
+     AutowiredAnnotationBeanPostProcessor,
+     CommonAnnotationBeanPostProcessor,
+     PersistenceAnnotationBeanPostProcessor, and the aforementioned
+     RequiredAnnotationBeanPostProcessor.
+     -->
+    <context:annotation-config/>
+
+    <bean id="userDAO1" class="com.mk.demos.spring.annotation.dao.UserDAO">
+        <!-- collaborators and configuration for this bean go here -->
+        <property name="userDAOId" value="1"/>
+    </bean>
+
+    <bean id="userDAO2" class="com.mk.demos.spring.annotation.dao.UserDAO" primary="true">
+        <!-- collaborators and configuration for this bean go here -->
+        <property name="userDAOId" value="2"/>
+    </bean>
+
+    <bean id="userService" class="com.mk.demos.spring.annotation.service.UserService">
+        <!-- collaborators and configuration for this bean go here -->
+<!--        <property name="userDAO" ref="userDAO"/>-->
+    </bean>
+
+    <bean id="roleService" class="com.mk.demos.spring.annotation.service.RoleService"></bean>
+
+</beans>
