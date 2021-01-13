@@ -19,16 +19,17 @@ public class ProxyTest {
 
 
     @Test
-    public void test() throws IOException {
+    public void test() throws Exception {
         Car car = new Car();
         Movable movable = (Movable) Proxy.newProxyInstance();
 
-//        movable.move();
+        movable.move();
 
     }
 
     @Test
     public void test2(){
-        System.out.println(System.getProperty("user.dir"));
+        String s = System.getProperty("user.dir");
+        System.out.println(s.replaceAll("\\\\", "/"));
     }
 }
