@@ -11,6 +11,8 @@ import com.mk.demos.design.pattern.proxy.Movable;
  * @since 1.0
  */
 public class CarTimeProxy implements Movable {
+    public CarTimeProxy() {
+    }
 
     private Movable movable;
 
