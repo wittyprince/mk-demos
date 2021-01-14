@@ -21,7 +21,7 @@ public class ProxyTest {
     @Test
     public void test() throws Exception {
         Car car = new Car();
-        Movable movable = (Movable) Proxy.newProxyInstance();
+        Movable movable = (Movable) Proxy.newProxyInstance(Movable.class);
 
         movable.move();
 
@@ -31,5 +31,8 @@ public class ProxyTest {
     public void test2(){
         String s = System.getProperty("user.dir");
         System.out.println(s.replaceAll("\\\\", "/"));
+
+        Class clazz = Movable.class;
+        System.out.println(clazz.getName());
     }
 }

@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Arrays;
@@ -30,14 +31,25 @@ import com.mk.demos.design.pattern.proxy.Movable;
  */
 public class Proxy {
 
-    public static Object newProxyInstance() throws Exception{
+    public static Object newProxyInstance(Class<?> interfaces) throws Exception{
+        StringBuffer methodStr = new StringBuffer();
+        Method[] methods = interfaces.getMethods();
+        for (Method method : methods){
+            methodStr.append("    @Override\n" +
+                         "    public void " + method.getName() + "() {\n" +
+                         "        System.out.println(\"TimeProxy start...\");\n" +
+                         "        movable." + method.getName() + "();\n" +
+                         "        System.out.println(\"TimeProxy end...\");\n" +
+                         "    }\n"
+            );
+        }
         // 假设已经获得了Car的动态代理类代码
         String proxyStr = // 下面的字符串是直接从com.mk.demos.design.pattern.proxy.jstatic.CarTimeProxy类中copy过来的
                 "package com.mk.demos.design.pattern.proxy.dynamic;\n" +
                         "\n" +
                         "import com.mk.demos.design.pattern.proxy.Movable;\n" +
                         "\n" +
-                        "public class CarTimeProxy implements Movable {\n" +
+                        "public class CarTimeProxy implements " + interfaces.getName() +" {\n" +
                         "    public CarTimeProxy() {\n" +
                         "    }\n" +
                         "\n" +
@@ -47,12 +59,13 @@ public class Proxy {
                         "        this.movable = movable;\n" +
                         "    }\n" +
                         "\n" +
-                        "    @Override\n" +
-                        "    public void move() {\n" +
-                        "        System.out.println(\"TimeProxy start...\");\n" +
-                        "        movable.move();\n" +
-                        "        System.out.println(\"TimeProxy end...\");\n" +
-                        "    }\n" +
+//                        "    @Override\n" +
+//                        "    public void move() {\n" +
+//                        "        System.out.println(\"TimeProxy start...\");\n" +
+//                        "        movable.move();\n" +
+//                        "        System.out.println(\"TimeProxy end...\");\n" +
+//                        "    }\n" +
+                        methodStr.toString() +
                         "}\n";
         // System.getProperty("user.dir") = D:\Gitspace\mk\mk-demos\design-pattern
         String pathname = System.getProperty("user.dir") + "/src/main/resources/com/mk/demos/design/pattern/proxy/dynamic/CarTimeProxy.java";
