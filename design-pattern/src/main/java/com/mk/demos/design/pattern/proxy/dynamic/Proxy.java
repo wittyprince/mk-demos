@@ -35,12 +35,12 @@ public class Proxy {
         StringBuffer methodStr = new StringBuffer();
         Method[] methods = interfaces.getMethods();
         for (Method method : methods){
-            methodStr.append("    @Override\n" +
-                         "    public void " + method.getName() + "() {\n" +
-                         "        System.out.println(\"TimeProxy start...\");\n" +
-                         "        movable." + method.getName() + "();\n" +
-                         "        System.out.println(\"TimeProxy end...\");\n" +
-                         "    }\n"
+            methodStr.append(   "    @Override\n" +
+                                "    public void " + method.getName() + "() {\n" +
+                                "        System.out.println(\"TimeProxy start...\");\n" +
+                                "        movable." + method.getName() + "();\n" +
+                                "        System.out.println(\"TimeProxy end...\");\n" +
+                                "    }\n"
             );
         }
         // 假设已经获得了Car的动态代理类代码
