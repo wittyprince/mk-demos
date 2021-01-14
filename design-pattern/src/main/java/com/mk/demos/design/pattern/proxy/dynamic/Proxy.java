@@ -32,7 +32,7 @@ public class Proxy {
 
     public static Object newProxyInstance() throws Exception{
         // 假设已经获得了Car的动态代理类代码
-        String proxyStr =
+        String proxyStr = // 下面的字符串是直接从com.mk.demos.design.pattern.proxy.jstatic.CarTimeProxy类中copy过来的
                 "package com.mk.demos.design.pattern.proxy.dynamic;\n" +
                         "\n" +
                         "import com.mk.demos.design.pattern.proxy.Movable;\n" +
