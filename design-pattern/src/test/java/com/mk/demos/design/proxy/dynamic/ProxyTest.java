@@ -7,6 +7,7 @@ import org.junit.Test;
 import com.mk.demos.design.pattern.proxy.Car;
 import com.mk.demos.design.pattern.proxy.Movable;
 import com.mk.demos.design.pattern.proxy.dynamic.Proxy;
+import com.mk.demos.design.pattern.proxy.dynamic.TimeHandler;
 
 /**
  * 动态代理类测试类
@@ -21,7 +22,7 @@ public class ProxyTest {
     @Test
     public void test() throws Exception {
         Car car = new Car();
-        Movable movable = (Movable) Proxy.newProxyInstance(Movable.class);
+        Movable movable = (Movable) Proxy.newProxyInstance(Movable.class, new TimeHandler(car));
 
         movable.move();
 

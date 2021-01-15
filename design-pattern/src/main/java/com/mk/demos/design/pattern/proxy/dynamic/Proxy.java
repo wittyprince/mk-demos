@@ -31,32 +31,53 @@ import com.mk.demos.design.pattern.proxy.Movable;
  */
 public class Proxy {
 
-    public static Object newProxyInstance(Class<?> interfaces) throws Exception{
-        StringBuffer methodStr = new StringBuffer();
+    public static Object newProxyInstance(Class<?> interfaces, InvocationHandler handler) throws Exception{
+        StringBuilder methodStr = new StringBuilder();
         Method[] methods = interfaces.getMethods();
-        for (Method method : methods){
+        /*for (Method method : methods){
             methodStr.append(   "    @Override\n" +
                                 "    public void " + method.getName() + "() {\n" +
+                                        // 现在想把代理逻辑也动态生成 System.out.println("TimeProxy start...")
+                                        // 思路动态生成代理逻辑，定义方法调用处理器InvocationHandler
+                                        // 所有想要增加的代理逻辑都有InvocationHandler来增加
                                 "        System.out.println(\"TimeProxy start...\");\n" +
                                 "        movable." + method.getName() + "();\n" +
                                 "        System.out.println(\"TimeProxy end...\");\n" +
                                 "    }\n"
             );
+        }*/
+        for (Method method : methods){
+            methodStr.append(   "    @Override\n" +
+                    "    public void " + method.getName() + "() {\n" +
+                    // 现在想把代理逻辑也动态生成 System.out.println("TimeProxy start...")
+                    // 思路动态生成代理逻辑，定义方法调用处理器InvocationHandler
+                    // 所有想要增加的代理逻辑都有InvocationHandler来增加
+//                    "        System.out.println(\"TimeProxy start...\");\n" +
+//                    "        movable." + method.getName() + "();\n" +
+//                    "        System.out.println(\"TimeProxy end...\");\n" +
+                    "        try{\n" +
+                    "        Method md = " + interfaces.getName() + ".class.getMethod(\""+ method.getName() +"\");\n" +
+                    "        handler.invoke(this, md, null);\n" +
+                    "        }catch(Throwable t){t.printStackTrace();}\n" +
+                    "    }\n"
+            );
         }
+
         // 假设已经获得了Car的动态代理类代码
         String proxyStr = // 下面的字符串是直接从com.mk.demos.design.pattern.proxy.jstatic.CarTimeProxy类中copy过来的
                 "package com.mk.demos.design.pattern.proxy.dynamic;\n" +
                         "\n" +
+                        "import java.lang.reflect.Method;\n" +
                         "import com.mk.demos.design.pattern.proxy.Movable;\n" +
                         "\n" +
                         "public class CarTimeProxy implements " + interfaces.getName() +" {\n" +
                         "    public CarTimeProxy() {\n" +
                         "    }\n" +
                         "\n" +
-                        "    private Movable movable;\n" +
+                        "    private InvocationHandler handler;\n" +
                         "\n" +
-                        "    public CarTimeProxy(Movable movable) {\n" +
-                        "        this.movable = movable;\n" +
+                        "    public CarTimeProxy(InvocationHandler handler) {\n" +
+                        "        this.handler = handler;\n" +
                         "    }\n" +
                         "\n" +
 //                        "    @Override\n" +
@@ -99,8 +120,8 @@ public class Proxy {
         System.out.println(loadClass.getName());
         // 至此，已将代理类加载到内存
         // 下面生产代理类实例instance
-        Constructor<?> constructor = loadClass.getConstructor(Movable.class);
-        Object o = constructor.newInstance(new Car());
+        Constructor<?> constructor = loadClass.getConstructor(InvocationHandler.class);
+        Object o = constructor.newInstance(handler);
         return o;
     }
 
