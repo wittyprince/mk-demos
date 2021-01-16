@@ -1,13 +1,11 @@
-package com.mk.demos.design.proxy.dynamic;
-
-import java.io.IOException;
+package com.mk.demos.design.proxy.dynamic.jdk;
 
 import org.junit.Test;
 
 import com.mk.demos.design.pattern.proxy.Car;
 import com.mk.demos.design.pattern.proxy.Movable;
-import com.mk.demos.design.pattern.proxy.dynamic.Proxy;
-import com.mk.demos.design.pattern.proxy.dynamic.TimeHandler;
+import com.mk.demos.design.pattern.proxy.dynamic.jdk.Proxy;
+import com.mk.demos.design.pattern.proxy.dynamic.jdk.TimeHandler;
 
 /**
  * 动态代理类测试类

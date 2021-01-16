@@ -1,4 +1,4 @@
-package com.mk.demos.design.proxy.dynamic;
+package com.mk.demos.design.proxy.dynamic.jdk;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

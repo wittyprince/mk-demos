@@ -1,4 +1,4 @@
-package com.mk.demos.design.pattern.proxy.dynamic;
+package com.mk.demos.design.pattern.proxy.dynamic.jdk;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -11,7 +11,6 @@ import java.net.URLClassLoader;
 import java.util.Arrays;
 
 import javax.tools.JavaCompiler;
-import javax.tools.JavaFileManager;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
@@ -116,7 +115,7 @@ public class Proxy {
         System.out.println("classToLoadPath: " + classToLoadPath);
         URL[] urls = new URL[]{new URL(classToLoadPath)};
         URLClassLoader urlClassLoader = new URLClassLoader(urls);
-        Class<?> loadClass = urlClassLoader.loadClass("com.mk.demos.design.pattern.proxy.dynamic.CarTimeProxy");
+        Class<?> loadClass = urlClassLoader.loadClass("com.mk.demos.design.pattern.proxy.dynamic.jdk.CarTimeProxy");
         System.out.println(loadClass.getName());
         // 至此，已将代理类加载到内存
         // 下面生产代理类实例instance
