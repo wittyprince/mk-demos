@@ -22,7 +22,7 @@ public class UserService {
     @Autowired
     private UserDAO userDAO;
 
-    @Autowired
+    @Autowired(required = false)
     private RoleService roleService;
 
     public void add(User user){
