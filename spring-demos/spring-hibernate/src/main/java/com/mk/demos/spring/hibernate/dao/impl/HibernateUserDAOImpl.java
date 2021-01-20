@@ -1,8 +1,11 @@
 package com.mk.demos.spring.hibernate.dao.impl;
 
+import java.io.Serializable;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,5 +64,12 @@ public class HibernateUserDAOImpl implements HibernateUserDAO {
 //        throw new RuntimeException("2");
     }
 
+    // ====================================================
+    @Autowired
+    private HibernateTemplate hibernateTemplate;
 
+    @Override
+    public void templateSave(HibernateUser user) {
+        hibernateTemplate.save(user);
+    }
 }

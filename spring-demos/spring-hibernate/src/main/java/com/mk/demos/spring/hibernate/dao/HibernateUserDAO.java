@@ -16,4 +16,6 @@ public interface HibernateUserDAO {
     void update(HibernateUser user);
 
     public void update2(HibernateUser user);
+
+    public void templateSave(HibernateUser user);
 }

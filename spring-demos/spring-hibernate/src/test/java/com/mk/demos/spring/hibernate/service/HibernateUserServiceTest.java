@@ -48,4 +48,12 @@ public class HibernateUserServiceTest {
         user.setName("hibernate");
         hibernateUserService.nestedOop(user);
     }
+
+    @Test
+    public void testHibernateTemplate(){
+        HibernateUser user = new HibernateUser();
+        user.setId(1L);
+        user.setName("template");
+        hibernateUserService.templateAdd(user);
+    }
 }

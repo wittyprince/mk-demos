@@ -38,7 +38,10 @@ public class HibernateUserService {
         throw new RuntimeException("service");
     }
 
-
+    @Transactional
+    public void templateAdd(HibernateUser user){
+        hibernateUserDAO.templateSave(user);
+    }
 
 
 
