@@ -30,6 +30,7 @@ public class Client {
             // 2. 获取连接
             connection = DriverManager.getConnection(url, username, password);
             // 3. 准备查询语句
+            /* // query
             String sql = "select * from people";
             preparedStatement = connection.prepareStatement(sql);
             // 4. 执行查询并获取结果
@@ -39,7 +40,13 @@ public class Client {
                 Long id = rs.getObject(1, Long.class);
                 String name = rs.getString(2);
                 System.out.println("id: " + id + ", name: " + name);
-            }
+            }*/
+            // insert
+            String sql = "insert into people(name) values(?)";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, "九哥");
+            preparedStatement.execute();
+
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
