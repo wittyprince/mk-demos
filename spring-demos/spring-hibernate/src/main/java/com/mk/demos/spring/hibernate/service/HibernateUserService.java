@@ -43,6 +43,11 @@ public class HibernateUserService {
         hibernateUserDAO.templateSave(user);
     }
 
+    @Transactional
+    public HibernateUser findById(Long id){
+        return hibernateUserDAO.getById(id);
+    }
+
 
 
 

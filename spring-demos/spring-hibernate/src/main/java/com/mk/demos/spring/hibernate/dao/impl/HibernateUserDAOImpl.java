@@ -72,4 +72,15 @@ public class HibernateUserDAOImpl implements HibernateUserDAO {
     public void templateSave(HibernateUser user) {
         hibernateTemplate.save(user);
     }
+
+    @Override
+    public HibernateUser getById(Long id) {
+        // load load: 返回的是一个代理对象，如果直接返回给jsp页面，会报session过期的问题，可以使用OpenSessionInView拦截器解决
+        // com.mk.demos.spring.hibernate.model.HibernateUser$HibernateProxy$WNXoVrdv
+//        HibernateUser user = hibernateTemplate.load(HibernateUser.class, id);
+
+        // get: 返回的不是代理对象，返回给jsp页面不会有问题
+        HibernateUser user = hibernateTemplate.get(HibernateUser.class, id);
+        return user;
+    }
 }

@@ -56,4 +56,10 @@ public class HibernateUserServiceTest {
         user.setName("template");
         hibernateUserService.templateAdd(user);
     }
+
+    @Test
+    public void testFindById(){
+        HibernateUser user = hibernateUserService.findById(1L);
+        System.out.println(user.getClass());
+    }
 }

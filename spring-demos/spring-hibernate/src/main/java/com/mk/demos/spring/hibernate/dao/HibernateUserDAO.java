@@ -18,4 +18,6 @@ public interface HibernateUserDAO {
     public void update2(HibernateUser user);
 
     public void templateSave(HibernateUser user);
+
+    HibernateUser getById(Long id);
 }
