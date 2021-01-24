@@ -9,5 +9,6 @@ package com.mk.demos.design.pattern.strategy;
  */
 public interface Strategy {
 
+    String s = "";// 接口中也可以定义变量，不过需要初始化
     void doOperation();
 }
