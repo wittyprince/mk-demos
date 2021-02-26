@@ -9,7 +9,7 @@ import java.io.InputStream;
 /**
  * 自定义class loader
  *
- * 继承java.lang.ClassLoader, 重写 findClass()方法, 调用de
+ * 继承java.lang.ClassLoader, 重写 findClass()方法, 调用defineClass
  *
  * @author WangChen
  * Created on 2019/12/22 11:27
@@ -37,16 +37,16 @@ public class CustomClassLoader extends ClassLoader {
         fileName = fileName.replace('.', File.separatorChar) + ".class";
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(fileName);
         byte[] buffer;
-        ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+        ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
         int nextValue = 0;
         try {
             while ( (nextValue = inputStream.read()) != -1 ) {
-                byteStream.write(nextValue);
+                byteOutputStream.write(nextValue);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        buffer = byteStream.toByteArray();
+        buffer = byteOutputStream.toByteArray();
         return buffer;
     }
 
