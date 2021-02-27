@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * https://www.cnblogs.com/volcano-liu/p/11615306.html
+ * ObjectOutputStream.writeObject()
+ * ObjectInputStream.readObject()
  * @author WangChen
  * Created on 2021/2/25 19:38
  * @since
