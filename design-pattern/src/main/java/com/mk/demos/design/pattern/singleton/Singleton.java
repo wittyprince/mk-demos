@@ -33,7 +33,7 @@ public class Singleton {
     // 方式三：正确的双重检查锁
     // uniqueSingleton前加入关键字volatile。
     // 使用了volatile关键字后，重排序被禁止，所有的写（write）操作都将发生在读（read）操作之前。
-    private volatile static Singleton uniqueSingleton;
+    /*private volatile static Singleton uniqueSingleton;
     private Singleton() {}
     public Singleton getInstance() {
         if (null == uniqueSingleton) {
@@ -44,6 +44,14 @@ public class Singleton {
             }
         }
         return uniqueSingleton;
-    }
+    }*/
 
+    // 方式四：静态内部类
+    private Singleton() {}
+    public Singleton getInstance() {
+        return Inner.s;
+    }
+    private static class Inner{
+        private static Singleton s = new Singleton();
+    }
 }
