@@ -2,6 +2,9 @@ package com.mk.demos.java.concurrent.interview;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * 写一个固定容量容器，拥有put和get方法，以及getCount方法
@@ -18,6 +21,7 @@ public class MyContainer2<E> {
     public int getCount(){
         return count;
     }
+    /** // 方式一：wait/notifyAll
     public void put(E e) {
         synchronized (lists){
             while (lists.size() == MAX){
@@ -48,6 +52,45 @@ public class MyContainer2<E> {
             count--;
             System.out.println("get " + count);
             lists.notifyAll();
+        }
+        return e;
+    }*/
+
+    // 方法二：ReentrantLock.Condition
+    private Lock lock = new ReentrantLock();
+    private Condition consumer = lock.newCondition();
+    private Condition producer = lock.newCondition();
+    public void put(E e){
+        try {
+            lock.lock();
+            while (lists.size() == MAX){
+                producer.await();
+            }
+            lists.add(e);
+            count++;
+            consumer.signalAll();
+
+        }catch (InterruptedException ex){
+            ex.printStackTrace();
+        }finally {
+            lock.unlock();
+        }
+    }
+
+    public E get(){
+        E e = null;
+        try {
+            lock.lock();
+            while (lists.size() == 0){
+                consumer.await();
+            }
+            e = lists.remove();
+            count--;
+            producer.signalAll();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }finally {
+            lock.unlock();
         }
         return e;
     }
