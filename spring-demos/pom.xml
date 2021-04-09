@@ -17,6 +17,7 @@
         <module>spring-annotation</module>
         <module>spring-hibernate</module>
         <module>spring-model</module>
+        <module>spring-ioc-container</module>
     </modules>
 
     <properties>
