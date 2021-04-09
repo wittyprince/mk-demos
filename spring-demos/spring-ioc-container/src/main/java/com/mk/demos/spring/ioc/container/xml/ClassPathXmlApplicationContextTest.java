@@ -25,5 +25,9 @@ public class ClassPathXmlApplicationContextTest {
 
         System.out.println(user);
 
+        // name 属性可以使用逗号, 分号; 空格 分隔，定义不同的别名
+        User dUser = applicationContext.getBean("dUser", User.class);
+        System.out.println("dUser: " + dUser);
+
     }
 }

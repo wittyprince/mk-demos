@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="user" class="com.mk.demos.spring.model.User">
+    <bean id="user" name="aUser, bUser; cUser dUser" class="com.mk.demos.spring.model.User">
         <property name="name" value="mk"/>
         <property name="id" value="1"/>
     </bean>
