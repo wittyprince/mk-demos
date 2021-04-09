@@ -16,6 +16,7 @@
         <module>spring-simulation</module>
         <module>spring-annotation</module>
         <module>spring-hibernate</module>
+        <module>spring-model</module>
     </modules>
 
     <properties>
