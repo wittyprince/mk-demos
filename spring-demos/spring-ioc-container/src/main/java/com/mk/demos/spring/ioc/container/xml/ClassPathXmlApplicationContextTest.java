@@ -29,5 +29,8 @@ public class ClassPathXmlApplicationContextTest {
         User dUser = applicationContext.getBean("dUser", User.class);
         System.out.println("dUser: " + dUser);
 
+        // 使用alias命名别名
+        User myUser = applicationContext.getBean("myUser", User.class);
+        System.out.println("myUser: " + myUser);
     }
 }

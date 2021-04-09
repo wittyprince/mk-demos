@@ -9,4 +9,5 @@
         <property name="id" value="1"/>
     </bean>
 
+    <alias name="user" alias="myUser"/>
 </beans>
