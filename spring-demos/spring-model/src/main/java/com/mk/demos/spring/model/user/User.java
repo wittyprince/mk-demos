@@ -1,4 +1,4 @@
-package com.mk.demos.spring.model;
+package com.mk.demos.spring.model.user;
 
 /**
  * User实体类
@@ -11,12 +11,14 @@ public class User {
 
     private Long id;
     private String name;
+    private Profile profile;
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", profile=" + profile +
                 '}';
     }
 
@@ -34,5 +36,13 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 }
