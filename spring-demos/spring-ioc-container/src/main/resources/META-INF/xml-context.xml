@@ -4,10 +4,19 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="user" name="aUser, bUser; cUser dUser" class="com.mk.demos.spring.model.User">
+    <bean id="user" name="aUser, bUser; cUser dUser" class="com.mk.demos.spring.model.user.User">
         <property name="name" value="mk"/>
         <property name="id" value="1"/>
     </bean>
 
     <alias name="user" alias="myUser"/>
+
+    <bean id="profile" class="com.mk.demos.spring.model.user.Profile" scope="prototype">
+        <property name="title" value="EMPLOYEE"/>
+    </bean>
+    <bean id="pUser" class="com.mk.demos.spring.model.user.User">
+        <property name="profile" ref="profile"/>
+        <property name="name" value="mk2"/>
+        <property name="id" value="2"/>
+    </bean>
 </beans>

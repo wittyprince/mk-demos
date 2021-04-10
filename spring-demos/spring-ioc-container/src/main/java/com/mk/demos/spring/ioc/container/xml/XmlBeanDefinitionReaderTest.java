@@ -3,7 +3,7 @@ package com.mk.demos.spring.ioc.container.xml;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.support.GenericApplicationContext;
 
-import com.mk.demos.spring.model.User;
+import com.mk.demos.spring.model.user.User;
 
 /**
  * xml bean definition reader
