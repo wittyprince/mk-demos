@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+         http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         id="WebApp_ID"
+         version="2.5">
+
+    <!-- 注意：如果使用的是Servlet2.5 api版本api，那么web.xml文件必不可少 -->
+
+    <!-- project display for web application -->
+    <display-name>SpringMVC-25</display-name>
+
+    <!-- welcome file list -->
+    <welcome-file-list>
+        <welcome-file>welcome.jsp</welcome-file>
+    </welcome-file-list>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!--
+        注意，当配置了context-param的contextConfigLocation参数时，
+        /WEB-INF/application-context.xml会首先被加载，
+        application-context.xml会通过ContextLoaderListener被加载为ApplicationContext
+    -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/application-context.xml</param-value>
+    </context-param>
+
+    <!--
+        mvc-dispatcher-servlet.xml会被加载为application-context.xml的一个child context，
+        mvc-dispatcher-servlet.xml是一个WebApplicationContext
+    -->
+    <servlet>
+        <servlet-name>springMVC25</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/mvc-dispatcher-servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!--拦截器配置-->
+    <servlet-mapping>
+        <servlet-name>springMVC25</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+</web-app>
