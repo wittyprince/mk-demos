@@ -28,14 +28,16 @@ public class XmlWebApplicationInitializer implements WebApplicationInitializer {
         // 另外，这里需注意：对于ServletContext而言，其默认加载路径为webapp下，而不是java工程的resources下
         String location = "WEB-INF/xml-root-context.xml";
         rootContext.setConfigLocation(location);
+
         container.addListener(new ContextLoaderListener(rootContext));
 
         // 2. 配置 web ApplicationContext
+        // dispatcherContext 是 构建在 ApplicationContext 之上的 web ApplicationContext
         XmlWebApplicationContext dispatcherContext = new XmlWebApplicationContext();
         dispatcherContext.setConfigLocation("WEB-INF/xml-web-context.xml");
 
         // 3. 配置 DispatcherServlet
-        ServletRegistration.Dynamic dispatcherServlet = container.addServlet("dispatcherServlet", new DispatcherServlet(dispatcherContext));
+        ServletRegistration.Dynamic dispatcherServlet = container.addServlet("xxxaaa", new DispatcherServlet(dispatcherContext));
         dispatcherServlet.setLoadOnStartup(1);
         dispatcherServlet.addMapping("/");
 
