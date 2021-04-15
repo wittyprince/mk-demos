@@ -18,6 +18,7 @@
         <module>spring-hibernate</module>
         <module>spring-model</module>
         <module>spring-ioc-container</module>
+        <module>spring-i18n</module>
     </modules>
 
     <properties>
