@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="defaultEncoding" value="UTF-8"/>
+<!--        <property name="cacheSeconds" value="3600"/>-->
+        <property name="basenames">
+            <list>
+                <value>format</value>
+                <value>exceptions</value>
+                <!-- 如果未配置windows.properties 文件，当通过getMessage方法查找的code不在其他properties文件中时，
+                便会查到当前这个windows.properties文件中查找, 如果发现windows.properties文件不存在，便会报如下警告
+                 ResourceBundle [windows] not found for MessageSource:
+                 Can't find bundle for base name windows, locale zh_CN -->
+                <value>windows</value>
+            </list>
+        </property>
+    </bean>
+
+<!--    <context:component-scan base-package="com.mk.demos.spring.i18n"/>-->
+        <bean id="myMessageSource" class="com.mk.demos.spring.i18n.MyMessageSource"/>
+</beans>
