@@ -1,6 +1,8 @@
 package com.mk.demos.spring.event.annotation;
 
 import org.springframework.context.event.EventListener;
+import org.springframework.core.annotation.Order;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import com.mk.demos.spring.event.BlackListEvent;
@@ -56,4 +58,17 @@ public class BlackListListener {
 //    public void processBlackListEvent(BlackListEvent blEvent) {
 //        // notify appropriate parties via notificationAddress...
 //    }
+
+    @EventListener
+    @Async
+    public void processBlackListEvent3(BlackListEvent event) {
+        // BlackListEvent is processed in a separate thread
+        System.out.println("@Async: " + event);
+    }
+
+    @EventListener
+    @Order(42)
+    public void processBlackListEvent4(BlackListEvent event) {
+        // notify appropriate parties via notificationAddress...
+    }
 }
