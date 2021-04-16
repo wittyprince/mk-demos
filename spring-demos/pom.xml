@@ -19,6 +19,7 @@
         <module>spring-model</module>
         <module>spring-ioc-container</module>
         <module>spring-i18n</module>
+        <module>spring-event</module>
     </modules>
 
     <properties>
