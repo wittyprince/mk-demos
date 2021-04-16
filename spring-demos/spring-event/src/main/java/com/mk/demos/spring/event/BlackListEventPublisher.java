@@ -1,28 +1,19 @@
 package com.mk.demos.spring.event;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 
 /**
- * 用于发布 自定义的 ApplicationEvent 事件
- * 通过publishEvent()方法
+ * 事件发布器
  *
  * @author WangChen
- * Created on 2021/4/16 13:27
+ * Created on 2021/4/16 14:07
  * @since 1.0
  */
-public class EmailService /*implements ApplicationEventPublisherAware*/ {
+public class BlackListEventPublisher implements ApplicationEventPublisherAware, ApplicationEventPublisher {
 
-    private List<String> blackList;
-    @Autowired
-    private ApplicationEventPublisher publisher;
-
-    public void setBlackList(List<String> blackList) {
-        this.blackList = blackList;
-    }
+    private ApplicationEventPublisher eventPublisher;
 
     /**
      * At configuration time, the Spring container will
@@ -36,17 +27,19 @@ public class EmailService /*implements ApplicationEventPublisherAware*/ {
      * 实现 *Aware接口的class bean，spring容器会自动call调用setXXX方法，
      * 然后把spring容器自身当成参数传过去
      */
-    /*@Override
+    @Override
     public void setApplicationEventPublisher(ApplicationEventPublisher publisher) {
-        this.publisher = publisher;
-    }*/
+        this.eventPublisher = publisher;
+    }
 
-    public void sendEmail(String address, String content) {
-        if (blackList.contains(address)) {
-            publisher.publishEvent(new BlackListEvent(this, address, content));
-            return;
-        }
-        // send email...
-        System.out.println("email was send to : " + address);
+
+    @Override
+    public void publishEvent(ApplicationEvent event) {
+        this.eventPublisher.publishEvent(event);
+    }
+
+    @Override
+    public void publishEvent(Object event) {
+        throw new RuntimeException("not support");
     }
 }
