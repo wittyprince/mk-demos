@@ -32,4 +32,28 @@ public class BlackListListener {
         // notify appropriate parties via notificationAddress...
         System.out.println("@EventListener2:" + event);
     }
+
+    @EventListener
+    public BlackListUpdateEvent handleBlackListEvent(BlackListEvent event) {
+        // notify appropriate parties via notificationAddress and
+        // then publish a ListUpdateEvent...
+        return new BlackListUpdateEvent(event.getSource());
+    }
+
+    @EventListener
+    public void processBlackListUpdateEvent(BlackListUpdateEvent updateEvent){
+        System.out.println("BlackListUpdateEvent:" + updateEvent);
+    }
+
+    // 监听多个事件
+//    @EventListener({ContextStartedEvent.class, ContextRefreshedEvent.class})
+//    public void handleContextStart() {
+//    ...
+//    }
+
+    // SPEL 表达式
+//    @EventListener(condition = "#blEvent.content == 'foo'")
+//    public void processBlackListEvent(BlackListEvent blEvent) {
+//        // notify appropriate parties via notificationAddress...
+//    }
 }

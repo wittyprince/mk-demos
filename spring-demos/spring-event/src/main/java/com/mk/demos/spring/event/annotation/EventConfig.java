@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import com.mk.demos.spring.event.BlackListEvent;
+import com.mk.demos.spring.event.BlackListEventPublisher;
 import com.mk.demos.spring.event.EmailService;
 
 /**
@@ -35,5 +36,10 @@ public class EventConfig {
         blackList.add("john.doe@example.org");
         emailService.setBlackList(blackList);
         return emailService;
+    }
+
+    @Bean
+    public BlackListEventPublisher eventPublisher(){
+        return new BlackListEventPublisher();
     }
 }
