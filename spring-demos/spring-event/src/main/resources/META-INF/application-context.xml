@@ -23,6 +23,6 @@
         <property name="notificationAddress" value="blacklist@example.org"/>
     </bean>
 
-    <bean id="blackListPublisher" class="com.mk.demos.spring.event.BlackListEventPublisher"/>
+<!--    <bean id="blackListPublisher" class="com.mk.demos.spring.event.BlackListEventPublisher"/>-->
 
 </beans>
