@@ -17,7 +17,8 @@ public class XmlBeanDefinitionReaderTest {
     public static void main(String [] args){
         String configLocation = "META-INF/xml-context.xml";
         GenericApplicationContext context = new GenericApplicationContext();
-        new XmlBeanDefinitionReader(context).loadBeanDefinitions(configLocation);
+        XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(context);
+        reader.loadBeanDefinitions(configLocation);
         // 启动spring应用上下文
         context.refresh();
         User user = context.getBean("user", User.class);
