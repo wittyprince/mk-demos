@@ -38,8 +38,8 @@ public class HibernateUserServiceTest {
     @Test
     public void testModify(){
         HibernateUser user = new HibernateUser();
-        user.setId(1L);
-        user.setName("u11");
+        user.setId(2L);//TODO 当user id 从 1 变为 2 时，报异常 org.springframework.orm.hibernate5.HibernateOptimisticLockingFailureException: Object of class [com.mk.demos.spring.hibernate.model.HibernateUser] with identifier [2]: optimistic locking failed; nested exception is org.hibernate.StaleObjectStateException: Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect) : [com.mk.demos.spring.hibernate.model.HibernateUser#2]
+        user.setName("u2");
         userService.modifyUser(user);
     }
 
