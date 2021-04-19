@@ -30,7 +30,9 @@ public class HibernateUserServiceTest {
     public void testAdd() {
         HibernateUser user = new HibernateUser();
         user.setName("hibernate_mk");
+        System.out.println("save前，userId = " + user.getId());
         hibernateUserService.add(user);
+        System.out.println("save后，userId = " + user.getId());
     }
 
     @Test
@@ -54,7 +56,7 @@ public class HibernateUserServiceTest {
         HibernateUser user = new HibernateUser();
         user.setId(1L);
         user.setName("template");
-        hibernateUserService.templateAdd(user);
+//        hibernateUserService.templateAdd(user);
     }
 
     @Test

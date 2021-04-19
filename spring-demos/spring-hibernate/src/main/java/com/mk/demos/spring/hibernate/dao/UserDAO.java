@@ -9,7 +9,7 @@ import com.mk.demos.spring.hibernate.model.HibernateUser;
  * Created on 2021/1/20 16:58
  * @since 1.0
  */
-public interface HibernateUserDAO {
+public interface UserDAO {
 
     void save(HibernateUser user);
 
@@ -17,7 +17,7 @@ public interface HibernateUserDAO {
 
     public void update2(HibernateUser user);
 
-    public void templateSave(HibernateUser user);
+//    public void templateSave(HibernateUser user);
 
     HibernateUser getById(Long id);
 }

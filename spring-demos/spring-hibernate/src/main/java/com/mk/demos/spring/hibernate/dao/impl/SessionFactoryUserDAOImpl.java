@@ -1,29 +1,24 @@
 package com.mk.demos.spring.hibernate.dao.impl;
 
-import java.io.Serializable;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.mk.demos.spring.hibernate.dao.HibernateUserDAO;
+import com.mk.demos.spring.hibernate.dao.UserDAO;
 import com.mk.demos.spring.hibernate.model.HibernateUser;
 
 /**
+ * 手动获取 SessionFactory 方式
  * @author WangChen
  * Created on 2021/1/20 16:59
  * @since 1.0
  */
-@Repository
-public class HibernateUserDAOImpl implements HibernateUserDAO {
+@Repository("sessionFactoryUserDAO")
+public class SessionFactoryUserDAOImpl implements UserDAO {
 
     private final SessionFactory sessionFactory;
 
-    public HibernateUserDAOImpl(SessionFactory sessionFactory) {
+    public SessionFactoryUserDAOImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
@@ -38,10 +33,12 @@ public class HibernateUserDAOImpl implements HibernateUserDAO {
 
     @Override
 //    @Transactional(propagation = Propagation.NESTED)
+    //TODO Hibernate transaction 委托给 Spring  ???
+    // Hibernate Session objects are NOT thread-safe.
     public void update(HibernateUser user) {
         HibernateUser u = new HibernateUser();
         u.setId(user.getId());
-        u.setName(user.getName() + "1");
+        u.setName(user.getName() + "-" + user.getId());
         Session session = sessionFactory.getCurrentSession();
         session.update(u);
 //        throw new RuntimeException("1");
@@ -54,7 +51,7 @@ public class HibernateUserDAOImpl implements HibernateUserDAO {
      *                          外部事务提交时才会把内部事务一并提交。
      */
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+//    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void update2(HibernateUser user) {
         HibernateUser u =  new HibernateUser();
         u.setId(user.getId());
@@ -64,23 +61,8 @@ public class HibernateUserDAOImpl implements HibernateUserDAO {
 //        throw new RuntimeException("2");
     }
 
-    // ====================================================
-    @Autowired
-    private HibernateTemplate hibernateTemplate;
-
-    @Override
-    public void templateSave(HibernateUser user) {
-        hibernateTemplate.save(user);
-    }
-
     @Override
     public HibernateUser getById(Long id) {
-        // load load: 返回的是一个代理对象，如果直接返回给jsp页面，会报session过期的问题，可以使用OpenSessionInView拦截器解决
-        // com.mk.demos.spring.hibernate.model.HibernateUser$HibernateProxy$WNXoVrdv
-//        HibernateUser user = hibernateTemplate.load(HibernateUser.class, id);
-
-        // get: 返回的不是代理对象，返回给jsp页面不会有问题
-        HibernateUser user = hibernateTemplate.get(HibernateUser.class, id);
-        return user;
+        return null;
     }
 }
