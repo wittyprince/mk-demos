@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mk.demos.spring.hibernate.dao.UserDAO;
+import com.mk.demos.spring.hibernate.model.HibernateAccount;
 import com.mk.demos.spring.hibernate.model.HibernateUser;
 
 /**
@@ -18,13 +19,16 @@ import com.mk.demos.spring.hibernate.model.HibernateUser;
 @Service
 public class UserService {
 
-    @Autowired
-    @Qualifier("sessionFactoryUserDAO")
-    private UserDAO sessionFactoryUserDAO;
+//    @Autowired
+//    @Qualifier("sessionFactoryUserDAO")
+//    private UserDAO sessionFactoryUserDAO;
 
     @Autowired
     @Qualifier("templateUserDAO")
     private UserDAO templateUserDAO;
+
+    @Autowired
+    private AccountService accountService;
 
     @Transactional
     public void add(HibernateUser user){
@@ -35,10 +39,14 @@ public class UserService {
     public void modifyUser(HibernateUser user){
         templateUserDAO.update(user);
 
-        HibernateUser user2 = new HibernateUser();
-        user2.setId(2L);
-        user2.setName("h2");
-        this.modifyUser2(user2);
+//        HibernateUser user2 = new HibernateUser();
+//        user2.setId(2L);
+//        user2.setName("h2");
+//        this.modifyUser2(user2);
+        HibernateAccount account = new HibernateAccount();
+        account.setId(1L);
+        account.setName("a11");
+        accountService.modify(account);
     }
     @Transactional
     public void modifyUser2(HibernateUser user){

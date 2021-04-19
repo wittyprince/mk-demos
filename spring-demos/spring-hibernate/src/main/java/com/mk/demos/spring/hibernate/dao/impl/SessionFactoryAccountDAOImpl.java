@@ -2,10 +2,11 @@ package com.mk.demos.spring.hibernate.dao.impl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-import com.mk.demos.spring.hibernate.dao.HibernateAccountDAO;
+import com.mk.demos.spring.hibernate.dao.AccountDAO;
 import com.mk.demos.spring.hibernate.model.HibernateAccount;
-import com.mk.demos.spring.hibernate.model.HibernateUser;
 
 /**
  * HibernateAccountDAO impl
@@ -14,11 +15,13 @@ import com.mk.demos.spring.hibernate.model.HibernateUser;
  * Created on 2021/4/19 15:12
  * @since 1.0
  */
-public class HibernateAccountDAOImpl implements HibernateAccountDAO {
+@Repository("sessionFactoryAccountDAOImpl")
+public class SessionFactoryAccountDAOImpl implements AccountDAO {
 
     private final SessionFactory sessionFactory;
 
-    public HibernateAccountDAOImpl(SessionFactory sessionFactory) {
+    @Autowired
+    public SessionFactoryAccountDAOImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 

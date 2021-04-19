@@ -9,7 +9,7 @@ import com.mk.demos.spring.hibernate.model.HibernateAccount;
  * Created on 2021/4/19 15:10
  * @since 1.0
  */
-public interface HibernateAccountDAO {
+public interface AccountDAO {
 
     void save(HibernateAccount account);
 

@@ -2,6 +2,7 @@ package com.mk.demos.spring.hibernate.dao.impl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mk.demos.spring.hibernate.dao.UserDAO;
@@ -18,6 +19,7 @@ public class SessionFactoryUserDAOImpl implements UserDAO {
 
     private final SessionFactory sessionFactory;
 
+    @Autowired
     public SessionFactoryUserDAOImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }

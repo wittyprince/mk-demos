@@ -22,7 +22,7 @@ public class HibernateUserServiceTest {
 
     @Before
     public void before() {
-        applicationContext = new ClassPathXmlApplicationContext("classpath:/spring-hibernate-context.xml");
+        applicationContext = new ClassPathXmlApplicationContext("spring-hibernate-context.xml");
         userService = (UserService) applicationContext.getBean("userService");
     }
 
@@ -39,7 +39,7 @@ public class HibernateUserServiceTest {
     public void testModify(){
         HibernateUser user = new HibernateUser();
         user.setId(1L);
-        user.setName("hibernate");
+        user.setName("u11");
         userService.modifyUser(user);
     }
 

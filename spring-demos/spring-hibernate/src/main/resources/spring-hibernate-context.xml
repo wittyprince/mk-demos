@@ -30,6 +30,12 @@
                 <value>com.mk.demos.spring.hibernate.model</value>
             </list>
         </property>
+        <!--<property name="mappingLocations">
+            <list>
+                <value>hbm/HibernateUser.hbm.xml</value>
+                <value>hbm/HibernateAccount.hbm.xml</value>
+            </list>
+        </property>-->
         <property name="hibernateProperties">
             <value>
                 hibernate.show_sql=true
