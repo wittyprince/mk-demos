@@ -16,14 +16,14 @@ import com.mk.demos.spring.hibernate.model.HibernateUser;
  */
 public class HibernateUserServiceTest {
 
-    private HibernateUserService hibernateUserService;
+    private UserService userService;
 
     ApplicationContext applicationContext;
 
     @Before
     public void before() {
         applicationContext = new ClassPathXmlApplicationContext("classpath:/spring-hibernate-context.xml");
-        hibernateUserService = (HibernateUserService) applicationContext.getBean("hibernateUserService");
+        userService = (UserService) applicationContext.getBean("userService");
     }
 
     @Test
@@ -31,7 +31,7 @@ public class HibernateUserServiceTest {
         HibernateUser user = new HibernateUser();
         user.setName("hibernate_mk");
         System.out.println("save前，userId = " + user.getId());
-        hibernateUserService.add(user);
+        userService.add(user);
         System.out.println("save后，userId = " + user.getId());
     }
 
@@ -40,7 +40,7 @@ public class HibernateUserServiceTest {
         HibernateUser user = new HibernateUser();
         user.setId(1L);
         user.setName("hibernate");
-        hibernateUserService.modifyUser(user);
+        userService.modifyUser(user);
     }
 
     @Test
@@ -48,7 +48,7 @@ public class HibernateUserServiceTest {
         HibernateUser user = new HibernateUser();
         user.setId(1L);
         user.setName("hibernate");
-        hibernateUserService.nestedOop(user);
+        userService.nestedOop(user);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class HibernateUserServiceTest {
 
     @Test
     public void testFindById(){
-        HibernateUser user = hibernateUserService.findById(1L);
+        HibernateUser user = userService.findById(1L);
         System.out.println(user.getClass());
     }
 }

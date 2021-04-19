@@ -16,7 +16,7 @@ import com.mk.demos.spring.hibernate.model.HibernateUser;
  * @since 1.0
  */
 @Service
-public class HibernateUserService {
+public class UserService {
 
     @Autowired
     @Qualifier("sessionFactoryUserDAO")
