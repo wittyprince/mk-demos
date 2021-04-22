@@ -9,11 +9,19 @@
     </bean>
 
     <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
-        <property name="customEditors">
+        <!--<property name="customEditors">
             <map>
                 <entry key="com.mk.demos.spring.propertyeditor.ExoticType" value="com.mk.demos.spring.propertyeditor.ExoticTypeEditor"/>
             </map>
+        </property>-->
+        <property name="propertyEditorRegistrars">
+            <list>
+                <ref bean="customPropertyEditorRegistrar"/>
+            </list>
         </property>
     </bean>
+
+    <bean id="customPropertyEditorRegistrar"
+          class="com.mk.demos.spring.propertyeditor.CustomPropertyEditorRegistrar"/>
 
 </beans>
