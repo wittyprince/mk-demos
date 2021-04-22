@@ -20,6 +20,7 @@
         <module>spring-ioc-container</module>
         <module>spring-i18n</module>
         <module>spring-event</module>
+        <module>spring-resource</module>
     </modules>
 
     <properties>
