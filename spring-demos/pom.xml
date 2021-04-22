@@ -21,6 +21,7 @@
         <module>spring-i18n</module>
         <module>spring-event</module>
         <module>spring-resource</module>
+        <module>spring-validation-databinding-typeconversion</module>
     </modules>
 
     <properties>
