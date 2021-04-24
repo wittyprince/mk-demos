@@ -29,7 +29,7 @@ public class JdkDynamicProxyTest {
         System.out.println("-------------------第一种创建代理类方法--------------");
         //创建一个实例对象，这个对象是被代理的对象，也称为委托类
         Person person = new SoftwareEngineer("Vincent");
-        //创建一个与代理类相关联的InvocationHandler,每一个代理类都有一个关联的 InvocationHandler，并将代理类引用传递进去
+        //创建一个与被代理类相关联的InvocationHandler,每一个被代理类都有一个关联的 InvocationHandler，并将被代理类引用传递进去
         InvocationHandler handler = new PersonInvocationHandler<>(person, 1L);
         //创建一个 代理对象 personProxy 来代理 person，创建的代理对象的每个执行方法都会被替换执行Invocation接口中的invoke方法
         Person personProxy = (Person) Proxy.newProxyInstance(
