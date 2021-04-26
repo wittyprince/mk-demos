@@ -22,6 +22,7 @@
         <module>spring-event</module>
         <module>spring-resource</module>
         <module>spring-validation-databinding-typeconversion</module>
+        <module>spring-aop</module>
     </modules>
 
     <properties>
