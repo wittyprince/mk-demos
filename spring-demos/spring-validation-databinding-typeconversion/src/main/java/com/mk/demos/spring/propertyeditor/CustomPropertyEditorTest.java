@@ -12,7 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class CustomPropertyEditorTest {
 
     public static void main(String [] args){
-        String configLocation = "META-INF/context.xml";
+        String configLocation = "META-INF/propertyeditor-context.xml";
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(configLocation);
         DependsOnExoticType dependsOnExoticType = context.getBean(DependsOnExoticType.class);
         System.out.println(dependsOnExoticType.getType().getName());
