@@ -49,7 +49,7 @@ public class Singleton {
     // 方式四：静态内部类
     // 优势：不用加锁，也能实现懒加载
     private Singleton() {}
-    public Singleton getInstance() {
+    public static Singleton getInstance() {
         return Inner.s;
     }
     private static class Inner{
