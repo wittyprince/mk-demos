@@ -27,5 +27,8 @@ public class RewriteAnonymousInnerClassTest {
         // 改写的思路：查看addActionListener的参数形式，得知ActionListener是一个接口，且只有一个未实现的方法。该未实现的方法是void类型的。
         // 所以，就按照这个接口中的方法来改写即可。
         button.addActionListener((a) -> {        });
+        // 注意：参数a, 没有声明其具体类型，这是因为 javac 可以根据程序的上下文(addActionListener方法的签名)
+        //      在后台推断出参数a的具体类型。也可以指明参数类型，如下：
+        button.addActionListener((ActionEvent a) -> {        });
     }
 }
