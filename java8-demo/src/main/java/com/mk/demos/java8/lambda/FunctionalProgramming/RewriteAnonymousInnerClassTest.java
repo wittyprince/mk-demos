@@ -32,7 +32,8 @@ public class RewriteAnonymousInnerClassTest {
         button.addActionListener((ActionEvent a) -> {        });
 
         // Lambda表达式的不同形式
-        // 1. Thread
+        // ------------------------1. Thread----------------------------
+        // Thread 无需参数，无返回值
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -41,7 +42,8 @@ public class RewriteAnonymousInnerClassTest {
         }).start();
         // 可以改写为，如下
         new Thread(() -> {});
-        // 2. Runnable
+        // ------------------------2. Runnable----------------------------
+        // Runnable 无需参数，无返回值
         Runnable r1 = new Runnable() {
             @Override
             public void run() {
@@ -50,6 +52,11 @@ public class RewriteAnonymousInnerClassTest {
         };
         //
         Runnable r2 = () -> {};
+
+        // ------------------------3. ActionListener----------------------------
+        // ActionListener 需要一个参数，无返回值
+        ActionListener a = (e) -> {};
+
 
     }
 }
