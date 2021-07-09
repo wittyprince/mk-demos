@@ -30,5 +30,26 @@ public class RewriteAnonymousInnerClassTest {
         // 注意：参数a, 没有声明其具体类型，这是因为 javac 可以根据程序的上下文(addActionListener方法的签名)
         //      在后台推断出参数a的具体类型。也可以指明参数类型，如下：
         button.addActionListener((ActionEvent a) -> {        });
+
+        // Lambda表达式的不同形式
+        // 1. Thread
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        }).start();
+        // 可以改写为，如下
+        new Thread(() -> {});
+        // 2. Runnable
+        Runnable r1 = new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        };
+        //
+        Runnable r2 = () -> {};
+
     }
 }
