@@ -3,6 +3,7 @@ package com.mk.demos.java8.lambda.FunctionalProgramming;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.function.BinaryOperator;
 
 /**
  * 改写匿名内部类
@@ -51,11 +52,16 @@ public class RewriteAnonymousInnerClassTest {
             }
         };
         //
-        Runnable r2 = () -> {};
+        Runnable r2 = () -> {}; // Runnable#run() 无需参数，无返回值
 
         // ------------------------3. ActionListener----------------------------
         // ActionListener 需要一个参数，无返回值
-        ActionListener a = (e) -> {};
+        ActionListener a = (e) -> {}; // ActionListener#actionPerformed(ActionEvent e) 需要一个参数，无返回值
+
+        // ------------------------4. BinaryOperator----------------------------
+        // BinaryOperator 二元操作器，继承自 BiFunction#apply(T t, U u)，接收两个参数 T 和 U, 返回 R .
+        BinaryOperator<Integer> b = (x, y) -> x + y; // BiFunction#apply(T t, U u)
+        BinaryOperator<Long> addExplicit = (Long x, Long y) -> x + y; // 也可以明确参数类型
 
 
     }
