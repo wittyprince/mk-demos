@@ -15,4 +15,15 @@ public class Artist {
     private List<String> members; // 乐队成员，可能为空
     private String origin; // 乐队来自哪里
 
+    public String getName() {
+        return name;
+    }
+
+    public List<String> getMembers() {
+        return members;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
 }
