@@ -107,9 +107,9 @@ public class Chapter3 {
 
     // reduce 重写 filter
     public static <T> List<T> filter(Stream<T> stream, Predicate<T> predicate) {
-        stream.reduce(new ArrayList<T>(), (acc, x) -> {
+        List<T> reduction = stream.reduce(new ArrayList<T>(), (acc, x) -> {
             List<T> newAcc = new ArrayList<>(acc);
-            if (predicate.test(x)){
+            if (predicate.test(x)) {
                 newAcc.add(x);
             }
             return (ArrayList<T>) newAcc;
@@ -118,6 +118,6 @@ public class Chapter3 {
             newLeft.addAll(right);
             return newLeft;
         });
-        return null;
+        return reduction;
     }
 }
