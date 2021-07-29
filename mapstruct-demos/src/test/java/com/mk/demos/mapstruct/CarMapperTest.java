@@ -21,15 +21,23 @@ public class CarMapperTest {
         CarMapper carMapper = CarMapper.INSTANCE;
         CarDto carDto = carMapper.carToCarDto( car );
 
+        //then
         Assertions.assertNotNull(carDto);
         Assertions.assertEquals("Morris", carDto.getMake());
         Assertions.assertEquals(5, carDto.getSeatCount());
         Assertions.assertEquals("AUDI", carDto.getType());
-        //then
-//        assertThat( carDto ).isNotNull();
-//        assertThat( carDto.getMake() ).isEqualTo( "Morris" );
-//        assertThat( carDto.getSeatCount() ).isEqualTo( 5 );
-//        assertThat( carDto.getType() ).isEqualTo( "SEDAN" );
+    }
 
+    @Test
+    public void test2(){
+        Car car = new Car( "Morris", 5, CarType.AUDI );
+
+        AbstractCarMapper carMapper = AbstractCarMapper.INSTANCE;
+        CarDto carDto = carMapper.carToCarDto( car );
+
+        Assertions.assertNotNull(carDto);
+        Assertions.assertEquals("Morris", carDto.getMake());
+        Assertions.assertEquals(5, carDto.getSeatCount());
+        Assertions.assertEquals("AUDI", carDto.getType());
     }
 }

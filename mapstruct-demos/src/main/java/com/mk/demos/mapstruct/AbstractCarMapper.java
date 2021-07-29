@@ -5,21 +5,21 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 /**
- * CarMapper
+ * Abstract CarMapper
  *
  * @author WangChen
- * Created on 2021/7/22 13:45
+ * Created on 2021/7/29 15:43
  * @since 0.1
  */
 @Mapper
-public interface CarMapper {
+public abstract class AbstractCarMapper {
 
-    CarMapper INSTANCE = Mappers.getMapper( CarMapper.class );
+    static AbstractCarMapper INSTANCE = Mappers.getMapper( AbstractCarMapper.class );
 
     @Mapping(source = "numberOfSeats", target = "seatCount")
-    CarDto carToCarDto(Car car);
+    public abstract CarDto carToCarDto(Car car);
 
-    default PersonDto personToPersonDto(Person person) {
+    public PersonDto personToPersonDto(Person person) {
         //hand-written mapping logic
         return null;
     }
