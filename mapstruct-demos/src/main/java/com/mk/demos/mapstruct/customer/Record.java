@@ -7,4 +7,12 @@ package com.mk.demos.mapstruct.customer;
  */
 public class Record {
     private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
