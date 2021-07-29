@@ -14,7 +14,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public abstract class AbstractCarMapper {
 
-    static AbstractCarMapper INSTANCE = Mappers.getMapper( AbstractCarMapper.class );
+    public static final AbstractCarMapper INSTANCE = Mappers.getMapper( AbstractCarMapper.class );
 
     @Mapping(source = "numberOfSeats", target = "seatCount")
     public abstract CarDto carToCarDto(Car car);
