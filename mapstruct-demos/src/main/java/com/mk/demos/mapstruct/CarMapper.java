@@ -1,7 +1,9 @@
 package com.mk.demos.mapstruct;
 
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 /**
@@ -23,4 +25,13 @@ public interface CarMapper {
         //hand-written mapping logic
         return null;
     }
+
+    @Mapping(source = "seatCount", target = "numberOfSeats")
+    void updateCarFromDto(CarDto carDto, @MappingTarget Car car);
+
+    /**
+     * This allows for fluent invocations of mapping methods.
+     */
+    @InheritInverseConfiguration
+    Car updateCarFromDto2(CarDto carDto, @MappingTarget Car car);
 }
