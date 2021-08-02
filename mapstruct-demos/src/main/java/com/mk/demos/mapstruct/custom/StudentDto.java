@@ -36,4 +36,13 @@ public class StudentDto {
     public void setGraduationTime(Long graduationTime) {
         this.graduationTime = graduationTime;
     }
+
+    @Override
+    public String toString() {
+        return "StudentDto{" +
+                "birthday='" + birthday + '\'' +
+                ", schoolTime=" + schoolTime +
+                ", graduationTime=" + graduationTime +
+                '}';
+    }
 }
