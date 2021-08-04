@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.mk.demos.mapstruct.complex.expression.OneMapper;
+import com.mk.demos.mapstruct.complex.expression.TaskMapper;
 import com.mk.demos.mapstruct.complex.expression.TaskDO;
 import com.mk.demos.mapstruct.complex.expression.TaskVO;
 
@@ -15,13 +15,13 @@ import com.mk.demos.mapstruct.complex.expression.TaskVO;
  * Created on 2021/7/30 13:27
  * @since 0.1
  */
-public class OneMapperTest {
+public class TaskMapperTest {
 
-    static OneMapper oneMapper;
+    static TaskMapper oneMapper;
 
     @BeforeAll
     public static void before(){
-        oneMapper = OneMapper.INSTANCE;
+        oneMapper = TaskMapper.INSTANCE;
     }
 
     @Test

@@ -12,9 +12,9 @@ import org.mapstruct.factory.Mappers;
  * @since 0.1
  */
 @Mapper
-public interface OneMapper {
+public interface TaskMapper {
 
-    OneMapper INSTANCE = Mappers.getMapper(OneMapper.class);
+    TaskMapper INSTANCE = Mappers.getMapper(TaskMapper.class);
 
     @Mapping(target = "taskStatusName", expression = "java(TaskStatusEnum.getNameByCode(taskDO.getTaskStatus()))")
     TaskVO toTaskVo(TaskDO taskDO);
