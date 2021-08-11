@@ -30,9 +30,9 @@ public class GenericTest_easy_coding {
         List<? extends Cat> extendsCatFromCat = cats;
         Cat cat = extendsCatFromCat.get(0);
         Animal cat1 = extendsCatFromCat.get(0);
-        extendsCatFromCat.add(new Garfield()); // 编译报错
-        extendsCatFromCat.add(new Animal()); // 编译报错
-        extendsCatFromCat.add(new Cat()); // 编译报错
+//        extendsCatFromCat.add(new Garfield()); // 编译报错
+//        extendsCatFromCat.add(new Animal()); // 编译报错
+//        extendsCatFromCat.add(new Cat()); // 编译报错
 
 
 
