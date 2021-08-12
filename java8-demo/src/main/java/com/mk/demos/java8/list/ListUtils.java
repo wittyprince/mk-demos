@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.BiPredicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * list 工具类
@@ -81,6 +83,23 @@ public class ListUtils {
         if (y == null) return false;
         return x.getI1() == y.getI1()
                 && Objects.equals(x.getS1(), y.getS1());
+    }
+
+    /**
+     * Possible heap pollution from parameterized vararg type
+     * 堆污染: 指一个变量被指向另外一个不是相同类型的变量
+     */
+    public static <T> List<T>  of(T... t){
+        return new ArrayList<>(Arrays.asList(t));
+    }
+
+    /**
+     * Possible heap pollution from parameterized vararg type
+     * 堆污染: 指一个变量被指向另外一个不是相同类型的变量
+     */
+    @SafeVarargs
+    public static <T> List<T> of2(T... t){
+        return Stream.of(t).collect(Collectors.toList());
     }
 
 }
