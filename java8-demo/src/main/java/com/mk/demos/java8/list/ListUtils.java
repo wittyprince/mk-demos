@@ -84,22 +84,4 @@ public class ListUtils {
         return x.getI1() == y.getI1()
                 && Objects.equals(x.getS1(), y.getS1());
     }
-
-    /**
-     * Possible heap pollution from parameterized vararg type
-     * 堆污染: 指一个变量被指向另外一个不是相同类型的变量
-     */
-    public static <T> List<T>  of(T... t){
-        return new ArrayList<>(Arrays.asList(t));
-    }
-
-    /**
-     * Possible heap pollution from parameterized vararg type
-     * 堆污染: 指一个变量被指向另外一个不是相同类型的变量
-     */
-    @SafeVarargs
-    public static <T> List<T> of2(T... t){
-        return Stream.of(t).collect(Collectors.toList());
-    }
-
 }
