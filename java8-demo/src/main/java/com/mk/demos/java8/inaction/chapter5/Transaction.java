@@ -1,4 +1,4 @@
-package com.mk.demos.java8.stream;
+package com.mk.demos.java8.inaction.chapter5;
 
 /**
  * Transaction
