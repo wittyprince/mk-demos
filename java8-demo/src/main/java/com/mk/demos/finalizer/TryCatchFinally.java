@@ -107,7 +107,7 @@ public class TryCatchFinally {
         try {
             // do something
             System.out.println("try");
-            System.exit(0);// status=0 表示jvm非正常退出
+            System.exit(0);// status=0 表示jvm正常退出
         } finally{
             System.out.println("Print from finally");// 注意此行语句不会执行
         }
