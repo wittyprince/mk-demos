@@ -96,6 +96,84 @@ public class TryCatchFinally {
 //        return -1;// ⑧
     }
 
+    /**
+     * 执行顺序：① -> ② -> ⑤ -> ②
+     * 返回结果：try
+     */
+    public String getReturn1() {
+        String s = "";
+        try {
+            s = "try";     // ①
+            return s;      // ②
+        } catch (Exception e) {
+            s = "catch";   // ③
+            return s;      // ④
+        } finally {
+            s = "finally"; // ⑤
+//            return s;      // ⑥
+        }
+//        return s;        // ⑦
+    }
+
+    /**
+     * 执行顺序：① -> ② -> ⑤ -> ⑥
+     * 返回结果：finally
+     */
+    public String getReturn2() {
+        String s = "";
+        try {
+            s = "try";     // ①
+            return s;      // ②
+        } catch (Exception e) {
+            s = "catch";   // ③
+            return s;      // ④
+        } finally {
+            s = "finally"; // ⑤
+            return s;      // ⑥
+        }
+//        return s;        // ⑦
+    }
+
+    /**
+     * 执行顺序：0 -> ③ -> ④ -> ⑤ -> ④
+     * 返回结果：catch
+     */
+    public String getReturn3() {
+        String s = "";
+        try {
+            double d = 1 / 0; // 0
+            s = "try";     // ①
+            return s;      // ②
+        } catch (Exception e) {
+            s = "catch";   // ③
+            return s;      // ④
+        } finally {
+            s = "finally"; // ⑤
+//            return s;      // ⑥
+        }
+//        return s;        // ⑦
+    }
+
+    /**
+     * 执行顺序：0 -> ③ -> ④ -> ⑤ -> ⑥
+     * 返回结果：finally
+     */
+    public String getReturn4() {
+        String s = "";
+        try {
+            double d = 1 / 0; // 0
+            s = "try";     // ①
+            return s;      // ②
+        } catch (Exception e) {
+            s = "catch";   // ③
+            return s;      // ④
+        } finally {
+            s = "finally"; // ⑤
+            return s;      // ⑥
+        }
+//        return s;        // ⑦
+    }
+
     public static void main(String [] args){
         TryCatchFinally finalizer2 = new TryCatchFinally();
 //        System.out.println("商是: " + finalizer2.divide1(9, 1));
@@ -103,6 +181,12 @@ public class TryCatchFinally {
 //        System.out.println("商是: " + finalizer2.divide3(9, 1));
 //        System.out.println("商是: " + finalizer2.divide4(9, 1));
 //        System.out.println("商是: " + finalizer2.divide2(9, 0));
+
+
+//        System.out.println("getReturn: " + finalizer2.getReturn1());
+//        System.out.println("getReturn: " + finalizer2.getReturn2());
+//        System.out.println("getReturn: " + finalizer2.getReturn3());
+        System.out.println("getReturn: " + finalizer2.getReturn4());
 
         try {
             // do something
