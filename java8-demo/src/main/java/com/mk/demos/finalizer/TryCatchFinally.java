@@ -62,7 +62,7 @@ public class TryCatchFinally {
             System.out.println("finally 语句块: --- ③");// ③
             return a + 2;// ⑦
         }
-//        System.out.println("Out of try-catch-finally --- ④");// ④
+//        System.out.println("Out of try-catch-finally --- ④");// ④  //此句为 Unreachable statement, 所以不注释掉会报错
 //        return -1;// ⑧
     }
 
@@ -92,7 +92,7 @@ public class TryCatchFinally {
             System.out.println("finally 语句块: --- ③");// ③
 //            return a + 2;// ⑦
         }
-//        System.out.println("Out of try-catch-finally --- ④");// ④
+//        System.out.println("Out of try-catch-finally --- ④");// ④ //此句为 Unreachable statement, 所以不注释掉会报错
 //        return -1;// ⑧
     }
 
