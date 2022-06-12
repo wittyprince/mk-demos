@@ -26,6 +26,9 @@ public class RadixConversion {
         Integer integer2 = Integer.valueOf("1111111", 2);
         System.out.println("integer2: " + integer2);
 
+        int integer22 = Integer.parseInt("1111111", 2);
+        System.out.println("integer22: " + integer22);
+
         // 十六进制 转 十进制
         Integer integer16 = Integer.valueOf("1a", 16);
         System.out.println("integer16: " + integer16);
@@ -44,5 +47,17 @@ public class RadixConversion {
         System.out.println("pow: " + pow2);
 
         System.out.println(Math.pow(10, 16));
+
+        // --------------------------------------
+        Float f = 0.1f;
+        String f16 = Float.toHexString(f);
+        System.out.println("f16: " + f16);
+
+        Double dd = 0.1;
+        String dd16 = Double.toHexString(dd);
+        System.out.println("dd16: " + dd16);
+
+        System.out.println(f == dd.doubleValue());
+
     }
 }
