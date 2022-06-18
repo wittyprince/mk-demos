@@ -12,9 +12,9 @@ public class Test {
     public static void main(String[] args) {
 
         Adaptee adaptee = new Adaptee();
-        Adapter adapter = new Adapter(adaptee);
+        Target target = new Adapter(adaptee);
 
-        Client client = new Client(adapter);
+        Client client = new Client(target);
         client.charge();
 
     }
