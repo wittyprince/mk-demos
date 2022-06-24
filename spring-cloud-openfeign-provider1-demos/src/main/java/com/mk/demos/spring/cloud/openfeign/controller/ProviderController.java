@@ -1,4 +1,4 @@
-package com.mk.demos.spring.cloud.openfeign.provider;
+package com.mk.demos.spring.cloud.openfeign.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
