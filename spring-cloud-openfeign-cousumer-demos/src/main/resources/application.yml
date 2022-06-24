@@ -1,0 +1,7 @@
+server:
+  port: 8001 #端口
+spring:
+  application:
+    name: cloud-consumer #服务别名
+
+

@@ -1,0 +1,7 @@
+server:
+  port: 9001 #端口
+spring:
+  application:
+    name: cloud-provider #服务别名
+
+
