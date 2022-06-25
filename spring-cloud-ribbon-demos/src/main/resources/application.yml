@@ -1,0 +1,15 @@
+server:
+  port: 8001 #端口
+spring:
+  application:
+    name: cloud-consumer #服务别名
+
+#
+#ribbon:
+#  eureka:
+#    enabled: false
+
+cloud-provider:
+  ribbon:
+    listOfServers: localhost:9001, localhost:9002
+
