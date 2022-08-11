@@ -27,7 +27,7 @@ public class Main {
 //        Future<?> submit = producerPool.submit(producer);
 
         Consumer consumer = new Consumer(container);
-        ExecutorService consumerPool = Executors.newScheduledThreadPool(2);
+        ExecutorService consumerPool = Executors.newFixedThreadPool(2);
         consumerPool.execute(consumer);
 
 //        ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(1);
