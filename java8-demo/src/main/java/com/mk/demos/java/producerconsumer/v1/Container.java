@@ -1,6 +1,9 @@
 package com.mk.demos.java.producerconsumer.v1;
 
 import java.util.LinkedList;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * 存放物品的地方，即容器
@@ -47,19 +50,6 @@ public class Container {
         return goods;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     // 方式一：wait/notifyAll
     public void put(Goods e) {
         synchronized (lists){
@@ -94,5 +84,46 @@ public class Container {
         }
         return e;
     }
+
+    // 方法二：ReentrantLock.Condition
+    Lock lock = new ReentrantLock();
+    private Condition consumer = lock.newCondition();
+    private Condition producer = lock.newCondition();
+
+    public void put3(Goods goods) {
+        try {
+            lock.lock();
+            while (count == MAX) {
+                producer.await();
+            }
+            lists.add(goods);
+            count++;
+            consumer.signalAll();
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public Goods get3() {
+        Goods goods = null;
+        try {
+            lock.lock();
+            while (count == 0) {
+                    consumer.await();
+            }
+            goods = lists.remove();
+            count--;
+            producer.signalAll();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+        return goods;
+    }
+
 
 }
