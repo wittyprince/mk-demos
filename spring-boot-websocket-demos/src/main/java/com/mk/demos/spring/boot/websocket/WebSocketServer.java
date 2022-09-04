@@ -1,7 +1,9 @@
 package com.mk.demos.spring.boot.websocket;
 
 import com.alibaba.fastjson.JSONObject;
+import com.mk.demos.spring.boot.websocket.spring.SpringContextHolder;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.CloseReason;
@@ -14,6 +16,7 @@ import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -146,7 +149,6 @@ public class WebSocketServer {
 //        CopyOnWriteArraySet<Session> copyOnWriteArraySet = JSONObject.parseObject(str, CopyOnWriteArraySet.class);
 //        copyOnWriteArraySet.remove(session);
         sessions.forEach(to -> {
-
             try {
                 if (to.isOpen()) {
                     to.getBasicRemote().sendText(message);
@@ -173,7 +175,13 @@ public class WebSocketServer {
     public static void sendInfo(String roomId, SocketMessage message) throws IOException {
         log.info("推送消息到窗口" + roomId + "，推送内容:" + message);
         CopyOnWriteArraySet<Session> sessions = roomSessionMap.get(roomId);
-        sendAllMessage(JSONObject.toJSONString(message), "", new ArrayList<>(sessions));
+        if (sessions != null && sessions.size() > 0) {
+            sendAllMessage(JSONObject.toJSONString(message), "", new ArrayList<>(sessions));
+        }
+
+        RedisTemplate<String, Object> redisTemplate = SpringContextHolder.getBean("redisTemplate", RedisTemplate.class);
+        redisTemplate.convertAndSend("CHANNEL_XXX", new DemoRequest("21", 123L, "wc", "mssg"));
+        log.info("session..." );
     }
 
     // 此为广播消息

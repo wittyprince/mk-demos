@@ -16,4 +16,14 @@ public class DemoRequest {
     private Long userId;
     private String username;
     private String msg;
+
+    public DemoRequest() {
+    }
+
+    public DemoRequest(String roomId, Long userId, String username, String msg) {
+        this.roomId = roomId;
+        this.userId = userId;
+        this.username = username;
+        this.msg = msg;
+    }
 }
