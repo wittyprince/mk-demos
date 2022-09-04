@@ -46,10 +46,12 @@ public class WebSocketServer {
     /** {session : "uid"} */
     public static Map<Session, String> sessionUidMap = new ConcurrentHashMap<>();
 
-    /**
-     * {"roomId": {"WebSocketServer", "WebSocketServer"}}
-     */
-    private static Map<String, CopyOnWriteArraySet<Session>> sessionRoomMap = new ConcurrentHashMap<>();
+    /** {"roomId": {"Session", "Session"}} */
+    private static final Map<String, CopyOnWriteArraySet<Session>> roomSessionMap = new ConcurrentHashMap<>();
+    /** {"roomId": {"uid", "uid"}} */
+    private static Map<String, CopyOnWriteArraySet<String>> roomUidSetMap = new ConcurrentHashMap<>();
+    /** {"uid": {"roomId", "roomId"}} */
+    private static Map<String, CopyOnWriteArraySet<String>> uidRoomSetMap = new ConcurrentHashMap<>();
 
     /**
      * 与某个客户端的连接会话，需要通过它来给客户端发送数据
@@ -62,7 +64,12 @@ public class WebSocketServer {
      */
 //    private String roomId = "";
 
-    private ThreadLocal<Session> localSession = new ThreadLocal<>();
+    /**
+     * 即使是同一个窗口，每次发送新消息到服务端，服务端均会分配新线程来处理，
+     * 所以这里 存放的ThreadLocal变量 只能是在方法调用传递到其他类的方法中时，才能使用，
+     * 本类中对应新请求存放的ThreadLocal<Session>没有意义。
+     */
+//    private ThreadLocal<Session> localSession = new ThreadLocal<>();
 
 
     /**
@@ -72,11 +79,11 @@ public class WebSocketServer {
 //    public void onOpen(Session session, EndpointConfig config, @PathParam("sid") String sid) {
     public void onOpen(Session session, @PathParam("roomId") String roomId, @PathParam("uid") String uid) {
 //        this.session = session;
-        this.localSession.set(session);
         uidSessionMap.put(uid, session);
+        sessionUidMap.put(session, uid);
 //        //加入set中
         sessionSet.add(session);
-        this.addRoomSession(session, roomId);
+        this.addToRoomSession(roomId, session);
 //        this.roomId = roomId;
         //在线数加1
         addOnlineCount();
@@ -91,7 +98,7 @@ public class WebSocketServer {
     @OnClose
 //    public void onClose(Session session, CloseReason closeReason) {
     public void onClose(Session session, CloseReason closeReason) {
-        sessionSet.remove(this.localSession.get());
+        sessionSet.remove(session);
         subOnlineCount();
         log.info("closeReason: " + closeReason.toString());
         log.info("有一连接关闭！当前在线人数为: " + getOnlineCount());
@@ -134,7 +141,7 @@ public class WebSocketServer {
 //        this.session.getBasicRemote().sendText(message);
         SocketMessage sm = JSONObject.parseObject(message, SocketMessage.class);
         String roomId = sm.getRoomId();
-        CopyOnWriteArraySet<Session> sessions = sessionRoomMap.get(roomId);
+        CopyOnWriteArraySet<Session> sessions = roomSessionMap.get(roomId);
 //        String str = JSON.toJSONString(sessions);
 //        CopyOnWriteArraySet<Session> copyOnWriteArraySet = JSONObject.parseObject(str, CopyOnWriteArraySet.class);
 //        copyOnWriteArraySet.remove(session);
@@ -143,6 +150,7 @@ public class WebSocketServer {
             try {
                 if (to.isOpen()) {
                     to.getBasicRemote().sendText(message);
+//                    to.getAsyncRemote().sendText(message);
                 } else {
                     sessions.remove(to);
                 }
@@ -164,14 +172,14 @@ public class WebSocketServer {
      */
     public static void sendInfo(String roomId, SocketMessage message) throws IOException {
         log.info("推送消息到窗口" + roomId + "，推送内容:" + message);
-        CopyOnWriteArraySet<Session> sessions = sessionRoomMap.get(roomId);
+        CopyOnWriteArraySet<Session> sessions = roomSessionMap.get(roomId);
         sendAllMessage(JSONObject.toJSONString(message), "", new ArrayList<>(sessions));
     }
 
     // 此为广播消息
     public void sendRoomMsg(String message, String roomId, String from) {
         System.out.println("【websocket消息】广播消息:" + roomId + "--" + message);
-        CopyOnWriteArraySet<Session> sessionSet = sessionRoomMap.get(roomId);
+        CopyOnWriteArraySet<Session> sessionSet = roomSessionMap.get(roomId);
         sendAllMessage(message, from, new ArrayList<>(sessionSet));
     }
 
@@ -187,15 +195,18 @@ public class WebSocketServer {
         WebSocketServer.onlineCount.decrement();
     }
 
-    private synchronized void addRoomSession(Session session, String roomId) {
-        CopyOnWriteArraySet<Session> sessionSet = sessionRoomMap.get(roomId);
+    private synchronized void addToRoomSession(String roomId, Session session) {
+        CopyOnWriteArraySet<Session> sessionSet = roomSessionMap.get(roomId);
         if (sessionSet == null) {
             sessionSet = new CopyOnWriteArraySet<>();
-            sessionSet.add(session);
-        } else {
-            sessionSet.add(session);
         }
-        sessionRoomMap.put(roomId, sessionSet);
+        sessionSet.add(session);
+        roomSessionMap.put(roomId, sessionSet);
+    }
+
+    private void removeFromRoomSession(Session session) {
+        String uid = sessionUidMap.get(session);
+
     }
 
 }
