@@ -119,7 +119,7 @@ public class InterruptDemo {
         System.out.println("a2:" + a2);
 
         try {
-            TimeUnit.SECONDS.sleep(5);
+            TimeUnit.SECONDS.sleep(5000000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
