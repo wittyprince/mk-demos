@@ -81,7 +81,7 @@ public class CustomReadBodyRoutePredicateFactory extends AbstractRoutePredicateF
                                 }).map((objectValue) -> {
                                     return config.getPredicate().test(objectValue);
                                 })
-                                /*.thenReturn(true)*/;
+                                .thenReturn(true); // thenReturn(true)是否需要注释掉
                     });
                 }
             }

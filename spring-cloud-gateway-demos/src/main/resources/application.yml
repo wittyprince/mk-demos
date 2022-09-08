@@ -13,10 +13,10 @@ spring:
           uri: "http://127.0.0.1:8002"
           predicates:
             - Path=/api/v2/**
-            - name: CustomReadBody
-              args:
-                inClass: '#{T(String)}'
-                predicate: '#{@bodyPredicate}' #注入实现predicate接口类
+#            - name: CustomReadBody # 也可以使用spring自带的ReadBodyPredicateFactory
+#              args:
+#                inClass: '#{T(String)}'
+#                predicate: '#{@bodyPredicate}' #注入实现predicate接口类
           filters:
             - Demo=true
             - PreserveHostHeader # 防止host被修改为localhost
