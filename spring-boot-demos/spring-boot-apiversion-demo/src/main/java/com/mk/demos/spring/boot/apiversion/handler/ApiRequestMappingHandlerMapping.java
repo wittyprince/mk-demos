@@ -1,4 +1,4 @@
-package com.mk.demos.spring.boot.handler;
+package com.mk.demos.spring.boot.apiversion.handler;
 
 import java.lang.reflect.Method;
 import java.util.regex.Matcher;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.condition.RequestCondition;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
-import com.mk.demos.spring.boot.annotation.ApiVersion;
+import com.mk.demos.spring.boot.apiversion.annotation.ApiVersion;
 
 import lombok.AllArgsConstructor;
 

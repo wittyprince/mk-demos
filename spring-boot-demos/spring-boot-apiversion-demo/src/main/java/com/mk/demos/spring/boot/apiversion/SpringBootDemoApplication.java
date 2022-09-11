@@ -1,12 +1,7 @@
-package com.mk.demos.spring.boot;
+package com.mk.demos.spring.boot.apiversion;
 
-import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
-import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.AnnotationBeanNameGenerator;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.util.StringUtils;
 
 @SpringBootApplication
 //@ComponentScan(nameGenerator = SpringBootDemoApplication.SpringBeanNameGenerator.class)

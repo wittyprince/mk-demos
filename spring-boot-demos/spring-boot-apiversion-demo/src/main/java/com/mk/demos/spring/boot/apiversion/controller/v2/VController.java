@@ -1,25 +1,23 @@
-package com.mk.demos.spring.boot.controller.v1;
+package com.mk.demos.spring.boot.apiversion.controller.v2;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * v
  *
  * @author WangChen
- * Created on 2019/10/24 20:47
+ * Created on 2019/10/24 21:00
  * @since 1.0
  */
-@Controller("v1")
-//@Controller
+@RestController("v2")
+//@RestController
 @RequestMapping("/{version}")
 public class VController {
 
     @GetMapping("/test")
-    @ResponseBody
     public String v(){
-        return "v1";
+        return "v2";
     }
 }

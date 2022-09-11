@@ -1,10 +1,10 @@
-package com.mk.demos.spring.boot.controller;
+package com.mk.demos.spring.boot.apiversion.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mk.demos.spring.boot.annotation.ApiVersion;
+import com.mk.demos.spring.boot.apiversion.annotation.ApiVersion;
 
 /**
  * V2Controller

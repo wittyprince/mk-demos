@@ -1,13 +1,12 @@
-package com.mk.demos.spring.boot.handler;
+package com.mk.demos.spring.boot.apiversion.handler;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.mk.demos.spring.boot.apiversion.exception.ApiVersionDiscardException;
 import org.springframework.web.servlet.mvc.condition.RequestCondition;
-
-import com.mk.demos.spring.boot.exception.ApiVersionDiscardException;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

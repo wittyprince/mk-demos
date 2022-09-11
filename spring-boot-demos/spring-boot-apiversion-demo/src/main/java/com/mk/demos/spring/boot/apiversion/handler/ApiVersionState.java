@@ -1,6 +1,6 @@
-package com.mk.demos.spring.boot.handler;
+package com.mk.demos.spring.boot.apiversion.handler;
 
-import com.mk.demos.spring.boot.annotation.ApiVersion;
+import com.mk.demos.spring.boot.apiversion.annotation.ApiVersion;
 
 import lombok.Data;
 

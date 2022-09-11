@@ -1,10 +1,9 @@
-package com.mk.demos.spring.boot.config;
+package com.mk.demos.spring.boot.apiversion.config;
 
+import com.mk.demos.spring.boot.apiversion.handler.ApiRequestMappingHandlerMapping;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcRegistrations;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
-
-import com.mk.demos.spring.boot.handler.ApiRequestMappingHandlerMapping;
 
 /**
  * WebMvcRegistrationsConfig

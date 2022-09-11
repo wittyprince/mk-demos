@@ -1,4 +1,4 @@
-package com.mk.demos.spring.boot.exception;
+package com.mk.demos.spring.boot.apiversion.exception;
 
 /**
  * ApiVersionDiscardException
