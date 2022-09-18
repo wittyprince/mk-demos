@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 /**
  * controller
  *
@@ -29,6 +31,19 @@ public class ConsumerController {
     @RequestMapping("/services")
     public Object services() {
         return discoveryClient.getInstances("service-producer");
+    }
+
+    @RequestMapping("/discoveryClient/call")
+    public String discoveryClientCall() {
+        List<ServiceInstance> instances = discoveryClient.getInstances("service-producer");
+        for (ServiceInstance instance : instances) {
+            System.out.println("服务地址：" + instance.getUri());
+            System.out.println("服务名称：" + instance.getServiceId());
+        }
+        String url = instances.get(0).getUri() + "/hello";
+        String callServiceResult = new RestTemplate().getForObject(url, String.class);
+        System.out.println(callServiceResult);
+        return callServiceResult;
     }
 
     /**
