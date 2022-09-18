@@ -23,6 +23,15 @@ public class GitController {
     @Autowired
     private GitAutoRefreshConfig gitAutoRefreshConfig;
 
+    @org.springframework.beans.factory.annotation.
+            Value("${data.env:fff}")
+    private String env; // 此处使用 @Value 也可以自动刷新
+
+    @GetMapping(value = "getEnv")
+    public Object getEnv(){
+        return env;
+    }
+
     @GetMapping(value = "show")
     public Object show(){
         return gitConfig;

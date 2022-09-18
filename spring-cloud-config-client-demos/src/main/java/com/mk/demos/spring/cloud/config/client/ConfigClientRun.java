@@ -25,7 +25,7 @@ public class ConfigClientRun {
      * 当git仓库中的配置修改后，会自动调用actuator/refresh接口
      *
      * 注意使用post /actuator/refresh调用后，
-     *  @Value 注解修饰的不会刷新，
+     *  @Value 注解修饰的不会刷新，(在非配置类中使用@RefreshScop + @Value 也可以自动刷新)
      *  @ConfigurationProperties(prefix = "data") 注解修饰的会刷新
      */
     public static void main(String[] args) {
