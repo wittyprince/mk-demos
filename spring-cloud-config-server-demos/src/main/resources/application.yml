@@ -1,3 +1,5 @@
 server:
   port: 3301
+#  servlet:
+#    context-path: "/"
 

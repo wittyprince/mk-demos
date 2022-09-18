@@ -1,13 +1,16 @@
 spring:
   application:
     name: config-single-server  # 应用名称
+  profiles:
+    active: native # 使用本地文件配置，git/svn仓库配置会失效
+  #  spring.cloud.config.server.native.searchLocations = file:D:/properties/
   cloud:
     config:
       server:
         git:
           uri: https://github.com/huzhicheng/config-only-a-demo #配置文件所在仓库
-          username: github 登录账号
-          password: github 登录密码
+          username: github #登录账号
+          password: github #登录密码
           default-label: master #配置文件分支
           search-paths: config  #配置文件所在根目录
 

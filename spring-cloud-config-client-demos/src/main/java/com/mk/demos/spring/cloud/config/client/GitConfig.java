@@ -20,12 +20,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class GitConfig {
 
-    @Value("${data.env}")
+    @Value("${data.env:eee}")
     private String env;
 
-    @Value("${data.user.username}")
+    @Value("${data.user.username:aaa}")
     private String username;
 
-    @Value("${data.user.password}")
+    @Value("${data.user.password:ccc}")
     private String password;
 }

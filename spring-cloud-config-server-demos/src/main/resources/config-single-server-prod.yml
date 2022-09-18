@@ -1,0 +1,8 @@
+# 直接启动spring-cloud-config-server-demos后，
+# 可以通过http://localhost:3301/config-single-server-prod.yml 来访问本文件
+data:
+  env: config-eureka-prod
+  user:
+    username: eureka-client-user-prod
+    password: 1291029102
+

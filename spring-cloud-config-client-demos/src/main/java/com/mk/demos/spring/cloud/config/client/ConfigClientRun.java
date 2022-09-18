@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 1.0
  */
 @SpringBootApplication
-public class ClientRun {
+public class ConfigClientRun {
     /**
      * 要读取配置中心的内容，需要增加相关的配置类，
      * Spring Cloud Config 读取配置中心内容的方式和读取本地配置文件中的配置是一模一样的。
@@ -25,7 +25,7 @@ public class ClientRun {
      * 当git仓库中的配置修改后，会自动调用actuator/refresh接口
      */
     public static void main(String[] args) {
-        SpringApplication.run(ClientRun.class, args);
+        SpringApplication.run(ConfigClientRun.class, args);
     }
 
 }
