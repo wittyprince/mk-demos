@@ -12,6 +12,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @since 1.0.0
  */
 @SpringBootApplication
+// 也可以不显示使用@EnableDiscoveryClient，使用springboot自动装配机制也可以
 @EnableDiscoveryClient
 public class NacosProvider2Run {
 
