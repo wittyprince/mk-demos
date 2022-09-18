@@ -23,6 +23,10 @@ public class ConfigClientRun {
      * 可以结合github或gitlab的Webhook功能来代替手动调用,
      * 在Webhook中配置 http://ip:port/actuator/refresh，
      * 当git仓库中的配置修改后，会自动调用actuator/refresh接口
+     *
+     * 注意使用post /actuator/refresh调用后，
+     *  @Value 注解修饰的不会刷新，
+     *  @ConfigurationProperties(prefix = "data") 注解修饰的会刷新
      */
     public static void main(String[] args) {
         SpringApplication.run(ConfigClientRun.class, args);
