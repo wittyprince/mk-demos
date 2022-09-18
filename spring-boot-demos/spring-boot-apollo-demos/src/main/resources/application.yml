@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: wc-apollo-demos
+server:
+  port: 9100
+
+
+app:
+  id: ${spring.application.name}
+apollo:
+  meta: http://106.54.227.205:8080
+  bootstrap:
+    enabled: true
+    eagerLoad:
+      enabled: true
+
+demo:
+  default:
+    message: hah...
