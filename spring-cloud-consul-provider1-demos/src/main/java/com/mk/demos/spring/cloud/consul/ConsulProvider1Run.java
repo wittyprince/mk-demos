@@ -13,7 +13,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @SpringBootApplication
 // @EnableDiscoveryClient 注解表示支持服务发现
-@EnableDiscoveryClient
+@EnableDiscoveryClient // 也可以不显示使用@EnableDiscoveryClient，使用springboot自动装配机制也可以
 public class ConsulProvider1Run {
 
     public static void main(String[] args) {
