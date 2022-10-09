@@ -14,8 +14,9 @@ public class DemoServiceTest extends TestStarterTests {
 
     @Test
     public void testDemo() {
-        String expect = "HELLO";
-        String actual = demoService.hello();
+        String name = "wc";
+        String expect = "HELLO: " + name;
+        String actual = demoService.hello(name);
         assertEquals(expect, actual);
     }
 }

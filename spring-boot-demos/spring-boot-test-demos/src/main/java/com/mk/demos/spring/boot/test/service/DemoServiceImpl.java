@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class DemoServiceImpl implements DemoService{
     @Override
-    public String hello() {
-        return "HELLO";
+    public String hello(String name) {
+        return "HELLO: " + name;
     }
 }

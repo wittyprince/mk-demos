@@ -9,5 +9,5 @@ package com.mk.demos.spring.boot.test.service;
  */
 public interface DemoService {
 
-    String hello();
+    String hello(String name);
 }
