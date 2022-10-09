@@ -23,8 +23,8 @@ public class DemoController {
     private DemoService demoService;
 
     @ResponseBody
-    @GetMapping("/hello/{name}")
-    public String hello(@PathVariable String name) {
+    @GetMapping("/hello")
+    public String hello(String name) {
         return demoService.hello(name);
     }
 }
