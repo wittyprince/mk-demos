@@ -1,0 +1,10 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: direct-sender
+  rabbitmq:
+    username: root
+    password: root
+    host: 192.168.0.86
+    port: 5672
