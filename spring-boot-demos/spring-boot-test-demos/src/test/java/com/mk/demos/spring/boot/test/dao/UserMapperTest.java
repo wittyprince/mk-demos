@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @since 1.0
  */
 @SpringBootTest
-@ActiveProfiles("test") //指定激活的profile
+@ActiveProfiles("testing") //指定激活的profile
 public class UserMapperTest {
 
     @Autowired
