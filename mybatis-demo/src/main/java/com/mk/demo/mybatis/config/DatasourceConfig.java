@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Created by WangChen on 2019/1/27 20:33.
  */
-@Configuration
+//@Configuration
 public class DatasourceConfig {
 
 }
