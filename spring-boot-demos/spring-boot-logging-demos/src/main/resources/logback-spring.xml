@@ -19,17 +19,39 @@
     <!-- 日志格式 -->
     <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
     <!--
-        %clr 表示颜色
+        %clr(表达式){颜色}: 设置输出内容的颜色
         %d 表示日期，{yyyy-MM-dd HH:mm:ss.SSS}对日期进行格式化，{faint}指颜色: 微弱的
         ${LOG_LEVEL_PATTERN:-%5p} 其中LOG_LEVEL_PATTERN SpringBootLogging 中对其描述为The format to use when rendering the log level (default %5p).
         ${PID:- } 表示Process ID，{magenta} 指颜色：洋红色
-        %clr([%15.15t]){faint} 表示格式化为线程[]
-        %clr(%-40.40logger{39}){cyan}
+        %clr([%15.15t]){faint} 表示格式化线程, 如 [           main],
+            15表示最小长度为15,若长度小于15,则右对齐,左边用空格填充;超过时,不做处理;如果是-15,则左对齐,右边用空格填充.
+            .15表示最大长度为15,若长度超过15,截掉多余字符.如果小于,不做处理.
+            %15.15表示若字符长度小于15,则左边用空格填充;若长度大于15,则截掉多余字符.
+        %clr(%-40.45logger{30}){cyan}
+            -40表示最小长度为40个字符且左对齐,不够,则右边补齐;超过时,不做处理.
+            .45表示最大长度为45个字符,不够时不做处理;超过时,进行截取.
+            logger{30}表示logger的最大长度为30,具体规则如下:
+                如果类名大于30个字符,那么输出为包名缩写+全类名,如o.s.b.w.s.c.ServletWebServerApplicationContext
+                如果类名小于30个字符,那么计算类名+上一级包名,如果大于30,那么输出为包名缩写+全类名,如o.s.b.w.e.t.TomcatWebServer,注意这里只有27个字符.
+                                                        如果小于30,那么计算再上一级包名,与30做对比,依次类推,如c.m.d.logging.LoggingStarter,注意这里只有28个字符.
+                如果包名+类名小于30个字符,则全名输出; 如下结果示例:
+                [c.m.d.logging.LoggingStarter            ]
+                [c.m.d.logging.LoggingStarter            ]
+                [o.s.b.w.e.t.TomcatWebServer             ]
+                [o.a.c.http11.Http11NioProtocol          ]
+                [o.a.c.core.StandardService              ]
+                [o.a.c.core.StandardEngine               ]
+                [o.a.c.c.C.[.[localhost].[/]             ]
+                [o.s.b.w.s.c.ServletWebServerApplicationContext]
+                [o.s.s.c.ThreadPoolTaskExecutor          ]
+                [o.a.c.http11.Http11NioProtocol          ]
+                [o.s.b.w.e.t.TomcatWebServer             ]
+                [c.m.d.logging.LoggingStarter            ]
         %m%n 其中m%表示全部信息，%n表示换行，Windows平台为"\r\n"，Unix平台为"\n"
         ${LOG_EXCEPTION_CONVERSION_WORD:-%wEx} 表示异常转换器使用下面定义的wEx
     -->
     <property name="CONSOLE_LOG_PATTERN"
-              value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+              value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} [%clr(%-40.45logger{30}){cyan}] %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
     <!-- conversionRule
         1. conversionRule标签必须紧挨着configuration标签写，绝对不可以放在appender标签下面，但是可以放在springProperty下面
         2. conversionRule标签中的converterClass属性指向的是conversion转换器，
@@ -54,12 +76,18 @@
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
         </encoder>
     </appender>
 
-    <!-- Log file debug output -->
+    <!-- appender:
+        文件输出，默认是debug级别
+        RollingFileAppender: 文件大小到达指定尺寸的时候产生一个新的文件
+    -->
     <appender name="debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 日志文件输出的文件名 -->
         <file>${log.path}/debug.log</file>
+        <!-- 滚动日志 基于时间和文件大小 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>${log.path}/%d{yyyy-MM, aux}/debug.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
             <maxFileSize>50MB</maxFileSize>
@@ -67,6 +95,7 @@
         </rollingPolicy>
         <encoder>
             <pattern>%date [%thread] %-5level [%logger{50}] %file:%line - %msg%n</pattern>
+            <charset>UTF-8</charset>
         </encoder>
     </appender>
 
@@ -80,9 +109,13 @@
         </rollingPolicy>
         <encoder>
             <pattern>%date [%thread] %-5level [%logger{50}] %file:%line - %msg%n</pattern>
+            <charset>UTF-8</charset>
         </encoder>
+        <!-- 按临界值过滤日志：低于ERROR以下级别被抛弃 -->
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>ERROR</level>
+            <!--<onMatch>DENY</onMatch>--> <!-- ERROR级别被抛弃 -->
+            <!--<onMismatch>NEUTRAL</onMismatch>--> <!-- 其它级别继续处理 -->
         </filter>
     </appender>
 
