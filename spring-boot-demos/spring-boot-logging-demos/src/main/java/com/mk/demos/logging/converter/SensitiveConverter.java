@@ -39,7 +39,8 @@ public class SensitiveConverter extends MessageConverter {
         // 获取原始日志
         String requestLogMsg = event.getFormattedMessage();
         // 获取返回脱敏后的日志
-        return filterSensitive(requestLogMsg);
+//        return filterSensitive(requestLogMsg);
+        return requestLogMsg + "===sensitive===";
     }
 
     /**
@@ -84,7 +85,7 @@ public class SensitiveConverter extends MessageConverter {
             matcher.appendReplacement(sb, baseSensitive(matcher.group(), 3, 4));
         }
         matcher.appendTail(sb);
-        return sb.toString();
+        return num + "===sensitive";
     }
 
 //    private static String filterMobile(String msg) {

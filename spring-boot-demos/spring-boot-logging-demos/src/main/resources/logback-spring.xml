@@ -73,7 +73,29 @@
     <conversionRule conversionWord="wEx"
                     converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
 
-    <conversionRule conversionWord="sst" converterClass="com.mk.demos.logging.converter.SensitiveConverter"/>
+    <conversionRule conversionWord="message" converterClass="com.mk.demos.logging.converter.SensitiveConverter"/>
+
+    <!-- sensitive -->
+    <property name="console_sst_pattern"
+              value="-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} [%clr(%-40.45logger{30}){cyan}] %clr(:){faint} %message%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+    <appender name="console_sst" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${console_sst_pattern}</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="console_mask" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="com.mk.demos.logging.converter.MaskingPatternLayout">
+                <maskPattern>\"SSN\"\s*:\s*\"(.*?)\"</maskPattern> <!-- SSN JSON pattern -->
+                <maskPattern>\"address\"\s*:\s*\"(.*?)\"</maskPattern> <!-- Address JSON pattern -->
+                <maskPattern>(\d+\.\d+\.\d+\.\d+)</maskPattern> <!-- Ip address IPv4 pattern -->
+                <maskPattern>(\w+@\w+\.\w+)</maskPattern> <!-- Email pattern -->
+                <pattern>%-5p [%d{ISO8601,UTC}] [%thread] %c: %m%n%rootException</pattern>
+            </layout>
+        </encoder>
+    </appender>
 
     <!-- 输出到控制台-->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
@@ -141,7 +163,9 @@
     <!-- springProfile来适配当前处于active状态的profile -->
     <springProfile name="default">
         <root level="INFO">
-            <appender-ref ref="console"/>
+<!--            <appender-ref ref="console"/>-->
+<!--            <appender-ref ref="console_mask"/>-->
+            <appender-ref ref="console_sst"/>
             <appender-ref ref="debug"/>
             <appender-ref ref="error"/>
         </root>
