@@ -8,7 +8,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
+    <groupId>com.mk.demos</groupId>
     <artifactId>spring-boot-logging-demos</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>spring-boot-logging-demos</name>

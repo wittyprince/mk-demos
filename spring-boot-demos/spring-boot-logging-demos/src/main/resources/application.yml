@@ -7,3 +7,6 @@ server:
 # 输出 debug 级别的日志信息, 注意这里的debug与idea调试模式debug并不是一会事
 #debug: true
 
+spring:
+  application:
+    name: logging-demos
