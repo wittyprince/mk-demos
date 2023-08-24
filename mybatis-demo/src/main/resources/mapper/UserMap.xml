@@ -9,6 +9,6 @@
     </insert>
 
     <select id="findById" resultType="com.mk.demo.mybatis.po.User">
-        SELECT * FROM cuser WHERE id = #{id}
+        SELECT * FROM user WHERE id = #{id}
     </select>
 </mapper>

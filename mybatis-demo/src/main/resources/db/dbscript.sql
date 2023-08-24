@@ -21,3 +21,18 @@ CREATE TABLE `flower` (
 INSERT INTO flower VALUES (DEFAULT, '喇叭花', 2.5, '阿根廷');
 INSERT INTO flower VALUES (DEFAULT, '狗尾巴', 5.0, '墨西哥');
 INSERT INTO flower VALUES (DEFAULT, '莲花', 4.3, '巴西');
+
+
+CREATE TABLE `user`
+(
+    `id`                   int(11) NOT NULL AUTO_INCREMENT,
+    `createBy`             varchar(30) NULL COMMENT 'createBy',
+    `lastModifiedBy`       varchar(30) NULL COMMENT 'lastModifiedBy',
+    `createDateTime`       datetime NULL COMMENT 'createDateTime',
+    `lastModifiedDateTime` datetime NULL COMMENT 'lastModifiedDateTime',
+    `version`              int NULL COMMENT 'version',
+    `available`            tinyint NULL COMMENT 'available',
+    `name`                 varchar(30) NULL COMMENT 'name',
+    `age`                  int NULL COMMENT 'age'
+        PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

@@ -1,5 +1,6 @@
 package com.mk.demo.mybatis;
 
+import com.mk.demo.mybatis.po.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -20,6 +21,9 @@ public class Main {
     public static void main(String [] args){
         ConfigurableApplicationContext context = SpringApplication.run(Main.class, args);
         System.out.println(context.getBean(UserMapper.class));
+        UserMapper userMapper = context.getBean(UserMapper.class);
+        User user = userMapper.findById(1);
+        System.out.println(user);
 
     }
 }

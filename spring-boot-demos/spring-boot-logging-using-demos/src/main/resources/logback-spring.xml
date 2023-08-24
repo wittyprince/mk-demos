@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 日志级别从低到高分为 TRACE < DEBUG < INFO < WARN < ERROR < FATAL，如果设置为WARN，则低于WARN的信息都不会输出 -->
+<configuration debug="false" scan="true" scanPeriod="30 seconds">
+
+    <springProperty scope="context" name="applicationName" source="spring.application.name" defaultValue="localhost"/>
+    <property name="log.path" value="logs/${applicationName}"/>
+
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+
+    <!--定义扩展规则-->
+    <conversionRule conversionWord="msg" converterClass="com.mk.demos.logging.converter.LogbackExt"/>
+
+    <property name="server.log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %clr(-%5p) [%logger{50}] %file:%line - %msg%n"/>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${server.log.pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <!-- 日志输出到控制台 -->
+        <appender-ref ref="console"/>
+    </root>
+</configuration>

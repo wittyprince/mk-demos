@@ -1,0 +1,6 @@
+server:
+  port: 6020
+
+spring:
+  application:
+    name: logging-using-demos
