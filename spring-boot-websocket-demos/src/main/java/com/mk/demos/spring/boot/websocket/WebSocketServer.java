@@ -55,6 +55,8 @@ public class WebSocketServer {
     private static Map<String, CopyOnWriteArraySet<String>> roomUidSetMap = new ConcurrentHashMap<>();
     /** {"uid": {"roomId", "roomId"}} */
     private static Map<String, CopyOnWriteArraySet<String>> uidRoomSetMap = new ConcurrentHashMap<>();
+    /** {"ip": {"uid", "uid"}} */
+    private static Map<String, CopyOnWriteArraySet<String>> ipUidSetMap = new ConcurrentHashMap<>();
 
     /**
      * 与某个客户端的连接会话，需要通过它来给客户端发送数据
