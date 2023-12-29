@@ -31,18 +31,18 @@ import java.util.concurrent.atomic.LongAdder;
  * @since 1.0
  */
 @Slf4j
-@Component
-@ServerEndpoint("/web/socket/{roomId}/{uid}")
+//@Component
+//@ServerEndpoint("/web/socket/{roomId}/{uid}")
 public class WebSocketServer {
 
     /**
      * 静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
      */
-    private static LongAdder onlineCount = new LongAdder();
+    private static final LongAdder onlineCount = new LongAdder();
     /**
      * concurrent包的线程安全Set，用来存放每个客户端对应的WebSocket对象。
      */
-    private static CopyOnWriteArraySet<Session> sessionSet = new CopyOnWriteArraySet<>();
+    private static final CopyOnWriteArraySet<Session> sessionSet = new CopyOnWriteArraySet<>();
 
     /** 存放所有在线的客户端, 每个用户对应的session {"uid" : session}*/
     public static Map<String, Session> uidSessionMap = new ConcurrentHashMap<>();
