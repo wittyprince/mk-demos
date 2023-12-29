@@ -27,12 +27,13 @@ public class Insertion {
         int[] a4 = {1, 2, 1, 3, 4, 5};
 
 
-        insertion(a4);
+        insertion2(a4);
 
 
     }
 
     public static void insertion(int[] arr) {
+        // 注意：此时空间复杂度变为T(n)，不是T(1)
         int[] sorted = new int[arr.length];
 
         sorted[0] = arr[0];
@@ -64,5 +65,21 @@ public class Insertion {
         Integer[] boxB = Arrays.stream(sorted).boxed().toArray(Integer[]::new);
         Arrays.asList(boxB).forEach(System.out::println);
 //        List<Integer> list = new ArrayList<>(Arrays.asList(boxB));
+    }
+
+    public static void insertion2(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            int tmp;
+            int j;
+            for (j = i; j > 0; j--) {
+                if (arr[i+1] >= arr[i]) {
+                    continue;
+                }
+                tmp = arr[j];
+                arr[j] = arr[j-1];
+                arr[j-1] = tmp;
+            }
+        }
+
     }
 }
