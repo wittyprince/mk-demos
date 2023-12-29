@@ -1,5 +1,6 @@
 package com.mk.demos.spring.beans.factory;
 
+import com.mk.demos.spring.beans.domain.AAA;
 import org.springframework.beans.factory.FactoryBean;
 
 import com.mk.demos.spring.beans.domain.Address;
@@ -11,15 +12,17 @@ import com.mk.demos.spring.beans.domain.Address;
  * Created on 2021/1/7 21:13
  * @since 1.0
  */
-public class AddressFactoryBean implements FactoryBean<Address> {
+public class AddressFactoryBean implements FactoryBean {
 
     @Override
     public Address getObject()  {
+        System.out.println("AddressFactoryBean#getObject...");
         return Address.createAddress();
     }
 
     @Override
     public Class<?> getObjectType() {
-        return Address.class;
+        System.out.println("AddressFactoryBean#getObjectType...");
+        return AAA.class;
     }
 }

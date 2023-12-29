@@ -1,5 +1,6 @@
 package com.mk.demos.spring.beans;
 
+import com.mk.demos.spring.beans.factory.AddressFactoryBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +29,8 @@ public class AnnotationBeanDefinitionDemo {
         User user = applicationContext.getBean(User.class);
         System.out.println(user);
 
+        System.out.println(applicationContext.getBean("&addressFactoryBean"));
+
         applicationContext.close();
     }
 
@@ -44,6 +47,11 @@ public class AnnotationBeanDefinitionDemo {
             user.setId(3L);
             user.setName(new AnnotationBeanDefinitionDemo().s);
             return user;
+        }
+
+        @Bean
+        public AddressFactoryBean addressFactoryBean() {
+            return new AddressFactoryBean();
         }
     }
 
