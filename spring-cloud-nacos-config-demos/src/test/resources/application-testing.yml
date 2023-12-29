@@ -1,0 +1,24 @@
+#  spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+#  spring.datasource.url=jdbc:mysql://192.168.52.134:3306/mktest
+#  spring.datasource.username=wangchen
+#  spring.datasource.password=wangchen@123
+
+spring:
+  h2:
+    console:
+      path: /h2-console #进入h2 web操作界面的路径
+      enabled: true #开启h2 web界面
+  datasource:
+    driver-class-name: org.h2.Driver
+    schema: classpath:db/schema-h2.sql
+    data: classpath:db/data-h2.sql
+    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;MODE=MySQL
+    username: root
+    password: test
+#mybatis
+#mybatis.config-location=
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.example.demo.mapper
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
