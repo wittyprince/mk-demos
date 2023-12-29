@@ -23,6 +23,7 @@
         <module>spring-resource</module>
         <module>spring-validation-databinding-typeconversion</module>
         <module>spring-aop</module>
+        <module>spring-transation</module>
     </modules>
 
     <properties>
