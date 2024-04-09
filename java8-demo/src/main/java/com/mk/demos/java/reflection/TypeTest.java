@@ -12,7 +12,7 @@ public class TypeTest {
     public static void main(String[] args) {
         // raw types, parameterized types,
         // * array types, type variables and primitive types
-        System.out.println(int.class);
+        System.out.println(int.class); // int
 
 
     }

@@ -53,34 +53,69 @@ public class ReflectionTest {
 //        Arrays.stream(declaredFields).forEach(System.out::println);
         for (Field f : declaredFields) {
             System.out.println("declaredField: " + f);
+            // 输出顺序根据字段的顺序从上往下输出
+            // declaredField: public int com.mk.demos.java.reflection.ReflectionModel.age
+            // declaredField: private java.lang.String com.mk.demos.java.reflection.ReflectionModel.name
+            // declaredField: public static java.lang.String com.mk.demos.java.reflection.ReflectionModel.staticField
+            // declaredField: private static final int com.mk.demos.java.reflection.ReflectionModel.staticFinalField
         }
         // getFields仅用来获取公有字段
         Field[] fields = clazz1.getFields();
 //        Arrays.stream(fields).forEach(System.out::println);
         for (Field f : fields) {
             System.out.println("field: " + f);
+            // field: public int com.mk.demos.java.reflection.ReflectionModel.age
+            // field: public static java.lang.String com.mk.demos.java.reflection.ReflectionModel.staticField
         }
         System.out.println("-------------------------------------");
         // 3.如何反射获取类中的所有构造方法？
         // getDeclaredConstructors获取所有声明的构造方法
         Constructor<?>[] declaredConstructors = clazz1.getDeclaredConstructors();
-        for (Constructor c : declaredConstructors){
+        for (Constructor<?> c : declaredConstructors){
             System.out.println("declaredConstructor: " + c);
+            // 输出顺序不得而知
+            // declaredConstructor: public com.mk.demos.java.reflection.ReflectionModel(int,java.lang.String)
+            // declaredConstructor: private com.mk.demos.java.reflection.ReflectionModel(java.lang.String)
+            // declaredConstructor: public com.mk.demos.java.reflection.ReflectionModel()
         }
         // getConstructors获取所有公有的构造方法
         Constructor<?>[] constructors = clazz1.getConstructors();
-        for (Constructor c : constructors){
+        for (Constructor<?> c : constructors){
             System.out.println("constructor: " + c);
+            // constructor: public com.mk.demos.java.reflection.ReflectionModel(int,java.lang.String)
+            // constructor: public com.mk.demos.java.reflection.ReflectionModel()
         }
         System.out.println("-------------------------------------");
         // 4.如何反射获取类中的所有非构造方法？
         Method[] declaredMethods = clazz1.getDeclaredMethods();
         for (Method m : declaredMethods){
             System.out.println("declaredMethod : " + m);
+            // 输出顺序不得而知
+            // declaredMethod : private java.lang.String com.mk.demos.java.reflection.ReflectionModel.privateMethod(java.lang.String)
+            // declaredMethod : public void com.mk.demos.java.reflection.ReflectionModel.setAge(int)
+            // declaredMethod : public java.lang.String com.mk.demos.java.reflection.ReflectionModel.publicMethod(java.lang.String)
+            // declaredMethod : public int com.mk.demos.java.reflection.ReflectionModel.getAge()
+            // declaredMethod : public static java.lang.String com.mk.demos.java.reflection.ReflectionModel.publicStaticMethod()
+            // declaredMethod : private static void com.mk.demos.java.reflection.ReflectionModel.privateStaticMethod()
         }
+        // getMethods获取所有公有的方法, 包括继承的方法
         Method[] methods = clazz1.getMethods();
         for (Method m : methods){
             System.out.println("method: " + m);
+            // 输出顺序不得而知
+            // method: public void com.mk.demos.java.reflection.ReflectionModel.setAge(int)
+            // method: public java.lang.String com.mk.demos.java.reflection.ReflectionModel.publicMethod(java.lang.String)
+            // method: public int com.mk.demos.java.reflection.ReflectionModel.getAge()
+            // method: public static java.lang.String com.mk.demos.java.reflection.ReflectionModel.publicStaticMethod()
+            // method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+            // method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+            // method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+            // method: public boolean java.lang.Object.equals(java.lang.Object)
+            // method: public java.lang.String java.lang.Object.toString()
+            // method: public native int java.lang.Object.hashCode()
+            // method: public final native java.lang.Class java.lang.Object.getClass()
+            // method: public final native void java.lang.Object.notify()
+            // method: public final native void java.lang.Object.notifyAll()
         }
         System.out.println("-------------------------------------");
         //
