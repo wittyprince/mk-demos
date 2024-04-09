@@ -8,6 +8,21 @@ import java.lang.reflect.Method;
 /**
  * Introspector Test
  *
+ * 主要参考：java.beans.Introspector中的类注释
+ * Introspector是Java语言对JavaBean的 properties，events 及 methods 一种缺省或默认处理方法。
+ *
+ * JavaBean是一种特殊的类（也可以说是普通）。
+ * 我们又通常把javabean的实例对象称之为值对象（Value Object）,因为这些bean中通常只有一些信息字段和存储方法，没有功能性方法。
+ * 一个JavaBean类可以不当JavaBean用，而当成普通类 用。
+ * JavaBean实际就是一种规范，当一个类满足这个规范，这个类就能被其它特定的类调用。
+ * 一个类被当作javaBean使用时，JavaBean的 属性是根据方法名推断出来的，
+ * 它根本看不到java类内部的成员变量(javabean的成员变量通常都是私有private的)。
+ * JavaBean的属性是通过方法来定义的，而不是通过变量来定义的。这些方法是getXXX()和setXXX()方法。
+ *
+ * 例如在某类中有属性name, 那我们可以通过 getName,setName来得到其值或者设置新的值。
+ * 通过 getName/setName来访问 name属性，这就是默认的规则。
+ * Java JDK中提供了一套 API 用来访问某个属性的 getter/setter 方法(通过这些API可以使你不需要了解这个规则)，这就是内省。
+ *
  * @author WangChen
  * Created on 2024/4/9
  * @since 1.0
