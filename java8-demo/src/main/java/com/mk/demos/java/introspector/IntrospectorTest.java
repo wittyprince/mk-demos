@@ -74,14 +74,12 @@ public class IntrospectorTest {
     public static void getPropertyByIntrospector(UserInfo userInfo, String propertyName) throws Exception {
         BeanInfo beanInfo = Introspector.getBeanInfo(UserInfo.class);
         PropertyDescriptor[] descriptors = beanInfo.getPropertyDescriptors();
-        if (descriptors != null) {
-            for (PropertyDescriptor descriptor : descriptors) {
-                if (descriptor.getName().equals(propertyName)) {
-                    Method readMethod = descriptor.getReadMethod();
-                    Object invoke = readMethod.invoke(userInfo);
-                    System.out.println("get " + propertyName + ":" + invoke.toString());
-                    break;
-                }
+        for (PropertyDescriptor descriptor : descriptors) {
+            if (descriptor.getName().equals(propertyName)) {
+                Method readMethod = descriptor.getReadMethod();
+                Object invoke = readMethod.invoke(userInfo);
+                System.out.println("get " + propertyName + ":" + invoke.toString());
+                break;
             }
         }
     }
@@ -101,14 +99,12 @@ public class IntrospectorTest {
     public static void setPropertyByIntrospector(UserInfo userInfo, String propertyName, Object propertyValue) throws Exception {
         BeanInfo beanInfo = Introspector.getBeanInfo(UserInfo.class);
         PropertyDescriptor[] proDescrtptors = beanInfo.getPropertyDescriptors();
-        if (proDescrtptors != null) {
-            for (PropertyDescriptor propDesc : proDescrtptors) {
-                if (propDesc.getName().equals(propertyName)) {
-                    Method writeMethod = propDesc.getWriteMethod();
-                    writeMethod.invoke(userInfo, propertyValue);
-                    System.out.println("set " + propertyName + ":" + propertyValue.toString());
-                    break;
-                }
+        for (PropertyDescriptor propDesc : proDescrtptors) {
+            if (propDesc.getName().equals(propertyName)) {
+                Method writeMethod = propDesc.getWriteMethod();
+                writeMethod.invoke(userInfo, propertyValue);
+                System.out.println("set " + propertyName + ":" + propertyValue.toString());
+                break;
             }
         }
     }
