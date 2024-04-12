@@ -24,6 +24,20 @@ public class ClassLoaderTest {
         // 获取BootStrapClassLoader所在的URL下的jar
         URL[] urLs = Launcher.getBootstrapClassPath().getURLs();
         Arrays.stream(urLs).map(URL::toExternalForm).forEach(System.out::println);
+        // file:/D:/tools/jdk/jdk1.8/jre/lib/resources.jar
+        // file:/D:/tools/jdk/jdk1.8/jre/lib/rt.jar
+        // file:/D:/tools/jdk/jdk1.8/jre/lib/sunrsasign.jar
+        // file:/D:/tools/jdk/jdk1.8/jre/lib/jsse.jar
+        // file:/D:/tools/jdk/jdk1.8/jre/lib/jce.jar
+        // file:/D:/tools/jdk/jdk1.8/jre/lib/charsets.jar
+        // file:/D:/tools/jdk/jdk1.8/jre/lib/jfr.jar
+        // file:/D:/tools/jdk/jdk1.8/jre/classes
+        // 可以看到，BootStrapClassLoader加载的是jre/lib下的jar包，这些jar包是JVM的核心类库，是JVM运行时必须的类库
+        // 并没有加载jre/lib/ext目录下的jar包，如：
+        // file:/D:/tools/jdk/jdk1.8/jre/lib/ext/access-bridge-64.jar
+        // 也没有加载D:\tools\jdk\jdk1.8\lib下的包，如：
+        // D:\tools\jdk\jdk1.8\lib\tools.jar
+
     }
 
 }
