@@ -24,6 +24,7 @@
         <module>spring-validation-databinding-typeconversion</module>
         <module>spring-aop</module>
         <module>spring-transation</module>
+        <module>spring-exception</module>
     </modules>
 
     <properties>
