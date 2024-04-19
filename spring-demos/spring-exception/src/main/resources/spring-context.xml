@@ -9,5 +9,6 @@
     </bean>
 
     <!-- more bean definitions go here -->
+<!--    <bean id="exceptionService" class="com.mk.demos.spring.exception.service.ExceptionService"/>-->
 
 </beans>
