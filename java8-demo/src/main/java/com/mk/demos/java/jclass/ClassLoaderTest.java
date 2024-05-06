@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.Arrays;
 
 import sun.misc.Launcher;
+import sun.misc.URLClassPath;
 
 /**
  * ClassLoader test
@@ -15,6 +16,11 @@ import sun.misc.Launcher;
 public class ClassLoaderTest {
 
     public static void main(String [] args){
+
+        System.out.println(Launcher.getLauncher().getClassLoader()); // sun.misc.Launcher$AppClassLoader@18b
+
+        System.out.println(ClassLoader.getSystemClassLoader()); // sun.misc.Launcher$AppClassLoader@18b
+
         ClassLoader classLoader = ClassLoaderTest.class.getClassLoader();
         System.out.println(classLoader.getClass());// class sun.misc.Launcher$AppClassLoader
         System.out.println(classLoader.getParent().getClass());// class sun.misc.Launcher$ExtClassLoader
@@ -37,6 +43,25 @@ public class ClassLoaderTest {
         // file:/D:/tools/jdk/jdk1.8/jre/lib/ext/access-bridge-64.jar
         // 也没有加载D:\tools\jdk\jdk1.8\lib下的包，如：
         // D:\tools\jdk\jdk1.8\lib\tools.jar
+
+        System.out.println("====================================");
+
+        // Get the system class path - sun.boot.class.path
+        // sun.boot.class.path 是在 sun.misc.Launcher#bootClassPath 中定义的
+        String bootClassPath = System.getProperty("sun.boot.class.path");
+        // Split the class path into individual paths
+        String[] paths = bootClassPath.split(System.getProperty("path.separator"));
+        // Print each path
+        Arrays.stream(paths).forEach(System.out::println);
+        // 结果同上
+        // D:\tools\jdk\jdk1.8\jre\lib\resources.jar
+        // D:\tools\jdk\jdk1.8\jre\lib\rt.jar
+        // D:\tools\jdk\jdk1.8\jre\lib\sunrsasign.jar
+        // D:\tools\jdk\jdk1.8\jre\lib\jsse.jar
+        // D:\tools\jdk\jdk1.8\jre\lib\jce.jar
+        // D:\tools\jdk\jdk1.8\jre\lib\charsets.jar
+        // D:\tools\jdk\jdk1.8\jre\lib\jfr.jar
+        // D:\tools\jdk\jdk1.8\jre\classes
 
     }
 
