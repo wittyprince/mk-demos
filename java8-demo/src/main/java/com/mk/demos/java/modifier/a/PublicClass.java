@@ -21,6 +21,11 @@ public class PublicClass {
         System.out.println("defaultMethod");
     }
 
+    // Extension methods can only be used within an interface
+//    default void defaultMethod2(){
+//        System.out.println("defaultMethod2");
+//    }
+
     private void privateMethod(){
         System.out.println("privateMethod");
     }
