@@ -3,7 +3,6 @@ package com.mk.demos.java.concurrent;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
@@ -14,10 +13,10 @@ import java.util.concurrent.locks.Lock;
  * Created on 2024/10/26
  * @since 1.0
  */
-public class MutexTest implements Lock, java.io.Serializable {
+public class MyMutexTest implements Lock, java.io.Serializable {
 
     // Our internal helper class
-    private static class Sync extends AbstractQueuedSynchronizer {
+    private static class Sync extends MyAQS {
         // Acquires the lock if state is zero
         public boolean tryAcquire(int acquires) {
             assert acquires == 1; // Otherwise unused
@@ -114,11 +113,11 @@ public class MutexTest implements Lock, java.io.Serializable {
         String a = "a";
         String b = "b";
         String c = "c";
-        c = b = a;
+        c = b = a; // 赋值顺序是从右向左 <-
         System.out.println(b);
         System.out.println(c);
 
-        MutexTest mutex = new MutexTest();
+        MyMutexTest mutex = new MyMutexTest();
 
         mutex.lockInterruptibly();
         mutex.lockInterruptibly();
