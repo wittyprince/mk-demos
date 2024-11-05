@@ -29,6 +29,17 @@ public class JInstanceDemo {
         System.out.println(ClassLayout.parseInstance("www.baidu.com").toPrintable());
 
         JInstanceDemo demo1 = new JInstanceDemo();
+        System.out.println("====================================");
+        System.out.println(ClassLayout.parseInstance(demo1).toPrintable());
+        //com.mk.demos.java.instance.JInstanceDemo object internals:
+        //OFF  SZ                TYPE DESCRIPTION               VALUE
+        //  0   8                     (object header: mark)     0x0000000000000005 (biasable; age: 0)
+        //  8   4                     (object header: class)    0x2000c105
+        // 12   4   java.lang.Integer JInstanceDemo.i1          null
+        // 16   4    java.lang.String JInstanceDemo.s1          null
+        // 20   4                     (object alignment gap)
+        //Instance size: 24 bytes
+        //Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
 
 
     }
