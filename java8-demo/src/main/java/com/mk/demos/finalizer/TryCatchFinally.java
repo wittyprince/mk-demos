@@ -8,11 +8,11 @@ package com.mk.demos.finalizer;
  *  1 先执行 try 块
  *  2 如果try块中无异常信息, 则执行finally,
  *      2.1.1 如果finally中无return, 则执行try块中return或try...catch...finally...块外的最后的return语句返回。
- *      即 divide1()中 为 ① -> ③ -> ⑤, divide2()中为①->③->④->⑧
+ *      即 divide1()中 为 ① -> ⑤ -> ③ -> ⑤, divide2()中为①->③->④->⑧
  *      2.1.2 如果finally块中有return, 那么执行到finally中return时，直接返回，不会再执行try块或catch块中的return
- *      即divide3()中为①->③->⑦, divide4()中也为①->③->⑦,
+ *      即divide3()中为①->⑤->③->⑦, divide4()中也为①->⑤->③->⑦,
  *  3 如果try块中有异常, 则执行catch块
- *      divide3()中为①->②->③->⑦, divide4()中也为①->②->③->⑦, divide5()中为①->②->③->⑥,
+ *      divide3()中为①->②->③->⑦, divide4()中也为①->②->⑥->③->⑦, divide5()中为①->②->⑥->③->⑥,
  *      divide2()中为①->②->③->④->⑧,
  *
  * @author WangChen
@@ -181,6 +181,9 @@ public class TryCatchFinally {
 //        System.out.println("商是: " + finalizer2.divide3(9, 1));
 //        System.out.println("商是: " + finalizer2.divide4(9, 1));
 //        System.out.println("商是: " + finalizer2.divide2(9, 0));
+//        System.out.println("商是: " + finalizer2.divide3(9, 0));
+//        System.out.println("商是: " + finalizer2.divide4(9, 0));
+//        System.out.println("商是: " + finalizer2.divide5(9, 0));
 
 
 //        System.out.println("getReturn: " + finalizer2.getReturn1());
