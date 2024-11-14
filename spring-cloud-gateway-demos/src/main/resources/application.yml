@@ -9,6 +9,17 @@ spring:
       default-filters:
         - AddRequestHeader=gateway-env, springcloud-gateway
       routes:
+        - id: "websocket_route"
+          uri: "ws://127.0.0.1:8083"
+          predicates:
+            - Path=/web/socket/**
+          #            - name: CustomReadBody # 也可以使用spring自带的ReadBodyPredicateFactory
+          #              args:
+          #                inClass: '#{T(String)}'
+          #                predicate: '#{@bodyPredicate}' #注入实现predicate接口类
+          filters:
+            - Demo=true
+            - PreserveHostHeader # 防止host被修改为localhost
         - id: "server_v2"
           uri: "http://127.0.0.1:8002"
           predicates:
