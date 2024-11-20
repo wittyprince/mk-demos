@@ -36,6 +36,20 @@ public class SynchronizedTest {
         }
     }
 
+    public static synchronized void testSync5(){
+        System.out.println(Thread.currentThread().getName() + ",count = " + 1);
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    public void testSync4(){
+        synchronized (SynchronizedTest.class){
+            System.out.println(Thread.currentThread().getName() + ",count = " + count++);
+        }
+    }
+
     public static void main(String[] args){
         SynchronizedTest test1 = new SynchronizedTest();
 
@@ -50,6 +64,13 @@ public class SynchronizedTest {
             @Override
             public void run() {
                 test1.testSync2();
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                test1.testSync4();
             }
         }).start();
     }
