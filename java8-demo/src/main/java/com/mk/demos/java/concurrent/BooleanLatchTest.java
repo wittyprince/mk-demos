@@ -21,6 +21,7 @@ public class BooleanLatchTest {
         }
 
         protected boolean tryReleaseShared(int ignore) {
+            // 这里为什么是setState(1)而不是setState(0)呢？
             setState(1);
             return true;
         }
@@ -38,6 +39,7 @@ public class BooleanLatchTest {
 
     public void await() throws InterruptedException {
         sync.acquireSharedInterruptibly(1);
+//        sync.acquireShared(1);
     }
 
     public static void main(String[] args) {
@@ -46,11 +48,11 @@ public class BooleanLatchTest {
         new Thread(() -> {
             try {
                 Thread.sleep(3000);
-                booleanLatch.signal();
                 System.out.println("signal");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            booleanLatch.signal();
         }).start();
 
         try {
