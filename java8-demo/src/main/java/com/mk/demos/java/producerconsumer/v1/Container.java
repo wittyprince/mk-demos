@@ -50,8 +50,20 @@ public class Container {
         return goods;
     }
 
-    // 方式一：wait/notifyAll
     public void put(Goods e) {
+//        putByWaitAndNotify(e);
+        putByLock(e);
+    }
+
+    public Goods get()  {
+        Goods e;
+//        e = getByWaitAndNotify();
+        e = getByLock();
+        return e;
+    }
+
+    // 方式一：wait/notifyAll
+    private void putByWaitAndNotify(Goods e) {
         synchronized (lists){
             while (lists.size() == MAX){
                 try {
@@ -67,8 +79,8 @@ public class Container {
         }
     }
 
-    public Goods get()  {
-        Goods e = null;
+    private Goods getByWaitAndNotify() {
+        Goods e;
         synchronized (lists){
             while (lists.size() == 0){
                 try {
@@ -90,7 +102,7 @@ public class Container {
     private Condition consumer = lock.newCondition();
     private Condition producer = lock.newCondition();
 
-    public void put3(Goods goods) {
+    public void putByLock(Goods goods) {
         try {
             lock.lock();
             while (count == MAX) {
@@ -107,7 +119,7 @@ public class Container {
         }
     }
 
-    public Goods get3() {
+    public Goods getByLock() {
         Goods goods = null;
         try {
             lock.lock();
