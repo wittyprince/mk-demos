@@ -2,6 +2,7 @@ package com.mk.demos.java.concurrent;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 import java.util.concurrent.locks.Condition;
@@ -111,19 +112,42 @@ public class MutexTest implements Lock, java.io.Serializable {
 
     public static void main(String[] args) throws InterruptedException {
 
-        String a = "a";
-        String b = "b";
-        String c = "c";
-        c = b = a;
-        System.out.println(b);
-        System.out.println(c);
+//        String a = "a";
+//        String b = "b";
+//        String c = "c";
+//        c = b = a;
+//        System.out.println(b);
+//        System.out.println(c);
+//
+//        MutexTest mutex = new MutexTest();
+//
+//        mutex.lockInterruptibly();
+//        mutex.lockInterruptibly();
+//        mutex.unlock();
+//        mutex.unlock();
 
-        MutexTest mutex = new MutexTest();
-
-        mutex.lockInterruptibly();
-        mutex.lockInterruptibly();
-        mutex.unlock();
-        mutex.unlock();
+        final MutexTest metux = new MutexTest();
+        new Thread(() -> {
+            metux.lock();
+            System.out.println(String.format("%s-thread-1获取锁成功休眠3秒...", LocalDateTime.now()));
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                //ignore
+            }
+            metux.unlock();
+            System.out.println(String.format("%s-thread-1解锁成功...", LocalDateTime.now()));
+            return;
+        }, "thread-1").start();
+        new Thread(() -> {
+            metux.lock();
+            System.out.println(String.format("%s-thread-2获取锁成功...",LocalDateTime.now()));
+            return;
+        }, "thread-2").start();
+        Thread.sleep(Integer.MAX_VALUE);
+        // 2024-11-20T09:34:34.091-thread-1获取锁成功休眠3秒...
+        // 2024-11-20T09:34:37.244-thread-2获取锁成功...
+        // 2024-11-20T09:34:37.244-thread-1解锁成功...
 
 
     }
