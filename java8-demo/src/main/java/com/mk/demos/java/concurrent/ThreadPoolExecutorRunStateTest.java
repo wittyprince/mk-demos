@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Created on 2024/11/21
  * @since 1.0
  */
-public class ThreadPoolExecutorTest {
+public class ThreadPoolExecutorRunStateTest {
 
     public static void main(String[] args) throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 
