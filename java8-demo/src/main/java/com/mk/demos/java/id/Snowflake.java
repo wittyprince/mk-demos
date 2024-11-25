@@ -69,6 +69,28 @@ public class Snowflake {
                 throw new RuntimeException(e);
             }
         }
+        // 另一种精细的处理方式，可以参考下面的代码
+//        //发生了回拨，此刻时间小于上次发号时间
+//        if (timestamp < lastTimestamp) {
+//
+//            long offset = lastTimestamp - timestamp;
+//            if (offset <= 5) {
+//                try {
+//                    //时间偏差大小小于5ms，则等待两倍时间
+//                    wait(offset << 1);//wait
+//                    timestamp = timeGen();
+//                    if (timestamp < lastTimestamp) {
+//                        //还是小于，抛异常并上报
+//                        throwClockBackwardsEx(timestamp);
+//                    }
+//                } catch (InterruptedException e) {
+//                    throw  e;
+//                }
+//            } else {
+//                //throw
+//                throwClockBackwardsEx(timestamp);
+//            }
+//        }
         // 如果是同一时间生成的，则进行毫秒内序列
         if (lastTimestamp == timestamp) {
             sequence = (sequence + 1) & sequenceMask;
