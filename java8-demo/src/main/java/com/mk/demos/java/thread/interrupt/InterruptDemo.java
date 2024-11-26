@@ -22,7 +22,7 @@ public class InterruptDemo {
 
         InterruptDemo demo = new InterruptDemo();
 
-        demo.m1();
+        demo.basic();
 
     }
 
@@ -47,7 +47,7 @@ public class InterruptDemo {
         Thread testThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println();
+                System.out.println("---start---");
             }
         });
 
@@ -119,7 +119,7 @@ public class InterruptDemo {
         System.out.println("a2:" + a2);
 
         try {
-            TimeUnit.SECONDS.sleep(5000000);
+            TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
