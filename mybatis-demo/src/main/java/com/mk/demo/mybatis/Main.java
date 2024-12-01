@@ -25,5 +25,8 @@ public class Main {
         User user = userMapper.findById(1);
         System.out.println(user);
 
+        userMapper.save(new User("test", 20));
+//        throw new RuntimeException("test");
+
     }
 }

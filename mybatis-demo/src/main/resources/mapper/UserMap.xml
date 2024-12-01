@@ -4,11 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mk.demo.mybatis.mapper.UserMapper">
     <insert id="save" parameterType="com.mk.demo.mybatis.po.User">
-        INSERT INTO user(name, password)
-                VALUES (#{name}, #{password})
+        INSERT INTO t_test_1201(name, age)
+                VALUES (#{name}, #{age})
     </insert>
 
     <select id="findById" resultType="com.mk.demo.mybatis.po.User">
-        SELECT * FROM user WHERE id = #{id}
+        SELECT * FROM t_test_1201 WHERE id = #{id}
     </select>
 </mapper>
