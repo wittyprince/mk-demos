@@ -25,5 +25,9 @@ public class App {
 //        userService.testTransactional(user);
         userService.testTransactionalWithTransactionalAnnotation(user);
 
+//        Object a = context.getBean("a");
+//        Object b = context.getBean("b");
+//        System.out.println(a);
+//        System.out.println(b);
     }
 }
