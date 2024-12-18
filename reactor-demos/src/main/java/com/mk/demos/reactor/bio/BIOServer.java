@@ -41,6 +41,7 @@ public class BIOServer {
 //        outputStream.flush();
 //        outputStream.close();
 
+        socket.close();
         serverSocket.close();
 
     }
