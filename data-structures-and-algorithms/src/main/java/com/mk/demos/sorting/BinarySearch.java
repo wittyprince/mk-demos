@@ -13,8 +13,9 @@ public class BinarySearch {
 
     public static void main(String[] args) {
         int[] a3 = {0, 1, 2, 3, 4, 5, 6, 7};
-        int target = 8;
-        binary(a3, target);
+        int target = 7;
+        int i = binarySearch(a3, target);
+        System.out.println(i);
     }
 
     public static void binary(int[] arr, int target) {
@@ -58,5 +59,20 @@ public class BinarySearch {
         if (arr[mid] < target) {
             binary(Arrays.copyOfRange(arr, mid, arr.length), target);
         }
+    }
+
+    public static int binarySearch(int[] a, int x) {
+        int low = 0, high = a.length -1, mid;
+        while (low <= high) {
+            mid = (low + high) / 2;
+            if (a[mid] < x) {
+                low = mid + 1;
+            } else if (a[mid] > x) {
+                high = mid - 1;
+            } else {
+                return mid;
+            }
+        }
+        return -1;
     }
 }
