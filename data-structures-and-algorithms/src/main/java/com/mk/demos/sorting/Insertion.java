@@ -102,4 +102,17 @@ public class Insertion {
         }
         return a;
     }
+
+    public static int[] insertSort2(int[] a) {
+        int i, j, tmp;
+        for (i = 1; i <= a.length -1; i++) {
+            tmp = a[i];
+            for (j = i - 1; j >= 0 && a[j] > tmp; j--) {
+                a[j+1] = a[j];
+            }
+            // 因为上面的for循环中j--了，所以这里要j+1
+            a[j+1] = tmp;
+        }
+        return a;
+    }
 }
