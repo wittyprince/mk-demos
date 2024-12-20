@@ -27,8 +27,11 @@ public class Insertion {
         int[] a4 = {1, 2, 1, 3, 4, 5};
 
 
-        insertion2(a4);
-
+//        insertion2(a4);
+        int[] ints = insertSort(a4);
+        for (int i = 0; i <= ints.length - 1; i++) {
+            System.out.println(ints[i]);
+        }
 
     }
 
@@ -81,5 +84,22 @@ public class Insertion {
             }
         }
 
+    }
+
+    public static int[] insertSort(int[] a) {
+        for (int i = 1; i <= a.length -1; i++) {
+            int tmp = a[i];
+            int j;
+            for (j = i - 1; j >= 0; j--) {
+                if (a[j] > tmp) {
+                    a[j+1] = a[j];
+                } else {
+                    break;
+                }
+            }
+            // 因为上面的for循环中j--了，所以这里要j+1
+            a[j+1] = tmp;
+        }
+        return a;
     }
 }
