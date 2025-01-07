@@ -2,7 +2,6 @@ package com.mk.demo.mybatis.just_ony_mybatis;
 
 import com.mk.demo.mybatis.mapper.UserMapper;
 import com.mk.demo.mybatis.po.User;
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
@@ -26,7 +25,7 @@ public class JustOnlyMybatisTest {
     // 仅仅使用mybatis自身来操作数据库
     public static void main(String[] args) throws IOException {
         instanceMybatisByXml();
-        instanceMybatisByJava();
+//        instanceMybatisByJava();
     }
 
     private static void instanceMybatisByJava() {
@@ -48,7 +47,7 @@ public class JustOnlyMybatisTest {
 
     private static void instanceMybatisByXml() throws IOException {
         // 方式一：使用xml方式配置
-        String resource = "com/mk/demo/mybatis/just_ony_mybatis/mybatis_config.xml";
+        String resource = "mybatis-config.xml";
         Reader reader = org.apache.ibatis.io.Resources.getResourceAsReader(resource);
         // 构建sqlSessionFactory
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
