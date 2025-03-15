@@ -18,7 +18,7 @@
          java.lang.NoClassDefFoundError: org/springframework/jdbc/support/JdbcTransactionManager
          -->
 <!--        <spring-boot.version>2.4.5</spring-boot.version>-->
-        <spring-boot.version>2.3.0.RELEASE</spring-boot.version>
+        <spring-boot.version>2.5.12</spring-boot.version>
     </properties>
 
     <dependencies>
